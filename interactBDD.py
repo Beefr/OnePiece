@@ -239,7 +239,7 @@ class InteractBDD(Static):
 	def removeFighter(username, pirate):
 		[conn, cur]=InteractBDD.beginQuery()
 
-		request = "DELETE FROM pirate WHERE username='"+username+"' and name='"+pirate.name+"' and fruit='"+pirate.fruit.name+"' and level='"+str(pirate.level)+"' and qualite='"+str(pirate.qualite)+"';"
+		request = "DELETE FROM pirate WHERE username='"+username+"' and name='"+pirate.name+"' and fruit='"+pirate.fruit.name+"' and qualite='"+str(pirate.qualite)+"';"
 		InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 
 		InteractBDD.endQuery(conn, cur)
