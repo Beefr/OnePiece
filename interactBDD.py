@@ -39,7 +39,7 @@ class InteractBDD(Static):
 	@staticmethod
 	def createUser(username, password):
 		[conn, cur]=InteractBDD.beginQuery()
-		request = "INSERT INTO joueur VALUES('"+username+"','"+password+"');"
+		request = "INSERT INTO `joueur` (`username`, `password`) VALUES('"+username+"','"+password+"');"
 		InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 		InteractBDD.endQuery(conn, cur)
 		return None
@@ -60,6 +60,19 @@ class InteractBDD(Static):
 
 
 	#_________________________GET___________________________
+
+	@staticmethod
+	def getID(username):
+		[conn, cur]=InteractBDD.beginQuery()
+		request = "SELECT id FROM joueur WHERE username='"+username+"';"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		
+		for elem in description:
+			id = elem[0]
+			InteractBDD.endQuery(conn, cur)
+			return id
+		return None
+
 
 	@staticmethod
 	def getMyCrew(username):
@@ -94,7 +107,7 @@ class InteractBDD(Static):
 		txt=""
 
 		txt=txt+"Joueur: <br>"
-		txt=txt+"username | password <br>"
+		txt=txt+"id | username | password <br>"
 		request = "select * from joueur;"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
@@ -215,7 +228,7 @@ class InteractBDD(Static):
 		request = "DELETE FROM island;"
 		InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 		request = "DELETE FROM joueur;"
-		InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+		InteractBDD.connectAndExecuteRequest(request, True, conn, cur) # TODO faudra sans doute supprimer un fichier de config avec les utilisateurs
 		request = "DELETE FROM pirate;"
 		InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 		InteractBDD.endQuery(conn, cur)
