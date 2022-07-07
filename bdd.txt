@@ -8,8 +8,8 @@ DELETE FROM pirate;
 
 
 Joueur
+- id                INT
 - username 			string
-- password 			string
 
 island
 - username 			string
@@ -37,7 +37,7 @@ World
 CREATE DATABASE data;
 use data;
 
-CREATE TABLE joueur(username varchar(20) PRIMARY KEY NOT NULL, password varchar(250));
+CREATE TABLE joueur(id INT NOT NULL AUTO_INCREMENT, username varchar(20) PRIMARY KEY NOT NULL);
 CREATE TABLE island(username varchar(20) PRIMARY KEY NOT NULL, position varchar(20));
 CREATE TABLE fruit(name varchar(20)  PRIMARY KEY NOT NULL, power varchar(20), allocated INT);
 CREATE TABLE pirate(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, username varchar(20) NOT NULL, name varchar(60), level INT, fruit varchar(20), qualite INT);
