@@ -73,6 +73,19 @@ class InteractBDD(Static):
 			return id
 		return None
 
+	@staticmethod
+	def getUsername(id):
+		[conn, cur]=InteractBDD.beginQuery()
+		request = "SELECT username FROM joueur WHERE id='"+str(id)+"';"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		
+		for elem in description:
+			username = elem[0]
+			InteractBDD.endQuery(conn, cur)
+			return username
+		return None
+
+
 
 	@staticmethod
 	def getMyCrew(username):
