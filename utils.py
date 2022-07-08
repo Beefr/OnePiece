@@ -139,6 +139,22 @@ class Utils(Static):
 		return password
 		
 
+	
+	@staticmethod
+	def sanitization(user_input):
+		forbiddenCharacters=["'", "\"", "\\", "&", "~", "{", "(", "[", "-", "|", "`", "_", "ç", "^", "à", "@", ")", "]", "=", "}", "+", "$", "£", "¤", "*", "µ", "ù", "%", "!", "§", ":", "/", ";", ".", ",", "?", "<", ">", "²"]
+		if len(user_input)==0 or user_input=="": # empty input
+			return False
+
+		for elem in user_input:
+			if len(elem)>=15: # max 15 characters
+				return False
+				
+			for char in forbiddenCharacters: # no special characters
+				if char in elem:
+					return False
+		return True
+
 
 	#_________________________________LOADING DYNAMICALLY____________________________
 
