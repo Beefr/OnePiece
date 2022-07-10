@@ -68,12 +68,10 @@ class World(object):
 	def initWorld(self):
 		worldsDatas=InteractBDD.initWorld()
 		numberOfStages=InteractBDD.getNumberOfStages()
-		World.world=[Stage([])] * numberOfStages
+		World.world=[Stage([])] * int(numberOfStages)
 
 		for islandData in worldsDatas:
 			island=Island(islandData[0], int(islandData[3]), int(islandData[2]))
-			print(numberOfStages)
-			print(int(islandData[1]))
 			World.world[int(islandData[1])]+island
 
 			World.avancee[islandData[0]] = int(islandData[1])
