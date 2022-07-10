@@ -17,10 +17,10 @@ class Joueur(object):
 			self.createNewUser(username, password) 
 		
 		self._username= username
+		self._world= World()
 		self._equipage= self.getMyCrew()
 		self._position= self.getMyLocation()
 		self._availableToFight=True
-		self._world= World()
 
 		
 
