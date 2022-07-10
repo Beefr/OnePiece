@@ -20,6 +20,7 @@ class Joueur(object):
 		self._equipage= self.getMyCrew()
 		self._position= self.getMyLocation()
 		self._availableToFight=True
+		self._world= World()
 
 		
 
@@ -31,19 +32,19 @@ class Joueur(object):
 		output.team+ Message("___________________________________________________", False, True)
 		output.team+ self._equipage.asMessageArray()
 
-		output.map+ World.showMap(self._position.name)
+		output.map+ self._world.showMap(self._position.name)
 		
 		output.content+ "Vous êtes actuellement ici: " 
 		output.content+ Message(str(self._position), True, True, "vert")
 		output.content+ Message("Dans quelle ile veux-tu aller maintenant?", True, False, "rouge")
-		output.content+ World.getNextStage(self._position.name)
+		output.content+ self._world.getNextStage(self._position.name)
 
 	def isinstance(self):
 		return "Joueur"
 
 	def resetCrew(self):
 		InteractBDD.deleteUserProgress(self._username)
-		InteractBDD.setMyCrew(self._username, World.carte()[0].islands[0].name, [Pirate(1, True, self._username)])
+		InteractBDD.setMyCrew(self._username, self._world.carte()[0].islands[0].name, [Pirate(1, True, self._username)])
 		self._equipage= self.getMyCrew()
 		self._position= self.getMyLocation()
 		self._availableToFight=True
@@ -53,7 +54,7 @@ class Joueur(object):
 		InteractBDD.increasePirateLevel(self._username)
 
 	def goingToNextIsland(self, value, output):
-		self._position=World.next(self._position.name, value)
+		self._position=self._world.next(self._position.name, value)
 		self._equipage.regenerateHealth()
 
 		isThereOtherPlayer=InteractBDD.checkPlayer(self._position.name) # returns the username or None
@@ -92,7 +93,7 @@ class Joueur(object):
 		output.team+ "___________________________________________________"
 		output.team+ self._equipage.asMessageArray()
 
-		output.map+ World.showMap(self._position.name)
+		output.map+ self._world.showMap(self._position.name)
 
 	def recrutement(self, number, output, pirates=[], value=0):
 		
@@ -175,7 +176,7 @@ class Joueur(object):
 		txtPirates=InteractBDD.getMyCrew(self._username)
 		if len(txtPirates)==0:
 			pirate=Pirate(1, True, self._username)
-			InteractBDD.setMyCrew(self._username, World.carte()[0].islands[0].name, [pirate])
+			InteractBDD.setMyCrew(self._username, self._world.carte()[0].islands[0].name, [pirate])
 			return Equipage([pirate])
 
 		else:
@@ -191,8 +192,8 @@ class Joueur(object):
 		if island!="":
 			return Island(island,0,0)
 		else:
-			InteractBDD.setMyLocation(self._username, World.carte()[0].islands[0].name)
-			return Island(World.carte()[0].islands[0].name,0,0)
+			InteractBDD.setMyLocation(self._username, self._world.carte()[0].islands[0].name)
+			return Island(self._world.carte()[0].islands[0].name,0,0)
 	
 
 
