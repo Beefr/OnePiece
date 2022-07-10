@@ -83,6 +83,6 @@ INSERT INTO world VALUES('Train', 11, 3, 85);
 INSERT INTO world VALUES('Avion', 11, 3, 90);
 INSERT INTO world VALUES('Etoile', 12, 1, 150);
 
-
+INSERT INTO `joueur` (`username`, `password`) VALUES ('None', 'None');
 
 
