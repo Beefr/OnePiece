@@ -148,6 +148,9 @@ class Joueur(object):
 		self._availableToFight=self._equipage.availableToFight
 		return self._availableToFight
 
+	@property
+	def world(self):
+		return self._world
 
 	@username.setter
 	def username(self, username):
