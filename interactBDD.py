@@ -64,7 +64,7 @@ class InteractBDD(Static):
 	@staticmethod
 	def getID(username):
 		[conn, cur]=InteractBDD.beginQuery()
-		request = "SELECT id FROM joueur WHERE username='"+username+"';"
+		request = "SELECT id FROM joueur WHERE username='"+str(username)+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		
 		for elem in description:
