@@ -217,6 +217,41 @@ class InteractBDD(Static):
 		return None
 
 
+	#_________________________WORLD_________________________________
+
+	@staticmethod
+	def initWorld():
+		[conn, cur]=InteractBDD.beginQuery()
+
+		request = "SELECT * FROM world;"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		
+		world= []
+		for elem in description:
+			array=[str(elem[0]), str(elem[1]), str(elem[2]), str(elem[3])]
+			world.append(array)
+		
+
+		InteractBDD.endQuery(conn, cur)
+		return world
+
+
+	@staticmethod
+	def getNumberOfStages():
+		[conn, cur]=InteractBDD.beginQuery()
+
+		request = "SELECT MAX(stage) FROM world;"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		
+		for elem in description:
+			InteractBDD.endQuery(conn, cur)
+			return elem[0]
+
+		InteractBDD.endQuery(conn, cur)
+		return None
+
+
+
 	#_________________________DELETE_________________________________
 
 
