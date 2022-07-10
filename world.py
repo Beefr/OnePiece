@@ -71,10 +71,10 @@ class World(object):
 		World.world=[Stage([])] * numberOfStages
 
 		for islandData in worldsDatas:
-			island=Island(islandData[0], islandData[3], islandData[2])
-			World.world[islandData[1]]+island
+			island=Island(islandData[0], int(islandData[3]), int(islandData[2]))
+			World.world[int(islandData[1])]+island
 
-			World.avancee[islandData[0]] = islandData[1]
+			World.avancee[islandData[0]] = int(islandData[1])
 
 
 	@staticmethod
