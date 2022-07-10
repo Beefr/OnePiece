@@ -72,6 +72,8 @@ class World(object):
 
 		for islandData in worldsDatas:
 			island=Island(islandData[0], int(islandData[3]), int(islandData[2]))
+			print(numberOfStages)
+			print(int(islandData[1]))
 			World.world[int(islandData[1])]+island
 
 			World.avancee[islandData[0]] = int(islandData[1])
