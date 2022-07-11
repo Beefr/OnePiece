@@ -4,57 +4,16 @@ from island import Island
 from multiLineMessage import MultiLineMessage
 from stage import Stage
 from message import Message
+from interactBDD import InteractBDD
 
 class World(object):
-	#store it in db
-	world=[Stage([Island("Karugarner", 0,0)]),
-			Stage([Island("Cupcake", 1, 3), Island("Bonbons", 2, 1)]),
-			Stage([Island("Bottle", 2, 3), Island("String", 3, 2), Island("Slip", 4, 1)]),
-			Stage([Island("Diplodocus", 3 , 3), Island("Fridge", 4, 2), Island("Montgolfiere", 5, 1)]),
-			Stage([Island("Picmin", 4 , 3)]),
-			Stage([Island("PoissonRouge", 5 , 3), Island("Gateau", 7, 1)]),
-			Stage([Island("Bouton", 6 , 3), Island("Fesse", 8, 1)]),
-			Stage([Island("Shinsekai", 20 , 1)]),
-			Stage([Island("Marguerite", 20 , 3), Island("Tulipe", 30, 1)]),
-			Stage([Island("Serpent", 20 , 6), Island("Singe", 30, 3), Island("Chien", 40, 1), Island("Dragon", 50, 1)]),
-			Stage([Island("Chaise", 25 , 6), Island("portefeuille", 35, 6), Island("Table", 45, 6), Island("Escalier", 55, 6), Island("Fourchette", 65, 6)],),
-			Stage([Island("Voiture", 70 , 3), Island("Velo", 80, 3), Island("Train", 85, 3), Island("Avion", 90, 3)],),
-			Stage([Island("Etoile", 150 , 1)])
-			]
+			
+	world = []
+	avancee = {}
 
-	avancee={"Karugarner":0,
-			"Cupcake":1,
-			"Bonbons":1,
-			"Bottle":2,
-			"String":2,
-			"Slip":2,
-			"Diplodocus":3,
-			"Fridge":3,
-			"Montgolfiere":3,
-			"Picmin":4,
-			"PoissonRouge":5,
-			"Gateau":5,
-			"Bouton":6,
-			"Fesse":6,
-			"Shinsekai":7,
-			"Marguerite":8,
-			"Tulipe":8,
-			"Serpent":9,
-			"Singe":9,
-			"Chien":9,
-			"Dragon":9,
-			"Chaise":10,
-			"portefeuille":10,
-			"Table":10,
-			"Escalier":10,
-			"Fourchette":10,
-			"Voiture":11,
-			"Velo":11,
-			"Train":11,
-			"Avion":11,
-			"Etoile":12
-			}
 
+	def __init__(self):
+		self.initWorld()
 
 	@staticmethod
 	def carte():
@@ -106,7 +65,16 @@ class World(object):
 		return Stage(availableIslands).asMessageArray()
 
 
+	def initWorld(self):
+		worldsDatas=InteractBDD.initWorld()
+		numberOfStages=InteractBDD.getNumberOfStages()
+		World.world=[Stage([])] * int(numberOfStages)
 
+		for islandData in worldsDatas:
+			island=Island(islandData[0], int(islandData[3]), int(islandData[2]))
+			World.world[int(islandData[1])]+island
+
+			World.avancee[islandData[0]] = int(islandData[1])
 
 
 	@staticmethod

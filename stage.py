@@ -10,6 +10,9 @@ class Stage(object):
 	def islands(self):
 		return self._islands
 
+	def __add__(self, island):
+		self._islands.append(island)
+
 
 	def asMessageArray(self):
 		array=[[Message("Les prochaines iles sont:")]]
