@@ -29,12 +29,25 @@ Pirate
 - qualite 			int
 
 World
-- name 				string
-- stage 			int
-- piratesNumber     int
-- piratesLevel
+- id                int AA primK
+- Archipel1         string
+- Archipel2         string
 
 
+PNJ
+- nom               string primK
+- ile               string
+- level             int
+- fruit             string
+- qualite           int
+
+Ile
+- nom               string primK
+- archipel          string
+- pvp               int
+
+Archipel
+- nom               string primK
 
 
 CREATE DATABASE data;
@@ -45,12 +58,178 @@ CREATE TABLE joueur(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, username varchar
 CREATE TABLE island(username varchar(20) PRIMARY KEY NOT NULL, position varchar(20));
 CREATE TABLE fruit(name varchar(20)  PRIMARY KEY NOT NULL, power varchar(20), allocated INT);
 CREATE TABLE pirate(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, username varchar(20) NOT NULL, name varchar(60), level INT, fruit varchar(20), qualite INT);
-CREATE TABLE world(name varchar(20) PRIMARY KEY NOT NULL, stage INT, number INT, level INT);
+CREATE TABLE world(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, archipel1 varchar(20) NOT NULL, archipel2 varchar(20) NOT NULL);
+CREATE TABLE pnj(nom varchar(20) PRIMARY KEY NOT NULL, ile varchar(20) NOT NULL, level INT NOT NULL, fruit varchar(20) NOT NULL, qualite INT NOT NULL);
+CREATE TABLE ile(nom varchar(20) PRIMARY KEY NOT NULL, archipel varchar(20) NOT NULL, pvp INT NOT NULL);
+CREATE TABLE archipel(nom varchar(20) PRIMARY KEY NOT NULL, ileprincipale varchar(20) NOT NULL);
 
 INSERT INTO fruit VALUES('GumGum','[25,25,25,25]', 0);
 INSERT INTO fruit VALUES('Fire','[25,50,0,25]', 0);
 INSERT INTO fruit VALUES('Ice','[25,0,50,25]', 0);
 INSERT INTO fruit VALUES('Electric','[50,0,0,50]', 0);
+
+INSERT INTO archipel VALUES('Ile de Goat','Ile de Goat');
+INSERT INTO archipel VALUES('Shells Town', 'Shells Town');
+INSERT INTO archipel VALUES('Shimotsuki', 'Shimotsuki');
+INSERT INTO archipel VALUES('Archipel des Orgao', 'Archipel des Orgao');
+INSERT INTO archipel VALUES('Ile des animaux rares', 'Ile des animaux rares');
+INSERT INTO archipel VALUES('Baratie', 'Baratie');
+INSERT INTO archipel VALUES('Loguetown', 'Loguetown');
+INSERT INTO archipel VALUES('Mirrorball', 'Mirrorball');
+INSERT INTO archipel VALUES('Tequila Wolf', 'Tequila Wolf');
+INSERT INTO archipel VALUES('Royaume d'Oykot', 'Royaume d'Oykot');
+INSERT INTO archipel VALUES('Ile de Dawn', 'Village de Fuchsia');
+INSERT INTO archipel VALUES('Archipel des Gekko', 'Syrup');
+INSERT INTO archipel VALUES('Archipel de Konomi', 'Village de Kokoyashi');
+INSERT INTO archipel VALUES('West Blue', 'Ohara');
+INSERT INTO archipel VALUES('North Blue', 'Royaume de Luvneel');
+INSERT INTO archipel VALUES('South Blue', 'Royaume de Bliss'); 
+INSERT INTO archipel VALUES('Red Line', 'Reverse Mountain');
+INSERT INTO archipel VALUES('Calm Belt', 'Amazon Lily');
+
+INSERT INTO archipel VALUES('Whiskey Peak', 'Whiskey Peak');
+INSERT INTO archipel VALUES('Little Garden', 'Little Garden');
+INSERT INTO archipel VALUES('Kyuka Island', 'Kyuka Island');
+INSERT INTO archipel VALUES('Alabasta', 'Alabasta');
+INSERT INTO archipel VALUES('Jaya', 'Jaya');
+INSERT INTO archipel VALUES('Long Ring Long Land', 'Long Ring Long Land');
+INSERT INTO archipel VALUES('Gare de Shift', 'Gare de Shift');
+INSERT INTO archipel VALUES('Water 7', 'Water 7');
+INSERT INTO archipel VALUES('Enies Lobby', 'Enies Lobby');
+INSERT INTO archipel VALUES('Baltigo', 'Baltigo');
+INSERT INTO archipel VALUES('Banaro', 'Banaro');
+INSERT INTO archipel VALUES('Thriller Bark', 'Thriller Bark');
+INSERT INTO archipel VALUES('Repaire de Duval', 'Repaire de Duval');
+INSERT INTO archipel VALUES('Archipel des Sabaody', '0');
+INSERT INTO archipel VALUES('Balgimoa', 'Balgimoa');
+INSERT INTO archipel VALUES('Kedetrav', 'Kedetrav');
+INSERT INTO archipel VALUES('Archipel des Boyn', 'Archipel des Boyn');
+INSERT INTO archipel VALUES('Harahettania', 'Harahettania');
+INSERT INTO archipel VALUES('Ile de Kuraigana', 'Ile de Kuraigana');
+INSERT INTO archipel VALUES('Kenzan', 'Kenzan');
+INSERT INTO archipel VALUES('Marineford', 'Marineford');
+INSERT INTO archipel VALUES('Foolshout', 'Foolshout');
+
+INSERT INTO archipel VALUES('Ile de Goat');
+INSERT INTO archipel VALUES('Ile de Goat');
+INSERT INTO archipel VALUES('Ile de Goat');
+INSERT INTO archipel VALUES('Ile de Goat');
+INSERT INTO archipel VALUES('Ile de Goat');
+INSERT INTO archipel VALUES('Ile de Goat');
+INSERT INTO archipel VALUES('Ile de Goat');
+INSERT INTO archipel VALUES('Ile de Goat');
+INSERT INTO archipel VALUES('Ile de Goat');
+INSERT INTO archipel VALUES('Ile de Goat');
+INSERT INTO archipel VALUES('Ile de Goat');
+INSERT INTO archipel VALUES('Ile de Goat');
+INSERT INTO archipel VALUES('Ile de Goat');
+INSERT INTO archipel VALUES('Ile de Goat');
+
+
+
+
+INSERT INTO ile VALUES('Ile de Goat', 'Ile de Goat', 1);
+INSERT INTO ile VALUES('Shells Town', 'Shells Town', 1);
+INSERT INTO ile VALUES('Shimotsuki', 'Shimotsuki', 1);
+INSERT INTO ile VALUES('Archipel des Orgao', 'Archipel des Orgao', 1);
+INSERT INTO ile VALUES('Ile des animaux rares', 'Ile des animaux rares', 1);
+INSERT INTO ile VALUES('Baratie', 'Baratie', 1);
+INSERT INTO ile VALUES('Loguetown', 'Loguetown', 1);
+INSERT INTO ile VALUES('Mirrorball', 'Mirrorball', 1);
+INSERT INTO ile VALUES('Tequila Wolf', 'Tequila Wolf', 1);
+INSERT INTO ile VALUES('Royaume d'Oykot', 'Royaume d'Oykot', 1);
+INSERT INTO ile VALUES('Syrup', 'Archipel des Gekko', 1);
+INSERT INTO ile VALUES('Royaume d'Oykot', 'Royaume d'Oykot', 1);
+
+INSERT INTO ile VALUES('Ile de Minion', 'North Blue', 1);
+INSERT INTO ile VALUES('Ile de Swallow', 'North Blue', 1);
+INSERT INTO ile VALUES('Notice', 'North Blue', 1);
+INSERT INTO ile VALUES('Ile de Rubeck', 'North Blue', 1);
+INSERT INTO ile VALUES('Royaume de Flevance', 'North Blue', 1);
+INSERT INTO ile VALUES('Spider Miles', 'North Blue', 1);
+INSERT INTO ile VALUES('Ile de Micqueot', 'North Blue', 1);
+INSERT INTO ile VALUES('Royaume de Luvneel', 'North Blue', 0);
+
+INSERT INTO ile VALUES('Las Camp', 'West Blue', 1);
+INSERT INTO ile VALUES('Ile de Toroa', 'West Blue', 1);
+INSERT INTO ile VALUES('Ohara', 'West Blue', 0);
+INSERT INTO ile VALUES('Royaume d'Ilisia', 'West Blue', 1);
+
+INSERT INTO ile VALUES('Village de Gosa', 'Archipel de Konomi', 1);
+INSERT INTO ile VALUES('Village de Kokoyashi', 'Archipel de Konomi', 0);
+INSERT INTO ile VALUES('Arlong Park', 'Archipel de Konomi', 1);
+
+INSERT INTO ile VALUES('Royaume de Goa', 'Ile de Dawn', 1);
+INSERT INTO ile VALUES('Grey Terminal', 'Ile de Dawn', 1);
+INSERT INTO ile VALUES('Foret du milieu', 'Ile de Dawn', 1);
+INSERT INTO ile VALUES('Village de Fuchsia', 'Ile de Dawn', 0);
+INSERT INTO ile VALUES('Mont Corvo', 'Ile de Dawn', 1);
+
+INSERT INTO ile VALUES('Royaume de Solbay ', 'South Blue', 1);
+INSERT INTO ile VALUES('Baterilla', 'South Blue', 1);
+INSERT INTO ile VALUES('Royaume de Torino', 'South Blue', 1);
+INSERT INTO ile VALUES('Saint Reia', 'South Blue', 1);
+INSERT INTO ile VALUES('Ile de Karate', 'South Blue', 1);
+INSERT INTO ile VALUES('Royaume de Bliss', 'South Blue', 0);
+
+INSERT INTO ile VALUES('Ile des Homme-poissons', 'Red Line', 1);
+INSERT INTO ile VALUES('Marie-Joie', 'Red Line', 1);
+INSERT INTO ile VALUES('Cap des jumeaux', 'Red Line', 1);
+INSERT INTO ile VALUES('Reverse Mountain', 'Red Line', 0);
+
+INSERT INTO ile VALUES('Rusukaina', 'Calm Belt', 1);
+INSERT INTO ile VALUES('Impel Down', 'Calm Belt', 1);
+INSERT INTO ile VALUES('Amazon Lily', 'Calm Belt', 0);
+
+INSERT INTO ile VALUES('Whiskey Peak', 'Whiskey Peak', 1);
+INSERT INTO ile VALUES('Little Garden', 'Little Garden', 1);
+INSERT INTO ile VALUES('Kyuka Island', 'Kyuka Island', 1);
+INSERT INTO ile VALUES('Alabasta', 'Alabasta', 1);
+INSERT INTO ile VALUES('Jaya', 'Jaya', 1);
+INSERT INTO ile VALUES('Long Ring Long Land', 'Long Ring Long Land', 1);
+INSERT INTO ile VALUES('Water 7', 'Water 7', 1);
+INSERT INTO ile VALUES('Enies Lobby', 'Enies Lobby', 1);
+INSERT INTO ile VALUES('Baltigo', 'Baltigo', 1);
+INSERT INTO ile VALUES('Banaro', 'Banaro', 1);
+INSERT INTO ile VALUES('Thriller Bark', 'Thriller Bark', 1);
+INSERT INTO ile VALUES('Repaire de Duval', 'Repaire de Duval', 1);
+INSERT INTO ile VALUES('Balgimoa', 'Balgimoa', 1);
+INSERT INTO ile VALUES('Kedetrav', 'Kedetrav', 1);
+INSERT INTO ile VALUES('Archipel des Boyn', 'Archipel des Boyn', 1);
+INSERT INTO ile VALUES('Harahettania', 'Harahettania', 1);
+INSERT INTO ile VALUES('Ile de Kuraigana', 'Ile de Kuraigana', 1);
+INSERT INTO ile VALUES('Kenzan', 'Kenzan', 1);
+INSERT INTO ile VALUES('Marineford', 'Marineford', 1);
+INSERT INTO ile VALUES('Foolshout', 'Foolshout', 1);
+
+INSERT INTO ile VALUES('0', 'Archipel des Sabaody', 0);
+INSERT INTO ile VALUES('1', 'Archipel des Sabaody', 1);
+INSERT INTO ile VALUES('2', 'Archipel des Sabaody', 1);
+INSERT INTO ile VALUES('3', 'Archipel des Sabaody', 1);
+INSERT INTO ile VALUES('4', 'Archipel des Sabaody', 1);
+INSERT INTO ile VALUES('5', 'Archipel des Sabaody', 1);
+INSERT INTO ile VALUES('6', 'Archipel des Sabaody', 1);
+INSERT INTO ile VALUES('7', 'Archipel des Sabaody', 1);
+INSERT INTO ile VALUES('8', 'Archipel des Sabaody', 1);
+INSERT INTO ile VALUES('9', 'Archipel des Sabaody', 1);
+INSERT INTO ile VALUES('10', 'Archipel des Sabaody', 1);
+INSERT INTO ile VALUES('11', 'Archipel des Sabaody', 1);
+INSERT INTO ile VALUES('12', 'Archipel des Sabaody', 1);
+INSERT INTO ile VALUES('13', 'Archipel des Sabaody', 1);
+INSERT INTO ile VALUES('14', 'Archipel des Sabaody', 1);
+INSERT INTO ile VALUES('15', 'Archipel des Sabaody', 1);
+INSERT INTO ile VALUES('16', 'Archipel des Sabaody', 1);
+INSERT INTO ile VALUES('17', 'Archipel des Sabaody', 1);
+INSERT INTO ile VALUES('18', 'Archipel des Sabaody', 1);
+INSERT INTO ile VALUES('19', 'Archipel des Sabaody', 1);
+INSERT INTO ile VALUES('20', 'Archipel des Sabaody', 1);
+
+
+
+
+
+
+
 
 INSERT INTO world VALUES('Karugarner', 0, 0, 0);
 INSERT INTO world VALUES('Cupcake', 1, 3, 1);
