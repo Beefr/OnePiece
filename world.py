@@ -72,7 +72,9 @@ class World(object):
 
 		for islandData in worldsDatas:
 			island=Island(islandData[0], int(islandData[3]), int(islandData[2]))
-			World.world[int(islandData[1])]+island
+			test=World.world[int(islandData[1])]
+			test2=test.append(island)
+			World.world[int(islandData[1])]=test2
 
 			World.avancee[islandData[0]] = int(islandData[1])
 
