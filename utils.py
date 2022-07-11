@@ -147,7 +147,7 @@ class Utils(Static):
 			return False
 
 		for elem in user_input:
-			if len(elem)>=15: # max 15 characters
+			if len(elem)>=40: # max 15 characters
 				return False
 				
 			for char in forbiddenCharacters: # no special characters
