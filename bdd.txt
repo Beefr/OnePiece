@@ -59,9 +59,9 @@ CREATE TABLE island(username varchar(20) PRIMARY KEY NOT NULL, position varchar(
 CREATE TABLE fruit(name varchar(20)  PRIMARY KEY NOT NULL, power varchar(20), allocated INT);
 CREATE TABLE pirate(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, username varchar(20) NOT NULL, name varchar(60), level INT, fruit varchar(20), qualite INT);
 CREATE TABLE world(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, archipel1 varchar(20) NOT NULL, archipel2 varchar(20) NOT NULL);
-CREATE TABLE pnj(nom varchar(20) PRIMARY KEY NOT NULL, ile varchar(20) NOT NULL, level INT NOT NULL, fruit varchar(20) NOT NULL, qualite INT NOT NULL);
-CREATE TABLE ile(nom varchar(20) PRIMARY KEY NOT NULL, archipel varchar(20) NOT NULL, pvp INT NOT NULL);
-CREATE TABLE archipel(nom varchar(20) PRIMARY KEY NOT NULL, ileprincipale varchar(20) NOT NULL);
+CREATE TABLE pnj(nom varchar(20) PRIMARY KEY NOT NULL, ile varchar(40) NOT NULL, level INT NOT NULL, fruit varchar(20) NOT NULL, qualite INT NOT NULL);
+CREATE TABLE ile(nom varchar(40) PRIMARY KEY NOT NULL, archipel varchar(40) NOT NULL, pvp INT NOT NULL);
+CREATE TABLE archipel(nom varchar(40) PRIMARY KEY NOT NULL, ileprincipale varchar(40) NOT NULL);
 
 INSERT INTO fruit VALUES('GumGum','[25,25,25,25]', 0);
 INSERT INTO fruit VALUES('Fire','[25,50,0,25]', 0);
@@ -110,20 +110,31 @@ INSERT INTO archipel VALUES('Kenzan', 'Kenzan');
 INSERT INTO archipel VALUES('Marineford', 'Marineford');
 INSERT INTO archipel VALUES('Foolshout', 'Foolshout');
 
-INSERT INTO archipel VALUES('Ile de Goat');
-INSERT INTO archipel VALUES('Ile de Goat');
-INSERT INTO archipel VALUES('Ile de Goat');
-INSERT INTO archipel VALUES('Ile de Goat');
-INSERT INTO archipel VALUES('Ile de Goat');
-INSERT INTO archipel VALUES('Ile de Goat');
-INSERT INTO archipel VALUES('Ile de Goat');
-INSERT INTO archipel VALUES('Ile de Goat');
-INSERT INTO archipel VALUES('Ile de Goat');
-INSERT INTO archipel VALUES('Ile de Goat');
-INSERT INTO archipel VALUES('Ile de Goat');
-INSERT INTO archipel VALUES('Ile de Goat');
-INSERT INTO archipel VALUES('Ile de Goat');
-INSERT INTO archipel VALUES('Ile de Goat');
+INSERT INTO archipel VALUES('Ile de Yukiryu', 'Ile de Yukiryu');
+INSERT INTO archipel VALUES('Pays de Wano', 'Pays de Wano');
+INSERT INTO archipel VALUES('Foodvalten', 'Foodvalten');
+INSERT INTO archipel VALUES('Punk Hazard', 'Punk Hazard');
+INSERT INTO archipel VALUES('Raijin Island', 'Raijin Island');
+INSERT INTO archipel VALUES('Risky Red', 'Risky Red');
+INSERT INTO archipel VALUES('Ile de Mystoria', 'Ile de Mystoria');
+INSERT INTO archipel VALUES('Pays des Fleurs', 'Pays des Fleurs');
+INSERT INTO archipel VALUES('Green Bit', 'Green Bit');
+INSERT INTO archipel VALUES('Zo', 'Zo');
+INSERT INTO archipel VALUES('Royaume de Prodence', 'Royaume de Prodence');
+INSERT INTO archipel VALUES('Royaume de Majiatsuka', 'Royaume de Majiatsuka');
+INSERT INTO archipel VALUES('Royaume de Rommel', 'Royaume de Rommel');
+INSERT INTO archipel VALUES('Dressrosa', 'Dressrosa');
+INSERT INTO archipel VALUES('Royaume de Mogaro', 'Royaume de Mogaro');
+INSERT INTO archipel VALUES('Royaume de Doerena', 'Royaume de Doerena');
+INSERT INTO archipel VALUES('Erbaf', 'Erbaf');
+INSERT INTO archipel VALUES('Ile de Lodestar', 'Ile de Lodestar');
+INSERT INTO archipel VALUES('Rough Tell', 'Rough Tell');
+
+INSERT INTO archipel VALUES('Mer Blanche', 'Mer de Nuages');
+
+INSERT INTO archipel VALUES('Totto Land', 'Ile de Cacao');
+
+
 
 
 
@@ -139,7 +150,6 @@ INSERT INTO ile VALUES('Mirrorball', 'Mirrorball', 1);
 INSERT INTO ile VALUES('Tequila Wolf', 'Tequila Wolf', 1);
 INSERT INTO ile VALUES('Royaume d'Oykot', 'Royaume d'Oykot', 1);
 INSERT INTO ile VALUES('Syrup', 'Archipel des Gekko', 1);
-INSERT INTO ile VALUES('Royaume d'Oykot', 'Royaume d'Oykot', 1);
 
 INSERT INTO ile VALUES('Ile de Minion', 'North Blue', 1);
 INSERT INTO ile VALUES('Ile de Swallow', 'North Blue', 1);
@@ -224,12 +234,60 @@ INSERT INTO ile VALUES('18', 'Archipel des Sabaody', 1);
 INSERT INTO ile VALUES('19', 'Archipel des Sabaody', 1);
 INSERT INTO ile VALUES('20', 'Archipel des Sabaody', 1);
 
+INSERT INTO ile VALUES('Dressrosa', 'Dressrosa', 1);
+INSERT INTO ile VALUES('Royaume de Tontatta', 'Dressrosa', 0);
+
+INSERT INTO ile VALUES('Whole Cake Island', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile de Jam', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile de Cacao', 'Totto Land', 0);
+INSERT INTO ile VALUES('Ile de Nuts', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile de Cheese', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile de Biscuit', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile de Candy', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile de la Liqueur', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile du Ble', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile du Croquant', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile de la Cuisson', 'Totto Land', 1);
+INSERT INTO ile VALUES('Funwari Island', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile des Glaces', 'Totto Land', 1);
+INSERT INTO ile VALUES('Cutlery Island', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile de Barbapapa', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile de Brioche', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile de Cafe', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile de Soda', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile Fruitee', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile de la Volaille', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile du Steak', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile des Oeufs', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile des Pates', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile de la Soupe', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile des Legumes', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile des Tables', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile des Fruits de Mer', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile des Crepes', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile du Beurre', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile Huileuse', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile Sauce Piquante', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile des Sushis', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile des Pizzas', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile des Tacos', 'Totto Land', 1);
+INSERT INTO ile VALUES('Ile des Burgers', 'Totto Land', 1);
+
+INSERT INTO ile VALUES('Mer de Nuages', 'Mer Blanche', 0);
+INSERT INTO ile VALUES('Skypiea', 'Mer Blanche', 1);
+INSERT INTO ile VALUES('Bilca', 'Mer Blanche', 1);
+INSERT INTO ile VALUES('Weatheria', 'Mer Blanche', 1);
+INSERT INTO ile VALUES('Milky Road', 'Mer Blanche', 1);
+INSERT INTO ile VALUES('Upper Yard', 'Mer Blanche', 1);
+INSERT INTO ile VALUES('Angel Island', 'Mer Blanche', 1);
+INSERT INTO ile VALUES('Shandora', 'Mer Blanche', 1);
+
+INSERT INTO pnj
+
+INSERT INTO world
 
 
-
-
-
-
+________________________________OLD_____________________________________________________
 
 INSERT INTO world VALUES('Karugarner', 0, 0, 0);
 INSERT INTO world VALUES('Cupcake', 1, 3, 1);
