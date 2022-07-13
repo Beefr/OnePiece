@@ -402,42 +402,24 @@ INSERT INTO pnj VALUES('Jack', 'Baratie', 100, 'Mammouth', '1');
 INSERT INTO pnj VALUES('Vinsmoke Judge', 'Baratie', 80, 'None', '1');
 INSERT INTO pnj VALUES('Katakuri', 'Baratie', 150, 'Mochi', '1');
 INSERT INTO pnj VALUES('Nekomamushi', 'Baratie', 80, 'None', '1');
-INSERT INTO world
 
 
-________________________________OLD_____________________________________________________
+INSERT INTO `world` ('archipel1`, `archipel2`) VALUES ('Royaume de Goa', 'Shinotsuki');
+INSERT INTO `world` ('archipel1`, `archipel2`) VALUES ('Royaume de Goa', 'Shells Town');
+INSERT INTO `world` ('archipel1`, `archipel2`) VALUES ('Royaume de Goa', 'ile de Goat');
+INSERT INTO `world` ('archipel1`, `archipel2`) VALUES ('Baratie', 'Shinotsuki');
+INSERT INTO `world` ('archipel1`, `archipel2`) VALUES ('Baratie', 'Shells Town');
+INSERT INTO `world` ('archipel1`, `archipel2`) VALUES ('Baratie', 'Tequila Wolf');
+INSERT INTO `world` ('archipel1`, `archipel2`) VALUES ('Baratie', 'Mirrorball');
+INSERT INTO `world` ('archipel1`, `archipel2`) VALUES ('Shells Town', 'Tequila Wolf');
+INSERT INTO `world` ('archipel1`, `archipel2`) VALUES ('Shells Town', 'Loguetown');
+INSERT INTO `world` ('archipel1`, `archipel2`) VALUES ('Shells Town', 'Ile de Goat');
+INSERT INTO `world` ('archipel1`, `archipel2`) VALUES ('Ile des animaux rares', 'Ile de Goat');
+INSERT INTO `world` ('archipel1`, `archipel2`) VALUES ('Archipel des Orgao', 'Ile de Goat');
+INSERT INTO `world` ('archipel1`, `archipel2`) VALUES ('Archipel des Orgao', 'Royaume d'Oykot');
 
-INSERT INTO world VALUES('Karugarner', 0, 0, 0);
-INSERT INTO world VALUES('Cupcake', 1, 3, 1);
-INSERT INTO world VALUES('Bonbons', 1, 1, 2);
-INSERT INTO world VALUES('Bottle', 2, 3, 2);
-INSERT INTO world VALUES('String', 2, 2, 3);
-INSERT INTO world VALUES('Slip', 2, 1, 4);
-INSERT INTO world VALUES('Diplodocus', 3, 3, 3);
-INSERT INTO world VALUES('Fridge', 3, 2, 4);
-INSERT INTO world VALUES('Montgolfiere', 3, 1, 5);
-INSERT INTO world VALUES('Picmin', 4, 3, 4);
-INSERT INTO world VALUES('PoissonRouge', 5, 3, 5);
-INSERT INTO world VALUES('Gateau', 5, 1, 7);
-INSERT INTO world VALUES('Bouton', 6, 3, 6);
-INSERT INTO world VALUES('Fesse', 6, 1, 8);
-INSERT INTO world VALUES('Shinsekai', 7, 1, 20);
-INSERT INTO world VALUES('Marguerite', 8, 3, 20);
-INSERT INTO world VALUES('Tulipe', 8, 1, 30);
-INSERT INTO world VALUES('Serpent', 9, 6, 20);
-INSERT INTO world VALUES('Singe', 9, 3, 30);
-INSERT INTO world VALUES('Chien', 9, 1, 40);
-INSERT INTO world VALUES('Dragon', 9, 1, 50);
-INSERT INTO world VALUES('Chaise', 10, 6, 25);
-INSERT INTO world VALUES('portefeuille', 10, 6, 35);
-INSERT INTO world VALUES('Table', 10, 6, 45);
-INSERT INTO world VALUES('Escalier', 10, 6, 55);
-INSERT INTO world VALUES('Fourchette', 10, 6, 65);
-INSERT INTO world VALUES('Voiture', 11, 3, 70);
-INSERT INTO world VALUES('Velo', 11, 3, 80);
-INSERT INTO world VALUES('Train', 11, 3, 85);
-INSERT INTO world VALUES('Avion', 11, 3, 90);
-INSERT INTO world VALUES('Etoile', 12, 1, 150);
+
+
 
 INSERT INTO `joueur` (`username`, `password`) VALUES ('None', 'None');
 
