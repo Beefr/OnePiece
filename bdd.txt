@@ -282,7 +282,54 @@ INSERT INTO ile VALUES('Upper Yard', 'Mer Blanche', 1);
 INSERT INTO ile VALUES('Angel Island', 'Mer Blanche', 1);
 INSERT INTO ile VALUES('Shandora', 'Mer Blanche', 1);
 
-INSERT INTO pnj
+
+INSERT INTO pnj VALUES('Sanji La Jambe Noire', 'Baratie', 40, 'None', '2');
+INSERT INTO pnj VALUES('Captaaaaain Usoooooppeee', 'Syrup', 80, 'None', '2');
+INSERT INTO pnj VALUES('Big Mom', 'Whole Cake Island', 200, 'Soul', '1');
+INSERT INTO pnj VALUES('Kaido', 'Pays de Wano', 200, 'Dragon', '1');
+INSERT INTO pnj VALUES('Shanks Le Roux', 'Ile de Yukiryu', 300, 'None', '1');
+INSERT INTO pnj VALUES('Barbe Noire', 'Baltigo', 300, 'Yami', '1');
+INSERT INTO pnj VALUES('Bellamy', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Captain Kid', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Bartholomew Kuma', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Roronoa Zoro', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Nami', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Monkey D Luffy', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Nico Robin', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Chopper', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Franky', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Brook', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Coby', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Baggy', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Dracule Mihawk', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Arlong', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Smoker', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Dragon', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Ace', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Nefertari Vivi', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Crocodile', 40, 'None', '1');
+INSERT INTO pnj VALUES('Donquixote Doflamingo', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Sengoku', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Barbe Blanche', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Marco', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Enel', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Aokiji', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Rob Lucci', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Garp', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Gecko Moria', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Trafalgar Law', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Basil Hawkins', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Scratchmen Apoo', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Dragon', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Dragon', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Dragon', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Dragon', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Dragon', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Dragon', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Dragon', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Dragon', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Dragon', 'Baratie', 40, 'None', '1');
+INSERT INTO pnj VALUES('Dragon', 'Baratie', 40, 'None', '1');
 
 INSERT INTO world
 
