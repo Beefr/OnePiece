@@ -48,7 +48,7 @@ Ile
 
 Archipel
 - nom               string primK
-
+- ileprincipale     string
 
 CREATE DATABASE data;
 use data;
