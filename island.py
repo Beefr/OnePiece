@@ -1,5 +1,4 @@
 
-from message import Message
 
 from equipage import Equipage
 
@@ -18,8 +17,7 @@ class Island(object):
 
 
 	def __str__(self):
-		return self._name+", il y a "+str(self._pirates.numberOfPirates)+" pirates de niveau "+str(self._level)
-
+		return self._name
 
 
 	@property
@@ -46,3 +44,4 @@ class Island(object):
 
 	def regenerate(self):
 		self._pirates=Equipage.generateEnnemies(self._level, self._ennemies)
+		# TODO choper boss depuis bdd

@@ -12,15 +12,10 @@ class Joueur(object):
 
 	villeDeDepart='Village de Fuchsia'
 
-	def __init__(self, username, password=None):
-		if password!=None:
-			password=Utils.hashPassword(password)
-			self.createNewUser(username, password) 
-		
+	def __init__(self, username):		
 		self._username= username
-		self._world= World()
-		self._equipage= self.getMyCrew()
-		self._position= self.getMyLocation()
+		self._equipage= []
+		self._position= []
 		self._availableToFight=True
 
 		
@@ -33,12 +28,12 @@ class Joueur(object):
 		output.team+ Message("___________________________________________________", False, True)
 		output.team+ self._equipage.asMessageArray()
 
-		output.map+ self._world.showMap(self._position.name)
+		output.map+ World.showMap(self._position.name)
 		
 		output.content+ "Vous êtes actuellement ici: " 
 		output.content+ Message(str(self._position), True, True, "vert")
-		output.content+ Message("Dans quelle ile veux-tu aller maintenant?", True, False, "rouge")
-		output.content+ self._world.getNextStage(self._position.name)
+		output.content+ Message("Dans quelle ile/archipel veux-tu aller maintenant?", True, False, "rouge")
+		output.content+ World.nextIslandsAsMessage(self._position.name)
 
 	def isinstance(self):
 		return "Joueur"
@@ -46,7 +41,7 @@ class Joueur(object):
 	def resetCrew(self):
 		InteractBDD.deleteUserProgress(self._username)
 		InteractBDD.setMyCrew(self._username, Joueur.villeDeDepart, [Pirate(1, True, self._username)])
-		self._equipage= self.getMyCrew()
+		self._equipage= self.getMyCrew() # TODO possible to remove those 2 lines to reduce bdd calls?
 		self._position= self.getMyLocation()
 		self._availableToFight=True
 
@@ -55,7 +50,7 @@ class Joueur(object):
 		InteractBDD.increasePirateLevel(self._username)
 
 	def goingToNextIsland(self, value, output):
-		self._position=self._world.next(self._position.name, value)
+		self._position=World.next(self._position.name, value)
 		self._equipage.regenerateHealth()
 
 		isThereOtherPlayer=InteractBDD.checkPlayer(self._position.name) # returns the username or None
@@ -94,7 +89,7 @@ class Joueur(object):
 		output.team+ "___________________________________________________"
 		output.team+ self._equipage.asMessageArray()
 
-		output.map+ self._world.showMap(self._position.name)
+		output.map+ World.showMap(self._position.name)
 
 	def recrutement(self, number, output, pirates=[], value=0):
 		
@@ -134,6 +129,7 @@ class Joueur(object):
 
 	@property
 	def position(self):
+		self._position= self.getMyLocation()
 		return self._position
 
 	@property
@@ -142,6 +138,7 @@ class Joueur(object):
 
 	@property
 	def equipage(self):
+		self._equipage= self.getMyCrew()
 		return self._equipage
 
 	@property
@@ -149,9 +146,6 @@ class Joueur(object):
 		self._availableToFight=self._equipage.availableToFight
 		return self._availableToFight
 
-	@property
-	def world(self):
-		return self._world
 
 	@username.setter
 	def username(self, username):
@@ -165,15 +159,6 @@ class Joueur(object):
 	def equipage(self, equipage):
 		self._equipage=equipage
 
-
-
-
-	def createNewUser(self, username, password):
-		return InteractBDD.createUser(username, password)
-
-
-	def checkPassword(self, username, password):
-		return InteractBDD.checkPassword(username, password)
 
 
 	def getMyCrew(self):

@@ -2,90 +2,52 @@
 
 from island import Island
 from multiLineMessage import MultiLineMessage
-from stage import Stage
 from message import Message
 from interactBDD import InteractBDD
 
 class World(object):
-			
-	world = []
-	avancee = {}
-
-
-	def __init__(self):
-		self.initWorld()
-
-	@staticmethod
-	def carte():
-		return World.world
 
 	@staticmethod
 	def next(currentIslandName, choix=0):
-		choix=int(choix)
-		availableIslands=World.availableIslands(currentIslandName)
-		World.getIsland(currentIslandName).regenerate()
-		if choix<=len(availableIslands)-1 and choix>=0: # TODO verify user input
-
-			try:
-				island=availableIslands[int(choix)]
-			except:
-				island=availableIslands[0]
-		else:
-			return None
-		return island
+		availableIslands=World.nextIslandsAsArray(currentIslandName)
+		try:
+			return availableIslands[int(choix)]
+		except:
+			return availableIslands[0]
 
 
 	@staticmethod
-	def getIsland(currentIslandName):
-		index=World.avancee[currentIslandName]
-		stage=World.world[index]
-		for island in stage.islands:
-			if island.name==currentIslandName:
-				return island
+	def nextIslandsAsMessage(currentIslandName):
+		array= MultiLineMessage()
+		compteur=0
+
+		availableIslands=InteractBDD.availableIslands(currentIslandName)
+		for ile in availableIslands:
+			array+ Message(str(compteur)+": " +ile, False, "rouge")
+			compteur+=1
+
+		availableArchipels=InteractBDD.availableArchipels(currentIslandName)
+		for ile in availableArchipels:
+			array+ Message(str(compteur)+": " +ile, False, "rouge")
+			compteur+=1
+
+		return array
 
 	@staticmethod
-	def availableIslands(currentIslandName):
-		maxIndex=len(World.world)-1
-		minIndex=1
-		index=World.avancee[currentIslandName]
-		availableStages=[]
-		for i in range(index-1,index+2): #it takes values index-1, index, index+1
-			if i>=minIndex and i<=maxIndex:
-				availableStages.append(World.world[i])
-		availableIslands=[]
-		for stage in availableStages:
-			for island in stage.islands:
-				if island.name!=currentIslandName:
-					availableIslands.append(island)
-		return availableIslands
+	def nextIslandsAsArray(currentIslandName):
+		array= []
+		availableIslands=InteractBDD.availableIslands(currentIslandName)
+		for ile in availableIslands:
+			array.append(ile)
 
-	@staticmethod
-	def getNextStage(currentIslandName):
-		availableIslands=World.availableIslands(currentIslandName)
-		return Stage(availableIslands).asMessageArray()
+		availableArchipels=InteractBDD.availableArchipels(currentIslandName)
+		for archipel in availableArchipels:
+			ile = InteractBDD.ilePrincipale(archipel)
+			array.append(ile)
+
+		return array
 
 
-	def initWorld(self):
-		worldsDatas=InteractBDD.initWorld()
-		numberOfStages=InteractBDD.getNumberOfStages()
-		World.world=[Stage([])] * int(numberOfStages)
-
-		for islandData in worldsDatas:
-			island=Island(islandData[0], int(islandData[3]), int(islandData[2]))
-			test=World.world[int(islandData[1])]
-			test2=test+island
-			World.world[int(islandData[1])]=test2
-
-			World.avancee[islandData[0]] = int(islandData[1])
-
-
-	@staticmethod
-	def has(name):
-		for stage in World.world:
-			for island in stage.islands:
-				if island.name==name:
-					return True
-		return False
 
 	@staticmethod
 	def showMap(currentIslandName):
@@ -95,12 +57,12 @@ class World(object):
 		array* Message(currentIslandName, True, True, "rouge")
 
 		array+ "Les iles à proximité sont:"
-		ilesProches=InteractBDD.accessibleIslandFrom(currentIslandName)
+		ilesProches=InteractBDD.availableIslands(currentIslandName)
 		for ile in ilesProches:
 			array+ Message(ile, False, "rouge")
 
 		array+ "Les archipels à proximité sont:"
-		archipelsProches=InteractBDD.accessibleArchipelFrom(currentIslandName)
+		archipelsProches=InteractBDD.availableArchipels(currentIslandName)
 		for archipel in archipelsProches:
 			array+ Message(archipel, False, "rouge")
 
