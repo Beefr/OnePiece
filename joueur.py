@@ -10,6 +10,7 @@ from message import Message
 
 class Joueur(object):
 
+	villeDeDepart='Village de Fuchsia'
 
 	def __init__(self, username, password=None):
 		if password!=None:
@@ -44,7 +45,7 @@ class Joueur(object):
 
 	def resetCrew(self):
 		InteractBDD.deleteUserProgress(self._username)
-		InteractBDD.setMyCrew(self._username, self._world.carte()[0].islands[0].name, [Pirate(1, True, self._username)])
+		InteractBDD.setMyCrew(self._username, Joueur.villeDeDepart, [Pirate(1, True, self._username)])
 		self._equipage= self.getMyCrew()
 		self._position= self.getMyLocation()
 		self._availableToFight=True
@@ -179,7 +180,7 @@ class Joueur(object):
 		txtPirates=InteractBDD.getMyCrew(self._username)
 		if len(txtPirates)==0:
 			pirate=Pirate(1, True, self._username)
-			InteractBDD.setMyCrew(self._username, self._world.carte()[0].islands[0].name, [pirate])
+			InteractBDD.setMyCrew(self._username, Joueur.villeDeDepart, [pirate])
 			return Equipage([pirate])
 
 		else:
@@ -195,8 +196,8 @@ class Joueur(object):
 		if island!="":
 			return Island(island,0,0)
 		else:
-			InteractBDD.setMyLocation(self._username, self._world.carte()[0].islands[0].name)
-			return Island(self._world.carte()[0].islands[0].name,0,0)
+			InteractBDD.setMyLocation(self._username, Joueur.villeDeDepart)
+			return Island(Joueur.villeDeDepart,0,0)
 	
 
 

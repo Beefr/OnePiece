@@ -90,28 +90,19 @@ class World(object):
 	@staticmethod
 	def showMap(currentIslandName):
 		array= MultiLineMessage()
-		for stage in World.world:
-			array+ Message('------------------------------------------------------------', False, True) #60
-			#1 20 20
-			#2 5 55 55 5
-			spaceLength=60/(len(stage.islands)+1) -10
-			for island in stage.islands:
 
-				for i in range(int(spaceLength)):
-					array+ Message(" ", False, False)
+		array+ "Vous êtes actuellement à"
+		array* Message(currentIslandName, True, True, "rouge")
 
-				array+ Message('|', False, False)
-				if island.name!=currentIslandName:
-					array+ Message(island.name, False, False)
-				else:
-					array+ Message(island.name, True, False, "rouge")
-				array+ Message('|', False, False)
+		array+ "Les iles à proximité sont:"
+		ilesProches=InteractBDD.accessibleIslandFrom(currentIslandName)
+		for ile in ilesProches:
+			array+ Message(ile, False, "rouge")
 
-				for i in range(int(spaceLength)):
-					array+ Message(" ", False, False)
-
-
-				array+ Message(" ", False, True)
+		array+ "Les archipels à proximité sont:"
+		archipelsProches=InteractBDD.accessibleArchipelFrom(currentIslandName)
+		for archipel in archipelsProches:
+			array+ Message(archipel, False, "rouge")
 
 		return array
 
