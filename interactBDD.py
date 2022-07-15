@@ -313,7 +313,6 @@ class InteractBDD(Static):
 		for elem in description:
 			currentArchipelName = str(elem[0]) # we got the name of the current archipel
 
-		islandNames=[]
 		# we must get all the connected archipels to get their principal island
 		connectedArchipels=[]
 		request = "SELECT archipel1 FROM world WHERE archipel2='"+currentArchipelName+"' UNION SELECT archipel2 FROM world WHERE archipel1='"+currentArchipelName+"';"

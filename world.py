@@ -56,15 +56,15 @@ class World(object):
 		array+ "Vous êtes actuellement à"
 		array* Message(currentIslandName, True, True, "rouge")
 
-		array+ "Les iles à proximité sont:"
+		array+ Message("Les iles à proximité sont:", False, True)
 		ilesProches=InteractBDD.availableIslands(currentIslandName)
 		for ile in ilesProches:
-			array+ Message(ile, False, "rouge")
+			array+ Message(ile, False, False, "rouge")
 
-		array+ "Les archipels à proximité sont:"
+		array+ Message("Les archipels à proximité sont:")
 		archipelsProches=InteractBDD.availableArchipels(currentIslandName)
 		for archipel in archipelsProches:
-			array+ Message(archipel, False, "rouge")
+			array+ Message(archipel, False, False, "rouge")
 
 		return array
 
