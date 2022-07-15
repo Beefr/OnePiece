@@ -150,7 +150,7 @@ class InteractBDD(Static):
 		txt=txt+"<br>"
 
 		txt=txt+"Fruit: <br>"
-		txt=txt+" name | power | allocated"
+		txt=txt+" name | power | allocated <br>"
 		request = "select * from fruit;"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
@@ -160,7 +160,7 @@ class InteractBDD(Static):
 		txt=txt+"<br>"
 
 		txt=txt+"World: <br>"
-		txt=txt+" id | archipel1 | archipel2"
+		txt=txt+" id | archipel1 | archipel2 <br>"
 		request = "select * from world;"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
@@ -170,7 +170,7 @@ class InteractBDD(Static):
 		txt=txt+"<br>"
 
 		txt=txt+"PNJ: <br>"
-		txt=txt+" nom | ile | level | fruit | qualite"
+		txt=txt+" nom | ile | level | fruit | qualite <br>"
 		request = "select * from pnj;"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
@@ -180,7 +180,7 @@ class InteractBDD(Static):
 		txt=txt+"<br>"
 
 		txt=txt+"Ile: <br>"
-		txt=txt+" nom | archipel | pvp"
+		txt=txt+" nom | archipel | pvp <br>"
 		request = "select * from ile;"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
@@ -190,7 +190,7 @@ class InteractBDD(Static):
 		txt=txt+"<br>"
 
 		txt=txt+"Archipel: <br>"
-		txt=txt+" nom | ilePrincipale"
+		txt=txt+" nom | ilePrincipale <br>"
 		request = "select * from archipel;"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
