@@ -220,35 +220,72 @@ class InteractBDD(Static):
 	#_________________________WORLD_________________________________
 
 	@staticmethod
-	def initWorld():
+	def availableIslands(currentIslandName):
 		[conn, cur]=InteractBDD.beginQuery()
 
-		request = "SELECT * FROM world;"
+		request = "SELECT archipel FROM ile WHERE nom='"+currentIslandName+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
-		
-		world= []
 		for elem in description:
-			array=[str(elem[0]), str(elem[1]), str(elem[2]), str(elem[3])]
-			world.append(array)
+			currentArchipelName = str(elem[0]) # we got the name of the current archipel
+
+		islandNames=[]
+		# we must get all the connected archipels to get their principal island
+		connectedArchipels=[]
+		request = "SELECT archipel1 FROM ile WHERE archipel2='"+currentArchipelName+"' UNION SELECT archipel2 FROM ile WHERE archipel1='"+currentArchipelName+"';"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		for elem in description:
+			connectedArchipels.append(str(elem[0])) 
 		
+		for archipel in connectedArchipels:
+			request = "SELECT ileprincipale FROM archipel WHERE nom='"+archipel+"';"
+			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+			for elem in description:
+				islandNames.append(str(elem[0])) 
+
+		# and we must also get all the islands inside the current archipel
+		request = "SELECT nom FROM ile WHERE archipel='"+currentArchipelName+"';"
+		InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		for elem in description:
+			if str(elem[0])!=currentIslandName:
+				islandNames.append(str(elem[0])) 
+
 
 		InteractBDD.endQuery(conn, cur)
-		return world
+		return islandNames
 
 
 	@staticmethod
-	def getNumberOfStages():
+	def availableArchipels(currentIslandName):
 		[conn, cur]=InteractBDD.beginQuery()
 
-		request = "SELECT MAX(stage) FROM world;"
+		request = "SELECT archipel FROM ile WHERE nom='"+currentIslandName+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
-		
 		for elem in description:
-			InteractBDD.endQuery(conn, cur)
-			return elem[0]
+			currentArchipelName = str(elem[0]) # we got the name of the current archipel
+
+		islandNames=[]
+		# we must get all the connected archipels to get their principal island
+		connectedArchipels=[]
+		request = "SELECT archipel1 FROM ile WHERE archipel2='"+currentArchipelName+"' UNION SELECT archipel2 FROM ile WHERE archipel1='"+currentArchipelName+"';"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		for elem in description:
+			connectedArchipels.append(str(elem[0])) 
 
 		InteractBDD.endQuery(conn, cur)
-		return None
+		return connectedArchipels	
+		
+	@staticmethod
+	def ilePrincipale(archipel):
+		[conn, cur]=InteractBDD.beginQuery()
+
+		request = "SELECT ileprincipale FROM archipel WHERE nom='"+archipel+"';"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		for elem in description:
+			ileprincipale = str(elem[0]) # we got the name of the current archipel
+
+		
+		InteractBDD.endQuery(conn, cur)
+		return ileprincipale
 
 
 
