@@ -129,7 +129,7 @@ class InteractBDD(Static):
 			txt=txt+"<br>"
 		txt=txt+"<br>"
 
-		txt=txt+"Position: <br>"
+		txt=txt+"island: <br>"
 		txt=txt+"username | position's name <br>"
 		request = "select * from island;"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
@@ -140,8 +140,58 @@ class InteractBDD(Static):
 		txt=txt+"<br>"
 
 		txt=txt+"Pirate: <br>"
-		txt=txt+"id | owner | name | level | fruit's name | qualite <br>"
+		txt=txt+" owner | name | level | fruit's name | qualite <br>"
 		request = "select * from pirate;"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		for elem in description:
+			for i in range(len(elem)):
+				txt= txt+" | " + str(elem[i])
+			txt=txt+"<br>"
+		txt=txt+"<br>"
+
+		txt=txt+"Fruit: <br>"
+		txt=txt+" name | power | allocated"
+		request = "select * from fruit;"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		for elem in description:
+			for i in range(len(elem)):
+				txt= txt+" | " + str(elem[i])
+			txt=txt+"<br>"
+		txt=txt+"<br>"
+
+		txt=txt+"World: <br>"
+		txt=txt+" id | archipel1 | archipel2"
+		request = "select * from world;"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		for elem in description:
+			for i in range(len(elem)):
+				txt= txt+" | " + str(elem[i])
+			txt=txt+"<br>"
+		txt=txt+"<br>"
+
+		txt=txt+"PNJ: <br>"
+		txt=txt+" nom | ile | level | fruit | qualite"
+		request = "select * from fruit;"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		for elem in description:
+			for i in range(len(elem)):
+				txt= txt+" | " + str(elem[i])
+			txt=txt+"<br>"
+		txt=txt+"<br>"
+
+		txt=txt+"Ile: <br>"
+		txt=txt+" nom | archipel | pvp"
+		request = "select * from fruit;"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		for elem in description:
+			for i in range(len(elem)):
+				txt= txt+" | " + str(elem[i])
+			txt=txt+"<br>"
+		txt=txt+"<br>"
+
+		txt=txt+"Archipel: <br>"
+		txt=txt+" nom | ilePrincipale"
+		request = "select * from fruit;"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
 			for i in range(len(elem)):
