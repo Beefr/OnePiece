@@ -281,7 +281,7 @@ class InteractBDD(Static):
 		islandNames=[]
 		# we must get all the connected archipels to get their principal island
 		connectedArchipels=[]
-		request = "SELECT archipel1 FROM ile WHERE archipel2='"+currentArchipelName+"' UNION SELECT archipel2 FROM ile WHERE archipel1='"+currentArchipelName+"';"
+		request = "SELECT archipel1 FROM world WHERE archipel2='"+currentArchipelName+"' UNION SELECT archipel2 FROM world WHERE archipel1='"+currentArchipelName+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
 			connectedArchipels.append(str(elem[0])) 
@@ -316,7 +316,7 @@ class InteractBDD(Static):
 		islandNames=[]
 		# we must get all the connected archipels to get their principal island
 		connectedArchipels=[]
-		request = "SELECT archipel1 FROM ile WHERE archipel2='"+currentArchipelName+"' UNION SELECT archipel2 FROM ile WHERE archipel1='"+currentArchipelName+"';"
+		request = "SELECT archipel1 FROM world WHERE archipel2='"+currentArchipelName+"' UNION SELECT archipel2 FROM world WHERE archipel1='"+currentArchipelName+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
 			connectedArchipels.append(str(elem[0])) 
