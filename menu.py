@@ -83,7 +83,6 @@ class Menu(object):
 		if value!=None:
 			self._joueur.goingToNextIsland(value, self._output)
 			self.checkAliveForRecruitment()
-			self._output.team+ "test"
 		else:
 			return self._joueur.showMenu(self._output)
 
