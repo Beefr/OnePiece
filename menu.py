@@ -41,7 +41,7 @@ class Menu(object):
 		self._output.reset()
 
 
-		if user_input!=None and self._died==False:
+		if user_input!="None" and self._died==False:
 			Menu.userInput=user_input
 			str(eval(Menu.steps[Menu.currentStep] + "(" + Menu.getParameters() + ")"))
 			self.nextStep()
