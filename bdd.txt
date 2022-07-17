@@ -210,11 +210,11 @@ INSERT INTO ile VALUES('Village de Gosa', 'Archipel de Konomi', 1);
 INSERT INTO ile VALUES('Village de Kokoyashi', 'Archipel de Konomi', 0);
 INSERT INTO ile VALUES('Arlong Park', 'Archipel de Konomi', 1);
 
-INSERT INTO ile VALUES('Royaume de Goa', 'Ile de Dawn', 1);
-INSERT INTO ile VALUES('Grey Terminal', 'Ile de Dawn', 1);
-INSERT INTO ile VALUES('Foret du milieu', 'Ile de Dawn', 1);
+INSERT INTO ile VALUES('Royaume de Goa', 'Ile de Dawn', 0);
+INSERT INTO ile VALUES('Grey Terminal', 'Ile de Dawn', 0);
+INSERT INTO ile VALUES('Foret du milieu', 'Ile de Dawn', 0);
 INSERT INTO ile VALUES('Village de Fuchsia', 'Ile de Dawn', 0);
-INSERT INTO ile VALUES('Mont Corvo', 'Ile de Dawn', 1);
+INSERT INTO ile VALUES('Mont Corvo', 'Ile de Dawn', 0);
 
 INSERT INTO ile VALUES('Royaume de Solbay ', 'South Blue', 1);
 INSERT INTO ile VALUES('Baterilla', 'South Blue', 1);
