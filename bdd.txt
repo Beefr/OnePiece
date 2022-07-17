@@ -422,6 +422,6 @@ INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Archipel des Orgao', 'Ro
 
 
 
-INSERT INTO `joueur` (`username`, `password`) VALUES ('None', 'None');
+INSERT INTO `joueur` (`username`, `password`, `currentstep`) VALUES ('None', 'None', 1);
 
 

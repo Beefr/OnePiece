@@ -39,7 +39,7 @@ class InteractBDD(Static):
 	@staticmethod
 	def createUser(username, password):
 		[conn, cur]=InteractBDD.beginQuery()
-		request = "INSERT INTO `joueur` (`username`, `password`) VALUES('"+username+"','"+password+"');"
+		request = "INSERT INTO `joueur` (`username`, `password`, `currentstep`) VALUES('"+username+"','"+password+"', 1);"
 		InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 		InteractBDD.endQuery(conn, cur)
 		return None
@@ -83,7 +83,7 @@ class InteractBDD(Static):
 			username = elem[0]
 			InteractBDD.endQuery(conn, cur)
 			return username
-		return None
+		return "None"
 
 
 
