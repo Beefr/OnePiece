@@ -1,6 +1,5 @@
 
 
-from island import Island
 from multiLineMessage import MultiLineMessage
 from message import Message
 from interactBDD import InteractBDD
