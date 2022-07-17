@@ -391,11 +391,6 @@ class InteractBDD(Static):
 
 		[conn, cur]=InteractBDD.beginQuery()
 
-		request = "SELECT archipel FROM ile WHERE nom='"+currentIslandName+"';"
-		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
-		for elem in description:
-			currentArchipelName = str(elem[0]) # we got the name of the current archipel
-
 		islandNames=[]
 		
 		for archipel in connectedArchipels:
