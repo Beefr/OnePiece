@@ -97,7 +97,7 @@ class Joueur(object):
 			newPirate=piratesID[int(value)] # now it's not a pirate, it's an id
 			truePirate=InteractBDD.getMyPirate(newPirate)
 			self._equipage.newFighter(truePirate)
-			InteractBDD.addNewFighter(self._username, newPirate) # i dont fking want to create a method that updates the owner's name
+			InteractBDD.addNewFighter(self._username, truePirate) # i dont fking want to create a method that updates the owner's name
 		self.showMenu(output)
 
 
