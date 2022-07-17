@@ -14,8 +14,8 @@ class Joueur(object):
 
 	def __init__(self, username):		
 		self._username= username
-		self._equipage= []
-		self._position= []
+		self._equipage= self.getMyCrew()
+		self._position= self.getMyLocation()
 		self._availableToFight=True
 
 		
