@@ -58,7 +58,7 @@ use data;
 CREATE TABLE joueur(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, username varchar(40) NOT NULL, password varchar(256) NOT NULL, currentstep INT NOT NULL);
 CREATE TABLE island(username varchar(40) PRIMARY KEY NOT NULL, position varchar(60));
 CREATE TABLE fruit(name varchar(20)  PRIMARY KEY NOT NULL, power varchar(20), allocated INT);
-CREATE TABLE pirate(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, username varchar(20) NOT NULL, name varchar(60), level INT, fruit varchar(20), qualite INT);
+CREATE TABLE pirate(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, username varchar(40) NOT NULL, name varchar(60), level INT, fruit varchar(20), qualite INT);
 CREATE TABLE world(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, archipel1 varchar(60) NOT NULL, archipel2 varchar(60) NOT NULL);
 CREATE TABLE pnj(nom varchar(20) PRIMARY KEY NOT NULL, ile varchar(60) NOT NULL, level INT NOT NULL, fruit varchar(20) NOT NULL, qualite INT NOT NULL);
 CREATE TABLE ile(nom varchar(60) PRIMARY KEY NOT NULL, archipel varchar(40) NOT NULL, pvp INT NOT NULL);
@@ -111,7 +111,7 @@ INSERT INTO fruit VALUES('Fragmentation','[0,50,50,0]', 0);
 
 INSERT INTO archipel VALUES('Ile de Goat','Ile de Goat');
 INSERT INTO archipel VALUES('Shells Town', 'Shells Town');
-INSERT INTO archipel VALUES('Shimotsuki', 'Shimotsuki');
+INSERT INTO archipel VALUES('Shinotsuki', 'Shinotsuki');
 INSERT INTO archipel VALUES('Archipel des Orgao', 'Archipel des Orgao');
 INSERT INTO archipel VALUES('Ile des animaux rares', 'Ile des animaux rares');
 INSERT INTO archipel VALUES('Baratie', 'Baratie');
@@ -405,9 +405,9 @@ INSERT INTO pnj VALUES('Katakuri', 'Baratie', 150, 'Mochi', '1');
 INSERT INTO pnj VALUES('Nekomamushi', 'Baratie', 80, 'None', '1');
 
 
-INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Royaume de Goa', 'Shinotsuki');
-INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Royaume de Goa', 'Shells Town');
-INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Royaume de Goa', 'ile de Goat');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ile de Dawn', 'Shinotsuki');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ile de Dawn', 'Shells Town');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ile de Dawn', 'ile de Goat');
 INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Baratie', 'Shinotsuki');
 INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Baratie', 'Shells Town');
 INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Baratie', 'Tequila Wolf');
