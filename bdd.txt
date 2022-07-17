@@ -55,8 +55,8 @@ CREATE DATABASE data;
 use data;
 
 
-CREATE TABLE joueur(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, username varchar(20) NOT NULL, password varchar(256) NOT NULL, currentstep INT NOT NULL);
-CREATE TABLE island(username varchar(20) PRIMARY KEY NOT NULL, position varchar(60));
+CREATE TABLE joueur(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, username varchar(40) NOT NULL, password varchar(256) NOT NULL, currentstep INT NOT NULL);
+CREATE TABLE island(username varchar(40) PRIMARY KEY NOT NULL, position varchar(60));
 CREATE TABLE fruit(name varchar(20)  PRIMARY KEY NOT NULL, power varchar(20), allocated INT);
 CREATE TABLE pirate(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, username varchar(20) NOT NULL, name varchar(60), level INT, fruit varchar(20), qualite INT);
 CREATE TABLE world(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, archipel1 varchar(60) NOT NULL, archipel2 varchar(60) NOT NULL);
