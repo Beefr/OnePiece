@@ -21,7 +21,6 @@ class Menu(object):
 		self._currentStep=1
 		self._output=Output()
 		self._died=False
-		self._tempData=None
 
 	#TODO use fruit's allocation
 	#TODO hook values from bdd and not code
@@ -89,7 +88,7 @@ class Menu(object):
 
 	def checkAliveForRecruitment(self):
 		if self._joueur.availableToFight:
-			self._tempData=self._joueur.askForRecruitment(self._output) # put the pirates id that we want to recruit
+			self._joueur.askForRecruitment(self._output) # put the pirates id that we want to recruit
 		else:
 			self._joueur.resetCrew()
 			self._output.content+ "Ton équipage est mort, il va falloir recommencer du début pour devenir le roi des pirates. y/n"
@@ -97,4 +96,5 @@ class Menu(object):
 
 
 	def choseThatPirate(self, value):
-		self._joueur.recrutement(len(self._tempData), self._output, self._tempData, value)
+		recruitablePirates=InteractBDD.getMyCrewsID("recrutement"+"self._username")
+		self._joueur.recrutement(self._output, recruitablePirates, value)
