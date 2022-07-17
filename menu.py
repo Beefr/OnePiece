@@ -96,5 +96,5 @@ class Menu(object):
 
 
 	def choseThatPirate(self, value):
-		recruitablePirates=InteractBDD.getMyCrewsID("recrutement"+"self._username")
+		recruitablePirates=InteractBDD.getMyCrewsID("recrutement"+self._joueur.username)
 		self._joueur.recrutement(self._output, recruitablePirates, value)

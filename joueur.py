@@ -114,7 +114,7 @@ class Joueur(object):
 
 
 	def askForRecruitment(self, output):
-		InteractBDD.deletePirates("recrutement"+"self._username") # clean up precedent recrutement
+		InteractBDD.deletePirates("recrutement"+self._username) # clean up precedent recrutement
 		number=5
 		output.content+ Message("Des pirates sont disponibles au recrutement.", True, False, "rouge")
 		for i in range(0,number):
