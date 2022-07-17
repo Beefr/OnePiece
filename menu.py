@@ -10,8 +10,8 @@ class Menu(object):
 			1: "self.choseThatIsland", 
 			2: "self.choseThatPirate"}
 	parameters={#1: "[Menu.userInput[0],Menu.userInput[1]]",  
-				1: "[Menu.userInput[-1]]",  
-				2: "[Menu.userInput[-1]]"}
+				1: "[self._userInput[-1]]",  
+				2: "[self._userInput[-1]]"}
 	
 
 
