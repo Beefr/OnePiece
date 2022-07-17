@@ -420,9 +420,113 @@ INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Shells Town', 'Ile de Go
 INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ile des animaux rares', 'Ile de Goat');
 INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Archipel des Orgao', 'Ile de Goat');
 INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Archipel des Orgao', 'Royaume d Oykot');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Archipel des Orgao', 'Loguetown');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Loguetown', 'Royaume d Oykot');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Village de Konomi', 'Royaume d Oykot');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Loguetown', 'Village de Konomi');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Syrup', 'Mirrorball');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Syrup', 'Tequila Wolf');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Village de Konomi', 'Tequila Wolf');
+
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Red Line', 'Village de Konomi');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Red Line', 'Syrup');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Red Line', 'South Blue');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Red Line', 'North Blue');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Red Line', 'West Blue');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Red Line', 'Calm Belt');
+
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Las Camp', 'Ile de Toroa');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Las Camp', 'Ohara');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Las Camp', 'Royaume d Ilisia');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ohara', 'Royaume d Ilisia');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ile de Toroa', 'Royaume d Ilisia');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ohara', 'Ile de Toroa');
+
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Royaume de Solbay', 'Baterilla');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Royaume de Solbay', 'Saint Reia');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Royaume de Solbay', 'Royaume de Bliss');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Royaume de Solbay', 'Ile de Karate');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Royaume de Solbay', 'Royaume de Torino');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Saint Reia', 'Baterilla');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Royaume de Bliss', 'Baterilla');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ile de Karate', 'Baterilla');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Royaume de Torino', 'Baterilla');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Saint Reia', 'Royaume de Bliss');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Saint Reia', 'Ile de Karate');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Saint Reia', 'Royaume de Torino');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Royaume de Bliss', 'Royaume de Torino');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ile de Karate', 'Royaume de Torino');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ile de Karate', 'Royaume de Bliss');
+
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Royaume de Luvneel', 'Notice');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Royaume de Luvneel', 'Ile de Minion');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Royaume de Luvneel', 'Spider Miles');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Royaume de Luvneel', 'Ile de Swallow');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Royaume de Luvneel', 'Royaume de Flevance');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Royaume de Luvneel', 'Ile de Rubeck');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Royaume de Luvneel', 'Ile de Micqueot');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Notice', 'Ile de Minion');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Notice', 'Spider Miles');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Notice', 'Ile de Swallow');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Notice', 'Royaume de Flevance');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Notice', 'Ile de Rubeck');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Notice', 'Ile de Micqueot');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ile de Minion', 'Spider Miles');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ile de Minion', 'Ile de Swallow');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ile de Minion', 'Royaume de Flevance');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ile de Minion', 'Ile de Rubeck');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ile de Minion', 'Ile de Micqueot');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Spider Miles', 'Ile de Swallow');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Spider Miles', 'Royaume de Flevance');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Spider Miles', 'Ile de Rubeck');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Spider Miles', 'Ile de Micqueot');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ile de Swallow', 'Royaume de Flevance');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ile de Swallow', 'Ile de Rubeck');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ile de Swallow', 'Ile de Micqueot');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Royaume de Flevance', 'Ile de Rubeck');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Royaume de Flevance', 'Ile de Micqueot');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ile de Micqueot', 'Ile de Rubeck');
 
 
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Rusukaina', 'Impel Down');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Amazon Lily', 'Impel Down');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Rusukaina', 'Amazon Lily');
 
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Mer de Nuages', 'Skypiea');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Mer de Nuages', 'Bilca');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Mer de Nuages', 'Weatheria');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Mer de Nuages', 'Milky Road');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Mer de Nuages', 'Upper Yard');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Mer de Nuages', 'Angel Island');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Mer de Nuages', 'Shandora');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Skypiea', 'Bilca');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Skypiea', 'Weatheria');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Skypiea', 'Milky Road');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Skypiea', 'Upper Yard');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Skypiea', 'Angel Island');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Skypiea', 'Shandora');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Bilca', 'Weatheria');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Bilca', 'Milky Road');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Bilca', 'Upper Yard');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Bilca', 'Angel Island');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Bilca', 'Shandora');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Weatheria', 'Milky Road');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Weatheria', 'Upper Yard');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Weatheria', 'Angel Island');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Weatheria', 'Shandora');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Milky Road, 'Upper Yard');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Milky Road', 'Angel Island');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Milky Road', 'Shandora');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Upper Yard', 'Angel Island');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Upper Yard', 'Shandora');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Angel Island', 'Shandora');
+
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Marie Joie', 'Reverse Mountain');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Marie Joie', 'Cap des jumeaux');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Marie Joie', 'Ile des Homme-poissons');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Reverse Mountain', 'Cap des jumeaux');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Reverse Mountain', 'Ile des Homme-poissons');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Cap des jumeaux', 'Ile des Homme-poissons');
 
 INSERT INTO `joueur` (`username`, `password`, `currentstep`) VALUES ('None', 'None', 1);
 
