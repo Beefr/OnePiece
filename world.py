@@ -21,12 +21,12 @@ class World(object):
 		array= MultiLineMessage()
 		compteur=0
 
-		availableIslands=InteractBDD.availableIslands(currentIslandName)
+		availableIslands=InteractBDD.availableIslandsInCurrentArchipel(currentIslandName)
 		for ile in availableIslands: # it's only their names
 			array+ Message(str(compteur)+": " +ile, False, False, "rouge")
 			compteur+=1
 
-		availableArchipels=InteractBDD.availableArchipels(currentIslandName)
+		availableArchipels=InteractBDD.availableIslandsInAvailableArchipels(currentIslandName)
 		for arch in availableArchipels: # it's only their names
 			array+ Message(str(compteur)+": " +arch, False, False, "rouge")
 			compteur+=1
@@ -36,7 +36,7 @@ class World(object):
 	@staticmethod
 	def nextIslandsAsArray(currentIslandName):
 		array= []
-		availableIslands=InteractBDD.availableIslands(currentIslandName)
+		availableIslands=InteractBDD.availableIslandsInCurrentArchipel(currentIslandName)
 		for ile in availableIslands:
 			array.append(ile)
 

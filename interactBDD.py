@@ -323,7 +323,7 @@ class InteractBDD(Static):
 	#_________________________WORLD_________________________________
 
 	@staticmethod
-	def availableIslands(currentIslandName):
+	def availableIslandsInCurrentArchipel(currentIslandName):
 		[conn, cur]=InteractBDD.beginQuery()
 
 		request = "SELECT archipel FROM ile WHERE nom='"+currentIslandName+"';"
@@ -332,15 +332,30 @@ class InteractBDD(Static):
 			currentArchipelName = str(elem[0]) # we got the name of the current archipel
 
 		islandNames=[]
-		# we must get all the connected archipels to get their principal island
-		connectedArchipels=[]
-		request = "SELECT archipel1, archipel2 FROM world WHERE archipel1='"+currentArchipelName+"' OR archipel2='"+currentArchipelName+"';"
+		# and we must also get all the islands inside the current archipel
+		request = "SELECT nom FROM ile WHERE archipel='"+currentArchipelName+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
-			if str(elem[0])!=currentArchipelName:
-				connectedArchipels.append(str(elem[0])) 
-			if str(elem[1])!=currentArchipelName:
-				connectedArchipels.append(str(elem[1])) 
+			if str(elem[0])!=currentIslandName:
+				islandNames.append(str(elem[0])) 
+
+
+		InteractBDD.endQuery(conn, cur)
+		return islandNames
+
+
+	@staticmethod
+	def availableIslandsInAvailableArchipels(currentIslandName):
+		connectedArchipels=InteractBDD.availableArchipels(currentIslandName)
+		
+		[conn, cur]=InteractBDD.beginQuery()
+
+		request = "SELECT archipel FROM ile WHERE nom='"+currentIslandName+"';"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		for elem in description:
+			currentArchipelName = str(elem[0]) # we got the name of the current archipel
+
+		islandNames=[]
 		
 		for archipel in connectedArchipels:
 			request = "SELECT ileprincipale FROM archipel WHERE nom='"+archipel+"';"
@@ -376,10 +391,10 @@ class InteractBDD(Static):
 		request = "SELECT archipel1, archipel2 FROM world WHERE archipel1='"+currentArchipelName+"' OR archipel2='"+currentArchipelName+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
-			#if str(elem[0])!=currentArchipelName:
-			connectedArchipels.append(str(elem[0])) 
-			#if str(elem[1])!=currentArchipelName:
-			connectedArchipels.append(str(elem[1])) 
+			if str(elem[0])!=currentArchipelName:
+				connectedArchipels.append(str(elem[0])) 
+			if str(elem[1])!=currentArchipelName:
+				connectedArchipels.append(str(elem[1])) 
 
 		InteractBDD.endQuery(conn, cur)
 		return connectedArchipels	
