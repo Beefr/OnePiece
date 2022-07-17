@@ -6,23 +6,23 @@ from output import Output
 
 class Menu(object):
 
-	userInput=[]
 	steps={ #1: "self.instanciateJoueur",
 			1: "self.choseThatIsland", 
 			2: "self.choseThatPirate"}
 	parameters={#1: "[Menu.userInput[0],Menu.userInput[1]]",  
 				1: "[Menu.userInput[-1]]",  
 				2: "[Menu.userInput[-1]]"}
-	currentStep=1
-	tempData=None
+	
 
 
 	def __init__(self):
+		self._userInput=[]
 		self._joueur=None
 		Menu.userInput=[]
-		Menu.currentStep=1
+		self._currentStep=InteractBDD.getMyCurrentStep("")
 		self._output=Output()
 		self._died=False
+		self._tempData=None
 
 	#TODO use fruit's allocation
 	#TODO hook values from bdd and not code
@@ -34,6 +34,7 @@ class Menu(object):
 
 	@joueur.setter
 	def joueur(self, joueur):
+		self._currentStep=InteractBDD.getMyCurrentStep(joueur.username)
 		self._joueur=joueur
 
 
@@ -42,13 +43,13 @@ class Menu(object):
 
 
 		if user_input!="None" and self._died==False:
-			Menu.userInput=user_input
-			str(eval(Menu.steps[Menu.currentStep] + "(" + Menu.getParameters() + ")"))
+			self._userInput=user_input
+			str(eval(Menu.steps[self._currentStep] + "(" + self.getParameters() + ")"))
 			self.nextStep()
 		else:
 			self._died=False
-			Menu.userInput=[]
-			Menu.currentStep=1
+			self._userInput=[]
+			self._currentStep=1
 			self.choseThatIsland()
 		
 			
@@ -57,16 +58,15 @@ class Menu(object):
 			
 
 	def nextStep(self):
-		if Menu.currentStep==1:
-			Menu.currentStep=2
-		elif Menu.currentStep==2:
-			Menu.currentStep=1
+		if self._currentStep==1:
+			self._currentStep=2
+		elif self._currentStep==2:
+			self._currentStep=1
+		InteractBDD.setMyCurrentStep(self._joueur.username, self._currentStep)
 
 
-
-	@staticmethod
-	def getParameters():
-		array=eval(Menu.parameters[Menu.currentStep])
+	def getParameters(self):
+		array=eval(Menu.parameters[self._currentStep])
 		txt=""
 		if array!=[]:
 			for param in array:
@@ -90,7 +90,7 @@ class Menu(object):
 
 	def checkAliveForRecruitment(self):
 		if self._joueur.availableToFight:
-			Menu.tempData=self._joueur.askForRecruitment(self._output)
+			self._tempData=self._joueur.askForRecruitment(self._output)
 		else:
 			self._joueur.resetCrew()
 			self._output.content+ "Ton équipage est mort, il va falloir recommencer du début pour devenir le roi des pirates. y/n"
@@ -98,4 +98,4 @@ class Menu(object):
 
 
 	def choseThatPirate(self, value):
-		self._joueur.recrutement(len(Menu.tempData), self._output, Menu.tempData, value)
+		self._joueur.recrutement(len(self._tempData), self._output, self._tempData, value)

@@ -113,6 +113,17 @@ class InteractBDD(Static):
 			InteractBDD.endQuery(conn, cur)
 			return value
 		return ""
+
+	@staticmethod
+	def getMyCurrentStep(username):
+		[conn, cur]=InteractBDD.beginQuery()
+		request = "SELECT currentstep FROM joueur WHERE username='"+username+"';"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		for elem in description:
+			value = int(elem[0])
+			InteractBDD.endQuery(conn, cur)
+			return value
+		return 1
 		
 	@staticmethod
 	def retrieveWholeDatabase():
@@ -120,7 +131,7 @@ class InteractBDD(Static):
 		txt=""
 
 		txt=txt+"Joueur: <br>"
-		txt=txt+"id | username | password <br>"
+		txt=txt+"id | username | password | currentStep <br>"
 		request = "select * from joueur;"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
@@ -241,6 +252,16 @@ class InteractBDD(Static):
 		InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 
 		request = "INSERT INTO island VALUES ('"+username+"', '"+positionsName+"');"
+		InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+		InteractBDD.endQuery(conn, cur)
+		return None
+
+		
+
+	@staticmethod
+	def getMyCurrentStep(username, currentStep):
+		[conn, cur]=InteractBDD.beginQuery()
+		request = "UPDATE joueur SET currentstep='"+currentStep+"' WHERE username='"+username+"';"
 		InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 		InteractBDD.endQuery(conn, cur)
 		return None
