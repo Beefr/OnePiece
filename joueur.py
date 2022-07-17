@@ -50,7 +50,7 @@ class Joueur(object):
 		InteractBDD.increasePirateLevel(self._username)
 
 	def goingToNextIsland(self, value, output):
-		self._position=World.next(self._position.name, value)
+		self._position=Island(World.next(self._position.name, value),0,0)
 		self._equipage.regenerateHealth()
 
 		isThereOtherPlayer=InteractBDD.checkPlayer(self._position.name) # returns the username or None
