@@ -261,6 +261,47 @@ class InteractBDD(Static):
 		return None
 
 
+	@staticmethod
+	def averagePirateLevel(username):
+		[conn, cur]=InteractBDD.beginQuery()
+		request = "SELECT level FROM pirate WHERE username='"+username+"';"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		
+		levels=[]
+		for elem in description:
+			levels.append(int(elem[0]))
+
+		InteractBDD.endQuery(conn, cur)
+		return sum(levels)/len(levels)
+
+	@staticmethod
+	def checkBoss(currentIslandName):
+		[conn, cur]=InteractBDD.beginQuery()
+		request = "SELECT nom, level, fruit, qualite FROM pnj WHERE ile='"+currentIslandName+"';"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		
+		levels=[]
+		for elem in description:
+			levels.append(int(elem[0]))
+
+		InteractBDD.endQuery(conn, cur)
+		return sum(levels)/len(levels)
+
+		
+	@staticmethod
+	def phraseDeCombat(pnjName):
+		[conn, cur]=InteractBDD.beginQuery()
+		request = "SELECT phrase FROM pnj WHERE nom='"+pnjName+"';"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		for elem in description:
+			texte=str(elem[0])
+			InteractBDD.endQuery(conn, cur)
+			return texte
+
+		InteractBDD.endQuery(conn, cur)
+		return "se déchaîne"
+
+
 	#_____________________STORE_______________________________
 
 	@staticmethod

@@ -74,11 +74,18 @@ class Pirate(object):
 	def regenerateHealth(level, qualite):
 		return 100*level*(5-qualite)
 
-	
+	def defense(self):
+		return self._stats[2]
 	
 	def attaque(self):
 		return self._stats[1]
 
+
+	def vie(self):
+		return self._stats[0]
+
+	def takeDamages(self, degats):
+		self._stats[0]-=degats
 
 	def fatigue(self):
 		return self._stats[3]
@@ -93,8 +100,8 @@ class Pirate(object):
 		self._mort=self.mort
 		self._availableToFight= self._stats[3]>0
 		return self._mort
-
-	def getAttackedBy(self, pirate):
+	'''
+	def getAttackedBy(self, pirate): 
 		degats=pirate.attaque()-self._stats[2]
 		if degats<=0: #aucun degat reçu
 			pirate.increaseFatigue()
@@ -106,6 +113,18 @@ class Pirate(object):
 			self._availableToFight=False
 			self._mort=True
 		return Message(self._name+" reçoit "+str(degats)+"pts de degats de la part de "+pirate.name+", il ne lui reste plus que "+str(self._stats[0])+"pts de vie")
+		'''
+
+	def isAttacking(self, pirate): 
+		self.increaseFatigue()
+
+		degats=self._stats[1]-pirate.defense()
+		if degats<=0: #aucun degat reçu
+			return Message(self._name+" attaque "+pirate.name+", mais celui-ci ne prend aucun degats et garde ses "+str(pirate.vie())+"pts de vie")
+		
+		pirate.takeDamages(degats)
+		pirate.updateStatus()
+		return Message(self._name+" inflige "+str(degats)+"pts de degats à "+pirate.name+", il ne lui reste plus que "+str(pirate.vie())+"pts de vie")
 
 	def generateNewName(self, name):
 		if name==None:
@@ -213,7 +232,28 @@ class Secondname(Name):
 		return dictionnaire[index]
 
 
+class Legende(Pirate):
+
+	def __init__(self, nom, level, fruit, qualite):
+		self._qualite=qualite
+		self._fruit=FruitFactory.giveThatFruit(fruit)
+		self._name=nom
+		self._level=level
+		self._stats=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
+		self._availableToFight=True
+		self._mort=False
 
 
+	def isAttacking(self, pirate): 
+		self.increaseFatigue()
 
+		degats=self._stats[1]-pirate.defense()
+		if degats<=0: #aucun degat reçu
+			texte=(self._name+" {} contre "+pirate.name+", mais celui-ci ne prend aucun degats et garde ses "+str(pirate.vie())+"pts de vie").format(InteractBDD.phraseDeCombat(self._name))
+			return Message(texte)
+		
+		pirate.takeDamages(degats)
+		pirate.updateStatus()
+		texte=(self._name+" {} contre "+pirate.name+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(pirate.vie())+"pts de vie").format(InteractBDD.phraseDeCombat(self._name))
+		return Message(texte, True, False)
 

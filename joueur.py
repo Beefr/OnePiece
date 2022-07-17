@@ -77,10 +77,15 @@ class Joueur(object):
 				# TODO eventuellement rajouter un petit message quand le gars se reconnecte?
 
 		else:
+			ennemies=Equipage.generateEnnemies(InteractBDD.averagePirateLevel(self._username), self._equipage.numberOfPirates)
+			isThereBoss=InteractBDD.checkBoss(self._position.name)
+			if isThereBoss!=None:
+				ennemies.append(isThereBoss)
+			
 			output.content+ "Arrivé sur "
 			output.content* self._position.name
 			output.content* ", tu fais face à de nombreux pirates hostiles."
-			output.content+ Utils.fight(self, self._position.pirates)
+			output.content+ Utils.fight(self, ennemies)
 
 
 		output.content+self.cleanUpDeadPirates()
