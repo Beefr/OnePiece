@@ -163,8 +163,6 @@ class InteractBDD(Static):
 		request = "select * from joueur;"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
-			#for i in range(len(elem)):
-			#	txt= txt+"| " + str(elem[i])
 			txt= txt+"| " + str(elem[0])
 			txt= txt+"| " + str(elem[1])
 			txt= txt+"| " + "Not Displayable"
@@ -436,6 +434,8 @@ class InteractBDD(Static):
 		request = "DELETE FROM joueur;"
 		InteractBDD.connectAndExecuteRequest(request, True, conn, cur) # TODO faudra sans doute supprimer un fichier de config avec les utilisateurs
 		request = "DELETE FROM pirate;"
+		InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+		request = "INSERT INTO `joueur` (`username`, `password`, `currentstep`) VALUES ('None', 'None', 1);"
 		InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 		InteractBDD.endQuery(conn, cur)
 		return None
