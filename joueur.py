@@ -126,6 +126,7 @@ class Joueur(object):
 			output.content+ pirate.asMessageArray()
 		piratesID=InteractBDD.getMyCrewsID("recrutement"+"self._username")
 		output.content+ Message("Lequel voulez-vous recruter?", True, False, "rouge")
+		print(piratesID)
 		return piratesID
 
 	@property
