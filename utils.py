@@ -2,7 +2,6 @@ import random
 import numpy as np
 import os
 
-from fruitdemon import FruitDemon
 from fruitdemon import FruitFactory
 from multiLineMessage import MultiLineMessage
 from pirate import Pirate
@@ -10,7 +9,6 @@ from message import Message
 
 import json
 from collections import namedtuple
-from json import JSONEncoder
 
 import hashlib
 
