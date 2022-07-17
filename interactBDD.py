@@ -71,6 +71,7 @@ class InteractBDD(Static):
 			id = elem[0]
 			InteractBDD.endQuery(conn, cur)
 			return id
+		InteractBDD.endQuery(conn, cur)
 		return None
 
 	@staticmethod
@@ -83,6 +84,7 @@ class InteractBDD(Static):
 			username = elem[0]
 			InteractBDD.endQuery(conn, cur)
 			return username
+		InteractBDD.endQuery(conn, cur)
 		return "None"
 
 
@@ -138,6 +140,7 @@ class InteractBDD(Static):
 			value = str(elem[0])
 			InteractBDD.endQuery(conn, cur)
 			return value
+		InteractBDD.endQuery(conn, cur)
 		return ""
 
 	@staticmethod
@@ -149,6 +152,7 @@ class InteractBDD(Static):
 			value = int(elem[0])
 			InteractBDD.endQuery(conn, cur)
 			return value
+		InteractBDD.endQuery(conn, cur)
 		return 1
 		
 	@staticmethod
