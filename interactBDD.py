@@ -370,18 +370,16 @@ class InteractBDD(Static):
 		for elem in description:
 			currentArchipelName = str(elem[0]) # we got the name of the current archipel
 
+		
 		# we must get all the connected archipels to get their principal island
 		connectedArchipels=[]
-		request = "SELECT archipel1 FROM world WHERE archipel2='"+currentArchipelName+"';"
+		request = "SELECT archipel1, archipel2 FROM world WHERE archipel1='"+currentArchipelName+"' OR archipel2='"+currentArchipelName+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
+			#if str(elem[0])!=currentArchipelName:
 			connectedArchipels.append(str(elem[0])) 
-			
-		# we must get all the connected archipels to get their principal island
-		request = "SELECT archipel2 FROM world WHERE archipel1='"+currentArchipelName+"';"
-		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
-		for elem in description:
-			connectedArchipels.append(str(elem[0])) 
+			#if str(elem[1])!=currentArchipelName:
+			connectedArchipels.append(str(elem[1])) 
 
 		InteractBDD.endQuery(conn, cur)
 		return connectedArchipels	

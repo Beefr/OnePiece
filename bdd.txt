@@ -31,8 +31,8 @@ Pirate
 
 World
 - id                int AA primK
-- Archipel1         string
-- Archipel2         string
+- archipel1         string
+- archipel2         string
 
 
 PNJ
