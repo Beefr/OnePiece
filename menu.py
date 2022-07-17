@@ -18,8 +18,7 @@ class Menu(object):
 	def __init__(self):
 		self._userInput=[]
 		self._joueur=None
-		Menu.userInput=[]
-		self._currentStep=InteractBDD.getMyCurrentStep("")
+		self._currentStep=1
 		self._output=Output()
 		self._died=False
 		self._tempData=None
