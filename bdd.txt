@@ -385,7 +385,7 @@ INSERT INTO pnj VALUES('Basil Hawkins', '14', 150, 'Vaudou', '1', 'tire une cart
 INSERT INTO pnj VALUES('Scratchmen Apoo', '15', 150, 'Musique', '1', 'envoie un son strident à');
 INSERT INTO pnj VALUES('Urouge', '16', 150, 'Conversion', '1', 'renvoie une bonne patate à');
 INSERT INTO pnj VALUES('Drake', '17', 150, 'Allosaure', '1', 'bouffe la jambe de');
-INSERT INTO pnj VALUES('Jewelry Bonney', '13', 150, 'Vieillissement', '1', 'file de l'arthrose à');
+INSERT INTO pnj VALUES('Jewelry Bonney', '13', 150, 'Vieillissement', '1', 'file de l arthrose à');
 INSERT INTO pnj VALUES('Capone Bege', '10', 150, 'Chateau', '1', 'se transforme en chateau avant de cannoner');
 INSERT INTO pnj VALUES('Silvers Rayleigh', '18', 200, 'None', '1', 'fait des rondelles avec');
 INSERT INTO pnj VALUES('Kizaru', '19', 200, 'Lumiere', '1', 'balance un rayon de lumière sur');
