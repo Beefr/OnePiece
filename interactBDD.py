@@ -335,6 +335,8 @@ class InteractBDD(Static):
 		for elem in description:
 			if str(elem[0])!=currentArchipelName:
 				connectedArchipels.append(str(elem[0])) 
+			if str(elem[1])!=currentArchipelName:
+				connectedArchipels.append(str(elem[1])) 
 		
 		for archipel in connectedArchipels:
 			request = "SELECT ileprincipale FROM archipel WHERE nom='"+archipel+"';"
