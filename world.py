@@ -23,12 +23,12 @@ class World(object):
 
 		availableIslands=InteractBDD.availableIslands(currentIslandName)
 		for ile in availableIslands: # it's only their names
-			array+ Message(str(compteur)+": " +ile, False, "rouge")
+			array+ Message(str(compteur)+": " +ile, False, False, "rouge")
 			compteur+=1
 
 		availableArchipels=InteractBDD.availableArchipels(currentIslandName)
 		for ile in availableArchipels: # it's only their names
-			array+ Message(str(compteur)+": " +ile, False, "rouge")
+			array+ Message(str(compteur)+": " +ile, False, False, "rouge")
 			compteur+=1
 
 		return array
