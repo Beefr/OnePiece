@@ -94,9 +94,10 @@ class Joueur(object):
 	def recrutement(self, number, output, pirates=[], value=0):
 		
 		if int(value)<number:
-			newPirate=pirates[int(value)]
-			self._equipage.newFighter(newPirate)
-			InteractBDD.addNewFighter(self._username, newPirate)
+			newPirate=pirates[int(value)] # now it's not a pirate, it's an id
+			truePirate=InteractBDD.getMyPirate(newPirate)
+			self._equipage.newFighter(truePirate)
+			InteractBDD.addNewFighter(self._username, newPirate) # i dont fking want to create a method that updates the owner's name
 		self.showMenu(output)
 
 
@@ -113,19 +114,19 @@ class Joueur(object):
 
 
 	def askForRecruitment(self, output):
-		pirates=[]
+		InteractBDD.deletePirates("recrutement"+"self._username") # clean up precedent recrutement
 		number=5
 		output.content+ Message("Des pirates sont disponibles au recrutement.", True, False, "rouge")
 		for i in range(0,number):
 			pirate=Pirate(self._position.level)
-			pirates.append(pirate)
+			InteractBDD.addNewFighter("recrutement"+"self._username", pirate)
 			output.content+ "Choix "
 			output.content* Message(str(i))
 			output.content* ": "
 			output.content+ pirate.asMessageArray()
-
+		piratesID=InteractBDD.getMyCrewsID("recrutement"+"self._username")
 		output.content+ Message("Lequel voulez-vous recruter?", True, False, "rouge")
-		return pirates
+		return piratesID
 
 	@property
 	def position(self):

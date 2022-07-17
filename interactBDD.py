@@ -102,6 +102,34 @@ class InteractBDD(Static):
 		InteractBDD.endQuery(conn, cur)
 		return pirates
 
+	@staticmethod
+	def getMyPirate(id):
+		[conn, cur]=InteractBDD.beginQuery()
+		pirate=[]
+		request = "SELECT name, level, fruit, qualite FROM pirate WHERE id='"+str(id)+"';"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		for elem in description:
+			level=elem[1]
+			qualite=elem[3]
+			fruit=FruitFactory.giveThatFruit(str(elem[2]))
+			txt='{"type": "Pirate", "name": \"'+str(elem[0])+'\", "level": '+str(level)+ ', "qualite": '+str(qualite)+', "fruit": '+ str(fruit)+', "stats": '+str(StatsPirate.generateStats(level, qualite, fruit.power))+', "availableToFight": "True", "mort": "False"}'
+			pirate.append(txt) #pas besoin de separation avec une ',', il n'y en a qu'un avec cet id
+		InteractBDD.endQuery(conn, cur)
+		return pirate
+
+
+	@staticmethod
+	def getMyCrewsID(username):
+		[conn, cur]=InteractBDD.beginQuery()
+		pirates=[]
+		request = "SELECT id FROM pirate WHERE username='"+username+"';"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		for elem in description:
+			id=int(elem[0])
+			pirates.append(id) #pas besoin de separation avec une ',', il n'y en a qu'un avec cet id
+		InteractBDD.endQuery(conn, cur)
+		return pirates
+
 
 	@staticmethod
 	def getMyLocation(username):
@@ -383,6 +411,17 @@ class InteractBDD(Static):
 
 		request = "DELETE FROM pirate WHERE username='"+username+"';"
 		InteractBDD.connectAndExecuteRequest(request, True, conn, cur) # TODO remove allocated fruits
+
+		InteractBDD.endQuery(conn, cur)
+		return None
+
+	@staticmethod
+	def deletePirates(username):
+
+		[conn, cur]=InteractBDD.beginQuery()
+
+		request = "DELETE FROM pirate WHERE username='"+username+"';"
+		InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 
 		InteractBDD.endQuery(conn, cur)
 		return None
