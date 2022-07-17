@@ -87,10 +87,8 @@ class Menu(object):
 
 
 	def checkAliveForRecruitment(self):
-		print("i ask for recruitment")
 		if self._joueur.availableToFight:
 			self._joueur.askForRecruitment(self._output) # put the pirates id that we want to recruit
-			print("i asked")
 		else:
 			self._joueur.resetCrew()
 			self._output.content+ "Ton équipage est mort, il va falloir recommencer du début pour devenir le roi des pirates. y/n"
