@@ -105,7 +105,6 @@ class InteractBDD(Static):
 	@staticmethod
 	def getMyPirate(id):
 		[conn, cur]=InteractBDD.beginQuery()
-		pirate=[]
 		request = "SELECT name, level, fruit, qualite FROM pirate WHERE id='"+str(id)+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
@@ -113,9 +112,8 @@ class InteractBDD(Static):
 			qualite=elem[3]
 			fruit=FruitFactory.giveThatFruit(str(elem[2]))
 			txt='{"type": "Pirate", "name": \"'+str(elem[0])+'\", "level": '+str(level)+ ', "qualite": '+str(qualite)+', "fruit": '+ str(fruit)+', "stats": '+str(StatsPirate.generateStats(level, qualite, fruit.power))+', "availableToFight": "True", "mort": "False"}'
-			pirate.append(txt) #pas besoin de separation avec une ',', il n'y en a qu'un avec cet id
 		InteractBDD.endQuery(conn, cur)
-		return pirate
+		return txt
 
 
 	@staticmethod
