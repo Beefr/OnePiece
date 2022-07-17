@@ -299,7 +299,7 @@ class InteractBDD(Static):
 			return texte
 
 		InteractBDD.endQuery(conn, cur)
-		return "se déchaîne"
+		return "se déchaîne contre"
 
 
 	#_____________________STORE_______________________________
