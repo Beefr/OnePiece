@@ -345,7 +345,7 @@ class InteractBDD(Static):
 
 		# and we must also get all the islands inside the current archipel
 		request = "SELECT nom FROM ile WHERE archipel='"+currentArchipelName+"';"
-		InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
 			if str(elem[0])!=currentIslandName:
 				islandNames.append(str(elem[0])) 
