@@ -16,7 +16,7 @@ class MultiLineMessage(object):
         if isinstance(messages, Message):
             self._myMessages.append([messages])
         elif isinstance(messages, MultiLineMessage):
-            self._myMessages.extend(messages.myMessages)
+            self._myMessages.append(messages.myMessages)
         elif isinstance(messages, str):
             self._myMessages.append([Message(messages)])
         elif isinstance(messages, list):
