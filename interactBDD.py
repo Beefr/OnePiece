@@ -135,8 +135,11 @@ class InteractBDD(Static):
 		request = "select * from joueur;"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
-			for i in range(len(elem)):
-				txt= txt+"| " + str(elem[i])
+			#for i in range(len(elem)):
+			#	txt= txt+"| " + str(elem[i])
+			txt= txt+"| " + str(elem[0])
+			txt= txt+"| " + "Not Displayable"
+			txt= txt+"| " + str(elem[2])
 			txt=txt+"<br>"
 		txt=txt+"<br>"
 
