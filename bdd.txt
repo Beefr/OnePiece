@@ -41,6 +41,7 @@ PNJ
 - level             int
 - fruit             string
 - qualite           int
+- phrase            string
 
 Ile
 - nom               string primK
@@ -60,7 +61,7 @@ CREATE TABLE island(username varchar(40) PRIMARY KEY NOT NULL, position varchar(
 CREATE TABLE fruit(name varchar(20)  PRIMARY KEY NOT NULL, power varchar(20), allocated INT);
 CREATE TABLE pirate(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, username varchar(40) NOT NULL, name varchar(60), level INT, fruit varchar(20), qualite INT);
 CREATE TABLE world(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, archipel1 varchar(60) NOT NULL, archipel2 varchar(60) NOT NULL);
-CREATE TABLE pnj(nom varchar(20) PRIMARY KEY NOT NULL, ile varchar(60) NOT NULL, level INT NOT NULL, fruit varchar(20) NOT NULL, qualite INT NOT NULL);
+CREATE TABLE pnj(nom varchar(20) PRIMARY KEY NOT NULL, ile varchar(60) NOT NULL, level INT NOT NULL, fruit varchar(20) NOT NULL, qualite INT NOT NULL, phrase varchar(256) NOT NULL);
 CREATE TABLE ile(nom varchar(60) PRIMARY KEY NOT NULL, archipel varchar(40) NOT NULL, pvp INT NOT NULL);
 CREATE TABLE archipel(nom varchar(60) PRIMARY KEY NOT NULL, ileprincipale varchar(60) NOT NULL);
 
@@ -345,66 +346,66 @@ INSERT INTO ile VALUES('Ile de Lodestar', 'Ile de Lodestar', 1);
 INSERT INTO ile VALUES('Rough Tell', 'Rough Tell', 1);
 
 
-INSERT INTO pnj VALUES('Sanji La Jambe Noire', 'Baratie', 150, 'None', '2');
-INSERT INTO pnj VALUES('Captaaaaain Usoooooppeee', 'Syrup', 60, 'None', '2');
-INSERT INTO pnj VALUES('Big Mom', 'Whole Cake Island', 200, 'Soul', '1');
-INSERT INTO pnj VALUES('Kaido', 'Pays de Wano', 200, 'Dragon', '1');
-INSERT INTO pnj VALUES('Shanks Le Roux', 'Ile de Yukiryu', 300, 'None', '1');
-INSERT INTO pnj VALUES('Barbe Noire', 'Banaro', 300, 'Yami', '1');
-INSERT INTO pnj VALUES('Bellamy', 'Jaya', 100, 'Ressort', '1');
-INSERT INTO pnj VALUES('Captain Kid', '9', 150, 'Ferraille', '1');
-INSERT INTO pnj VALUES('Bartholomew Kuma', '8', 150, 'Coussinet', '1');
-INSERT INTO pnj VALUES('Roronoa Zoro', 'Shells Town', 150, 'None', '1');
-INSERT INTO pnj VALUES('Nami', 'Village de Kokoyashi', 40, 'None', '1');
-INSERT INTO pnj VALUES('Monkey D Luffy', 'Upper Yard', 300, 'GumGum', '1');
-INSERT INTO pnj VALUES('Nico Robin', '11', 80, 'Eclosion', '1');
-INSERT INTO pnj VALUES('Chopper', 'Ile de Drum', 60, 'Homme', '1');
-INSERT INTO pnj VALUES('Franky', 'Water 7', 60, 'None', '1');
-INSERT INTO pnj VALUES('Brook', '7', 40, 'Resurrection', '1');
-INSERT INTO pnj VALUES('Coby', '6', 80, 'None', '1');
-INSERT INTO pnj VALUES('Baggy', '5', 40, 'Fragmentation', '1');
-INSERT INTO pnj VALUES('Dracule Mihawk', 'Kuraigana', 150, 'None', '1');
-INSERT INTO pnj VALUES('Arlong', 'Arlong Park', 80, 'None', '1');
-INSERT INTO pnj VALUES('Smoker', 'Loguetown', 100, 'Fumee', '1');
-INSERT INTO pnj VALUES('Dragon', 'Baltigo', 200, 'Meteo', '1');
-INSERT INTO pnj VALUES('Ace', 'Grey Terminal', 150, 'Feu', '1');
-INSERT INTO pnj VALUES('Nefertari Vivi', '4', 40, 'None', '1');
-INSERT INTO pnj VALUES('Crocodile', 'Alabasta', 100, 'Sable', '1');
-INSERT INTO pnj VALUES('Donquixote Doflamingo', 'Dressrosa', 150, 'Balistique', '1');
-INSERT INTO pnj VALUES('Sengoku', 'Marie Joie', 150, 'Bouddha', '1');
-INSERT INTO pnj VALUES('Barbe Blanche', 'Rusukaina', 300, 'Tremblement', '1');
-INSERT INTO pnj VALUES('Marco', 'Angel Island', 200, 'Phoenix', '1');
-INSERT INTO pnj VALUES('Enel', 'Shandora', 100, 'Electricite', '1');
-INSERT INTO pnj VALUES('Aokiji', 'Whiskey Peak', 150, 'Glace', '1');
-INSERT INTO pnj VALUES('Rob Lucci', 'Enies Lobby', 100, 'Guepard', '1');
-INSERT INTO pnj VALUES('Garp', 'Mont Corvo', 80, 'None', '1');
-INSERT INTO pnj VALUES('Gecko Moria', 'Thriller Bark', 100, 'Ombre', '1');
-INSERT INTO pnj VALUES('Trafalgar Law', '12', 150, 'Bistouri', '1');
-INSERT INTO pnj VALUES('Basil Hawkins', '14', 150, 'Vaudou', '1');
-INSERT INTO pnj VALUES('Scratchmen Apoo', '15', 150, 'Musique', '1');
-INSERT INTO pnj VALUES('Urouge', '16', 150, 'Conversion', '1');
-INSERT INTO pnj VALUES('Drake', '17', 150, 'Allosaure', '1');
-INSERT INTO pnj VALUES('Jewelry Bonney', '13', 150, 'Vieillissement', '1');
-INSERT INTO pnj VALUES('Capone Bege', '10', 150, 'Chateau', '1');
-INSERT INTO pnj VALUES('Silvers Rayleigh', '18', 200, 'None', '1');
-INSERT INTO pnj VALUES('Kizaru', '19', 200, 'Lumiere', '1');
-INSERT INTO pnj VALUES('Sentomaru', '20', 100, 'None', '1');
-INSERT INTO pnj VALUES('Boa Hancock', 'Amazon Lily', 100, 'Passion', '1');
-INSERT INTO pnj VALUES('Magellan', 'Impel Down', 150, 'Poison', '1');
-INSERT INTO pnj VALUES('Jinbe', 'Ile des Homme-poissons', 150, 'None', '1');
-INSERT INTO pnj VALUES('Emporio Ivankov', 'Kedetrav', 100, 'Hormones', '1');
-INSERT INTO pnj VALUES('Akainu', 'Kyuka Island', 200, 'Lave', '1');
-INSERT INTO pnj VALUES('Sabo', 'Foodvalten', 150, 'None', '1');
-INSERT INTO pnj VALUES('Caesar Clown', 'Punk Hazard', 100, 'Gaz', '1');
-INSERT INTO pnj VALUES('Vergo', 'Foolshout', 100, 'None', '1');
-INSERT INTO pnj VALUES('Fujitora', 'Little Garden', 200, 'Gravite', '1');
-INSERT INTO pnj VALUES('Bartolomeo', 'Balgimoa', 80, 'Barriere', '1');
-INSERT INTO pnj VALUES('Kinemon', 'Wano', 80, 'None', '1');
-INSERT INTO pnj VALUES('Inuarashi', 'Zo', 80, 'None', '1');
-INSERT INTO pnj VALUES('Jack', 'Banaro', 100, 'Mammouth', '1');
-INSERT INTO pnj VALUES('Vinsmoke Judge', 'Royaume de Flevance', 80, 'None', '1');
-INSERT INTO pnj VALUES('Katakuri', 'Ile du Ble', 150, 'Mochi', '1');
-INSERT INTO pnj VALUES('Nekomamushi', 'Zo', 80, 'None', '1');
+INSERT INTO pnj VALUES('Sanji La Jambe Noire', 'Baratie', 150, 'None', '2', 'décide de faire une fricassée avec');
+INSERT INTO pnj VALUES('Captaaaaain Usoooooppeee', 'Syrup', 60, 'None', '2', 'court à toutes jambes avant de décocher une boulette piquante à');
+INSERT INTO pnj VALUES('Big Mom', 'Whole Cake Island', 200, 'Soul', '1', 'propose un deal: "Soul or Life" à' );
+INSERT INTO pnj VALUES('Kaido', 'Pays de Wano', 200, 'Dragon', '1', 'dessaoule et balance un bon gros coup de marteau sa mère à');
+INSERT INTO pnj VALUES('Shanks Le Roux', 'Ile de Yukiryu', 300, 'None', '1', 'atomise');
+INSERT INTO pnj VALUES('Barbe Noire', 'Banaro', 300, 'Yami', '1', 'fait un coup tordu à');
+INSERT INTO pnj VALUES('Bellamy', 'Jaya', 100, 'Ressort', '1', 'tend ses ressorts et fonce sur');
+INSERT INTO pnj VALUES('Captain Kid', '9', 150, 'Ferraille', '1', 'ramasse la ferraille alentour pour l assener sur');
+INSERT INTO pnj VALUES('Bartholomew Kuma', '8', 150, 'Coussinet', '1', 'met un petit coup de coussinets à');
+INSERT INTO pnj VALUES('Roronoa Zoro', 'Shells Town', 150, 'None', '1', 'déchaîne ses lames contre');
+INSERT INTO pnj VALUES('Nami', 'Village de Kokoyashi', 40, 'None', '1', 'déchaîne les éléments sur');
+INSERT INTO pnj VALUES('Monkey D Luffy', 'Upper Yard', 300, 'GumGum', '1', 'envoie une rafale de coups de poings');
+INSERT INTO pnj VALUES('Nico Robin', '11', 80, 'Eclosion', '1', 'fait une prise de catch à');
+INSERT INTO pnj VALUES('Chopper', 'Ile de Drum', 60, 'Homme', '1', 'met un vilain coup de sabot à');
+INSERT INTO pnj VALUES('Franky', 'Water 7', 60, 'None', '1', 'envoie un Franky Missile dans la tête de');
+INSERT INTO pnj VALUES('Brook', '7', 40, 'Resurrection', '1', 'fait trois pas...SONG SLASH... coup dur pour');
+INSERT INTO pnj VALUES('Coby', '6', 80, 'None', '1', 'met une patate à');
+INSERT INTO pnj VALUES('Baggy', '5', 40, 'Fragmentation', '1', 'balance littéralement son poing à');
+INSERT INTO pnj VALUES('Dracule Mihawk', 'Kuraigana', 150, 'None', '1', 'dégaine calmement son épée et fend l air avec, une terrible balafre apparaît sur le torse de');
+INSERT INTO pnj VALUES('Arlong', 'Arlong Park', 80, 'None', '1', 'ricane avant de balancer son poing dans');
+INSERT INTO pnj VALUES('Smoker', 'Loguetown', 100, 'Fumee', '1', 'disparait dans un nuage de fumée avant de flanquer un coup de pied à');
+INSERT INTO pnj VALUES('Dragon', 'Baltigo', 200, 'Meteo', '1', 'déchaîne les éléments sur');
+INSERT INTO pnj VALUES('Ace', 'Grey Terminal', 150, 'Feu', '1', 'carbonise ');
+INSERT INTO pnj VALUES('Nefertari Vivi', '4', 40, 'None', '1', 'dit à Karoo d en mettre une bonne à');
+INSERT INTO pnj VALUES('Crocodile', 'Alabasta', 100, 'Sable', '1', 'tente d enterrer vivant');
+INSERT INTO pnj VALUES('Donquixote Doflamingo', 'Dressrosa', 150, 'Balistique', '1', 'envoie sa poupée de fil massacrer');
+INSERT INTO pnj VALUES('Sengoku', 'Marie Joie', 150, 'Bouddha', '1', 'se transforme en Bouddha pour asséner un énorme coup de poing à');
+INSERT INTO pnj VALUES('Barbe Blanche', 'Rusukaina', 300, 'Tremblement', '1', 'fait trembler les mers, un énorme tsunami déferle sur');
+INSERT INTO pnj VALUES('Marco', 'Angel Island', 200, 'Phoenix', '1', 'fonce sur');
+INSERT INTO pnj VALUES('Enel', 'Shandora', 100, 'Electricite', '1', 'décharge ses batteries sur');
+INSERT INTO pnj VALUES('Aokiji', 'Whiskey Peak', 150, 'Glace', '1', 'congèle');
+INSERT INTO pnj VALUES('Rob Lucci', 'Enies Lobby', 100, 'Guepard', '1', 'fonce de sa vitesse foudroyante sur');
+INSERT INTO pnj VALUES('Garp', 'Mont Corvo', 80, 'None', '1', 'met une turbo patate à');
+INSERT INTO pnj VALUES('Gecko Moria', 'Thriller Bark', 100, 'Ombre', '1', 'prend l ombre de');
+INSERT INTO pnj VALUES('Trafalgar Law', '12', 150, 'Bistouri', '1', 'arrache le coeur de');
+INSERT INTO pnj VALUES('Basil Hawkins', '14', 150, 'Vaudou', '1', 'tire une carte et... ça va mal se passer pour');
+INSERT INTO pnj VALUES('Scratchmen Apoo', '15', 150, 'Musique', '1', 'envoie un son strident à');
+INSERT INTO pnj VALUES('Urouge', '16', 150, 'Conversion', '1', 'renvoie une bonne patate à');
+INSERT INTO pnj VALUES('Drake', '17', 150, 'Allosaure', '1', 'bouffe la jambe de');
+INSERT INTO pnj VALUES('Jewelry Bonney', '13', 150, 'Vieillissement', '1', 'file de l'arthrose à');
+INSERT INTO pnj VALUES('Capone Bege', '10', 150, 'Chateau', '1', 'se transforme en chateau avant de cannoner');
+INSERT INTO pnj VALUES('Silvers Rayleigh', '18', 200, 'None', '1', 'fait des rondelles avec');
+INSERT INTO pnj VALUES('Kizaru', '19', 200, 'Lumiere', '1', 'balance un rayon de lumière sur');
+INSERT INTO pnj VALUES('Sentomaru', '20', 100, 'None', '1', 'assène un coup de hache');
+INSERT INTO pnj VALUES('Boa Hancock', 'Amazon Lily', 100, 'Passion', '1', 'pétrifie');
+INSERT INTO pnj VALUES('Magellan', 'Impel Down', 150, 'Poison', '1', 'envoie un déferlement de poison sur');
+INSERT INTO pnj VALUES('Jinbe', 'Ile des Homme-poissons', 150, 'None', '1', 'lance son karaté des homme-poissons sur');
+INSERT INTO pnj VALUES('Emporio Ivankov', 'Kedetrav', 100, 'Hormones', '1', 'fait une petite injection à');
+INSERT INTO pnj VALUES('Akainu', 'Kyuka Island', 200, 'Lave', '1', 'devient chaud bouillant, la lave blesse');
+INSERT INTO pnj VALUES('Sabo', 'Foodvalten', 150, 'None', '1', 'envoie sa griffe du dragon');
+INSERT INTO pnj VALUES('Caesar Clown', 'Punk Hazard', 100, 'Gaz', '1', 'retire l oxygene de');
+INSERT INTO pnj VALUES('Vergo', 'Foolshout', 100, 'None', '1', 'met un coup de baton à');
+INSERT INTO pnj VALUES('Fujitora', 'Little Garden', 200, 'Gravite', '1', 'balance une montagne à');
+INSERT INTO pnj VALUES('Bartolomeo', 'Balgimoa', 80, 'Barriere', '1', 'envoie une barriere à');
+INSERT INTO pnj VALUES('Kinemon', 'Wano', 80, 'None', '1', 'envoie une lame de feu à');
+INSERT INTO pnj VALUES('Inuarashi', 'Zo', 80, 'None', '1', 'mord');
+INSERT INTO pnj VALUES('Jack', 'Banaro', 100, 'Mammouth', '1', 'met un coup de défense');
+INSERT INTO pnj VALUES('Vinsmoke Judge', 'Royaume de Flevance', 80, 'None', '1', 'frappe');
+INSERT INTO pnj VALUES('Katakuri', 'Ile du Ble', 150, 'Mochi', '1', 'balance du mochi à');
+INSERT INTO pnj VALUES('Nekomamushi', 'Zo', 80, 'None', '1', 'griffe');
 
 
 INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ile de Dawn', 'Shinotsuki');
