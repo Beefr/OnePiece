@@ -347,7 +347,7 @@ class InteractBDD(Static):
 	@staticmethod
 	def availableIslandsInAvailableArchipels(currentIslandName):
 		connectedArchipels=InteractBDD.availableArchipels(currentIslandName)
-		
+
 		[conn, cur]=InteractBDD.beginQuery()
 
 		request = "SELECT archipel FROM ile WHERE nom='"+currentIslandName+"';"
@@ -363,14 +363,6 @@ class InteractBDD(Static):
 			for elem in description:
 				if str(elem[0])!=currentIslandName: 
 					islandNames.append(str(elem[0])) 
-
-		# and we must also get all the islands inside the current archipel
-		request = "SELECT nom FROM ile WHERE archipel='"+currentArchipelName+"';"
-		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
-		for elem in description:
-			if str(elem[0])!=currentIslandName:
-				islandNames.append(str(elem[0])) 
-
 
 		InteractBDD.endQuery(conn, cur)
 		return islandNames
