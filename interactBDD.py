@@ -259,7 +259,7 @@ class InteractBDD(Static):
 		
 
 	@staticmethod
-	def getMyCurrentStep(username, currentStep):
+	def setMyCurrentStep(username, currentStep):
 		[conn, cur]=InteractBDD.beginQuery()
 		request = "UPDATE joueur SET currentstep='"+currentStep+"' WHERE username='"+username+"';"
 		InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
