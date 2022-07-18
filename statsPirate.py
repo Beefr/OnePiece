@@ -10,4 +10,4 @@ class StatsPirate(object):
 		degats=20*level*(5-qualite)
 		defense=10*level*(5-qualite)
 		fatigue=100*(5-qualite)
-		return [vie*(100+fruitpower[0])/100, degats*(100+fruitpower[1])/100, defense*(100+fruitpower[2])/100, fatigue*(100+fruitpower[3])/100]
+		return [vie*(100+int(fruitpower[0]))/100, degats*(100+int(fruitpower[1]))/100, defense*(100+int(fruitpower[2]))/100, fatigue*(100+int(fruitpower[3]))/100]
