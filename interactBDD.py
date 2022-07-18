@@ -95,12 +95,7 @@ class InteractBDD(Static):
 		request = "SELECT name, level, fruit, qualite FROM pirate WHERE username='"+username+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
-			level=elem[1]
-			qualite=elem[3]
-			powerAsString=InteractBDD.fruitsPowerInternal(str(elem[2]), conn, cur)
-			power=powerAsString.split(",")
-			fruitsTXT='{"type": "FruitDemon", "name": \"'+str(elem[2])+'\","power": '+powerAsString+'}'
-			txt='{"type": "Pirate", "name": \"'+str(elem[0])+'\", "level": '+str(level)+ ', "qualite": '+str(qualite)+', "fruit": '+ fruitsTXT +', "stats": '+str(StatsPirate.generateStats(level, qualite, power))+', "availableToFight": "True", "mort": "False"}'
+			txt=InteractBDD.pirateTXT(elem)
 			pirates.append(txt) #pas besoin de separation avec une ',', il n'y en a qu'un avec cet id
 		InteractBDD.endQuery(conn, cur)
 		return pirates
@@ -111,12 +106,7 @@ class InteractBDD(Static):
 		request = "SELECT name, level, fruit, qualite FROM pirate WHERE id='"+str(id)+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
-			level=elem[1]
-			qualite=elem[3]
-			powerAsString=InteractBDD.fruitsPowerInternal(str(elem[2]), conn, cur)
-			power=powerAsString.split(",")
-			fruitsTXT='{"type": "FruitDemon", "name": \"'+str(elem[2])+'\","power": '+powerAsString+'}'
-			txt='{"type": "Pirate", "name": \"'+str(elem[0])+'\", "level": '+str(level)+ ', "qualite": '+str(qualite)+', "fruit": '+ fruitsTXT +', "stats": '+str(StatsPirate.generateStats(level, qualite, power))+', "availableToFight": "True", "mort": "False"}'
+			txt=InteractBDD.pirateTXT(elem)
 		InteractBDD.endQuery(conn, cur)
 		return txt
 
@@ -284,12 +274,7 @@ class InteractBDD(Static):
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		txt=""
 		for elem in description:
-			level=elem[1]
-			qualite=elem[3]
-			powerAsString=InteractBDD.fruitsPowerInternal(str(elem[2]), conn, cur)
-			power=powerAsString.split(",")
-			fruitsTXT='{"type": "FruitDemon", "name": \"'+str(elem[2])+'\","power": '+powerAsString+'}'
-			txt='{"type": "Pirate", "name": \"'+str(elem[0])+'\", "level": '+str(level)+ ', "qualite": '+str(qualite)+', "fruit": '+ fruitsTXT +', "stats": '+str(StatsPirate.generateStats(level, qualite, power))+', "availableToFight": "True", "mort": "False"}'
+			txt=InteractBDD.pirateTXT(elem)
 		InteractBDD.endQuery(conn, cur)
 		return txt
 
@@ -306,6 +291,8 @@ class InteractBDD(Static):
 
 		InteractBDD.endQuery(conn, cur)
 		return "se déchaîne contre"
+
+
 
 
 	#_____________________STORE_______________________________
@@ -601,3 +588,21 @@ class InteractBDD(Static):
 		cur.close()
 		conn.close()
 		
+	@staticmethod
+	def pirateTXT(elem):
+		level=elem[1]
+		qualite=elem[3]
+		powerAsString=InteractBDD.fruitsPowerInternal(str(elem[2]), conn, cur)
+		power=powerAsString.split(",")
+		fruitsTXT='{"type": "FruitDemon", "name": \"'+str(elem[2])+'\","power": ['+powerAsString+']}'
+		txt='{"type": "Pirate", "name": \"'+str(elem[0])+'\", "level": '+str(level)+ ', "qualite": '+str(qualite)+', "fruit": '+ fruitsTXT +', "stats": '+str(StatsPirate.generateStats(level, qualite, power))+', "availableToFight": "True", "mort": "False"}'
+		return txt
+
+
+
+
+
+
+
+
+
