@@ -592,12 +592,14 @@ class InteractBDD(Static):
 		
 	@staticmethod
 	def pirateTXT(elem, conn, cur):
+		piratesName=str(elem[0])
 		level=elem[1]
+		fruitsName=str(elem[2])
 		qualite=elem[3]
-		powerAsString=InteractBDD.fruitsPowerInternal(str(elem[2]), conn, cur)
-		power=powerAsString.split(",")
-		fruitsTXT='{"type": "FruitDemon", "name": \"'+str(elem[2])+'\","power": ['+powerAsString+']}'
-		txt='{"type": "Pirate", "name": \"'+str(elem[0])+'\", "level": '+str(level)+ ', "qualite": '+str(qualite)+', "fruit": '+ fruitsTXT +', "stats": '+str(StatsPirate.generateStats(level, qualite, power))+', "availableToFight": "True", "mort": "False"}'
+
+		power=map(int, InteractBDD.fruitsPowerInternal(fruitsName, conn, cur).split(",")) # [1,2,3,4]
+		fruitsTXT='{"type": "FruitDemon", "name": \"{}\","power": {}}'.format(fruitsName, str(power))
+		txt='{"type": "Pirate", "name": \"'+piratesName+'\", "level": '+str(level)+ ', "qualite": '+str(qualite)+', "fruit": '+ fruitsTXT +', "stats": '+str(StatsPirate.generateStats(level, qualite, power))+', "availableToFight": "True", "mort": "False"}'
 		return txt
 
 
