@@ -1,6 +1,8 @@
 
 import random
 
+from onepiece.OnePiece.interactBDD import InteractBDD
+
 class FruitDemon(object):
 
 	def __init__(self, name, power):
@@ -50,73 +52,44 @@ class FruitFactoryMeta(type):
 
 class FruitFactory(metaclass=FruitFactoryMeta):
 
-	fruitsNames=["GumGum", "Fire", "Ice", "Electric"]
-	fruitsPower={"GumGum":[250,250,250,250], 
-				"Fire":[250,500,0,250], 
-				"Ice":[250,300,500,250], 
-				"Electric":[500,0,0,500]}
-	allocatedFruits={"GumGum":False, 
-				"Fire":False, 
-				"Ice":False, 
-				"Electric":False}
-	#todo: create a database to avoid class variables
-
-
-	def countAvailableFruits():
-		count=0
-		for fruit in FruitFactory.fruitsNames:
-			if FruitFactory.allocatedFruits[fruit]==False:
-				count=count+1
-		return count
-
-
 	@staticmethod
 	def allocateFruit(percentages):
 		fruitBool=random.randint(0,100)<=percentages[0]
 		if fruitBool:
-			availableFruits=FruitFactory.countAvailableFruits()
+			availableFruits=InteractBDD.countAvailableFruits()
 			if availableFruits==0:
 				return FruitDemon("None",[0,0,0,0])
 
 			fruitsNumber=random.randint(0,availableFruits-1)
-			count=0
-			for fruit in FruitFactory.fruitsNames:
-				if FruitFactory.allocatedFruits[fruit]==False:
-					if count==fruitsNumber:
-						FruitFactory.allocatedFruits[fruit]=True
-						return FruitDemon(fruit,FruitFactory.fruitsPower[fruit])
-					count+=1
-
-			
+			fruitsName=InteractBDD.notAllocatedFruits()[fruitsNumber]
+			InteractBDD.allocateFruit(fruitsName)
+			string=InteractBDD.fruitsPower(fruitsName) #1,2,3,4
+			array=string.split(",")
+			return FruitDemon(fruitsName,array)
+					
 		return FruitDemon("None",[0,0,0,0])
 
 
 	@staticmethod
-	def giveThatFruit(fruit):
-		if fruit=="None":
+	def giveThatFruit(fruitsName):
+		if fruitsName=="None":
 			return FruitDemon("None",[0,0,0,0])
-
-		return FruitDemon(fruit, FruitFactory.fruitsPower[fruit])
+		InteractBDD.allocateFruit(fruitsName)
+		string=InteractBDD.fruitsPower(fruitsName) #1,2,3,4
+		array=string.split(",")
+		return FruitDemon(fruitsName, array)
 
 	@staticmethod
 	def giveAFruit():
-		#availableFruits=FruitFactory.countAvailableFruits()
-		availableFruits=len(FruitFactory.fruitsNames)
-		#if availableFruits==0:
-		#	return FruitDemon("None",[0,0,0,0])
-		# TODO it is bugged
+		availableFruits=InteractBDD.countAvailableFruits()
+		if availableFruits==0:
+			return FruitDemon("None",[0,0,0,0])
 		fruitsNumber=random.randint(0,availableFruits-1)
-		count=0
-		for fruit in FruitFactory.fruitsNames:
-			if FruitFactory.allocatedFruits[fruit]==False:
-				if count==fruitsNumber:
-					#FruitFactory.allocatedFruits[fruit]=True
-					return FruitDemon(fruit,FruitFactory.fruitsPower[fruit])
-				count+=1
-
-			
-		#return FruitDemon("None",[0,0,0,0])
-		return FruitFactory.giveThatFruit("GumGum")
+		fruitsName=InteractBDD.notAllocatedFruits()[fruitsNumber]
+		InteractBDD.allocateFruit(fruitsName)
+		string=InteractBDD.fruitsPower(fruitsName) #1,2,3,4
+		array=string.split(",")
+		return FruitDemon(fruitsName,array)
 
 
 

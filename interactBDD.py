@@ -362,6 +362,62 @@ class InteractBDD(Static):
 		return None
 
 
+	#_________________________FRUITS_________________________________
+
+
+	@staticmethod
+	def countAvailableFruits():
+		[conn, cur]=InteractBDD.beginQuery()
+
+		request = "SELECT COUNT(*) FROM fruit WHERE allocated='0';"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		for elem in description:
+			value=int(elem[0])
+		
+		InteractBDD.endQuery(conn, cur)
+		return value
+
+
+
+
+	@staticmethod
+	def notAllocatedFruits():
+		[conn, cur]=InteractBDD.beginQuery()
+
+		fruits=[]
+		request = "SELECT name FROM fruit WHERE allocated=0;"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		for elem in description:
+			fruits.append(str(elem[0]))
+		
+		InteractBDD.endQuery(conn, cur)
+		return fruits
+
+
+	@staticmethod
+	def fruitsPower(fruitsName):
+		[conn, cur]=InteractBDD.beginQuery()
+
+		request = "SELECT power FROM fruit WHERE name='"+str(fruitsName)+"';"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		for elem in description:
+			power=str(elem[0])
+		
+		InteractBDD.endQuery(conn, cur)
+		return power
+		
+	@staticmethod
+	def allocateFruit(fruitsName):
+		[conn, cur]=InteractBDD.beginQuery()
+
+		request = "UPDATE fruit SET allocated=1 WHERE name='"+str(fruitsName)+"';"
+		InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+		
+		InteractBDD.endQuery(conn, cur)
+		return None
+
+
+
 	#_________________________WORLD_________________________________
 
 	@staticmethod
