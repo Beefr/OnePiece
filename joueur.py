@@ -80,7 +80,7 @@ class Joueur(object):
 			ennemies=Equipage.generateEnnemies(InteractBDD.averagePirateLevel(self._username), self._equipage.numberOfPirates)
 			isThereBoss=InteractBDD.checkBoss(self._position.name)
 			if isThereBoss!=None:
-				ennemies.append(Utils.load(isThereBoss))
+				ennemies.newFighter(Utils.load(isThereBoss))
 			
 			output.content+ "Arrivé sur "
 			output.content* self._position.name
