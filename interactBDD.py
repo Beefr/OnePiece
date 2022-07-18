@@ -600,8 +600,8 @@ class InteractBDD(Static):
 		strpower=InteractBDD.fruitsPowerInternal(fruitsName, conn, cur) # "1,2,3,4"
 		power=list(map(int, strpower.split(",") )) # [1,2,3,4]
 		#fruitsTXT='{"type": "FruitDemon", "name": \"'+fruitsName+'\", "power": \"'+str(power)+'\"}'
-		fruitsTXT='{"type": "FruitDemon", "name": "%s", "power": "%s"}' % (fruitsName, str(power)) 
 		#fruitsTXT="{"+"\"type\": \"FruitDemon\", \"name\": \"{}\", \"power\": \"{}\"".format(fruitsName, str(power)) + "}"
+		fruitsTXT='{"type": "FruitDemon", "name": "%s", "power": "%s"}' % (fruitsName, str(strpower)) 
 		#txt='{"type": "'+type+'", "name": \"'+piratesName+'\", "level": \"'+str(level)+ '\", "qualite": \"'+str(qualite)+'\", "fruit": \"'+ fruitsTXT+'\", "stats": \"'+str(StatsPirate.generateStats(level, qualite, power))+'\", "availableToFight": "True", "mort": "False"}'
 		#txt="{"+ '\"type": "{}", "name": "{}", "level": "{}", "qualite": "{}", "fruit": "{}", "stats": "{}", "availableToFight": "True", "mort": "False\"'.format(type, piratesName, str(level), str(qualite), fruitsTXT, str(StatsPirate.generateStats(level, qualite, power)) ) +"}"
 		txt='{"type": "%s", "name": "%s", "level": "%s", "qualite": "%s", "fruit": "%s", "stats": "%s", "availableToFight": "True", "mort": "False"}' % (type, piratesName, str(level), str(qualite), fruitsTXT, str(StatsPirate.generateStats(level, qualite, power)) )
