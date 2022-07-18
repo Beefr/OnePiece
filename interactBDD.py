@@ -279,6 +279,7 @@ class InteractBDD(Static):
 		[conn, cur]=InteractBDD.beginQuery()
 		request = "SELECT nom, level, fruit, qualite FROM pnj WHERE ile='"+currentIslandName+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		txt=""
 		for elem in description:
 			level=elem[1]
 			qualite=elem[3]
