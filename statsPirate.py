@@ -6,6 +6,9 @@ class StatsPirate(object):
 
 	@staticmethod
 	def generateStats(level, qualite, fruitpower):
+		level=int(level)
+		qualite=int(qualite)
+
 		vie=100*level*(5-qualite)
 		degats=20*level*(5-qualite)
 		defense=10*level*(5-qualite)
