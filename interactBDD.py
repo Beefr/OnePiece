@@ -392,6 +392,7 @@ class InteractBDD(Static):
 
 		request = "SELECT power FROM fruit WHERE name='"+str(fruitsName)+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		power=""
 		for elem in description:
 			power=str(elem[0])
 		
@@ -405,6 +406,7 @@ class InteractBDD(Static):
 
 		request = "SELECT power FROM fruit WHERE name='"+str(fruitsName)+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		power=""
 		for elem in description:
 			power=str(elem[0])
 		return power
