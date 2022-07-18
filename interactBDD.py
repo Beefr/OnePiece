@@ -1,6 +1,6 @@
 import mariadb
 
-from fruitdemon import FruitFactory
+from fruitdemon import FruitDemon
 from statsPirate import StatsPirate
 
 
@@ -98,7 +98,7 @@ class InteractBDD(Static):
 		for elem in description:
 			level=elem[1]
 			qualite=elem[3]
-			fruit=FruitFactory.giveThatFruit(str(elem[2]))
+			fruit=FruitDemon(str(elem[2]), )
 			txt='{"type": "Pirate", "name": \"'+str(elem[0])+'\", "level": '+str(level)+ ', "qualite": '+str(qualite)+', "fruit": '+ str(fruit)+', "stats": '+str(StatsPirate.generateStats(level, qualite, fruit.power))+', "availableToFight": "True", "mort": "False"}'
 			pirates.append(txt) #pas besoin de separation avec une ',', il n'y en a qu'un avec cet id
 		InteractBDD.endQuery(conn, cur)
@@ -112,7 +112,8 @@ class InteractBDD(Static):
 		for elem in description:
 			level=elem[1]
 			qualite=elem[3]
-			fruit=FruitFactory.giveThatFruit(str(elem[2]))
+			power=InteractBDD.fruitsPowerInternal(str(elem[2]), conn, cur).split(",")
+			fruit=FruitDemon(str(elem[2]), power)
 			txt='{"type": "Pirate", "name": \"'+str(elem[0])+'\", "level": '+str(level)+ ', "qualite": '+str(qualite)+', "fruit": '+ str(fruit)+', "stats": '+str(StatsPirate.generateStats(level, qualite, fruit.power))+', "availableToFight": "True", "mort": "False"}'
 		InteractBDD.endQuery(conn, cur)
 		return txt
@@ -283,7 +284,8 @@ class InteractBDD(Static):
 		for elem in description:
 			level=elem[1]
 			qualite=elem[3]
-			fruit=FruitFactory.giveThatFruit(str(elem[2]))
+			power=InteractBDD.fruitsPowerInternal(str(elem[2]), conn, cur).split(",")
+			fruit=FruitDemon(str(elem[2]), power)
 			txt='{"type": "Legende", "name": \"'+str(elem[0])+'\", "level": '+str(level)+ ', "qualite": '+str(qualite)+', "fruit": '+ str(fruit)+', "stats": '+str(StatsPirate.generateStats(level, qualite, fruit.power))+', "availableToFight": "True", "mort": "False"}'
 		InteractBDD.endQuery(conn, cur)
 		return txt
@@ -404,6 +406,17 @@ class InteractBDD(Static):
 			power=str(elem[0])
 		
 		InteractBDD.endQuery(conn, cur)
+		return power
+
+		
+
+	def fruitsPowerInternal(fruitsName, conn, cur):
+		#used only by InteractBDD
+
+		request = "SELECT power FROM fruit WHERE name='"+str(fruitsName)+"';"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		for elem in description:
+			power=str(elem[0])
 		return power
 		
 	@staticmethod
