@@ -601,7 +601,7 @@ class InteractBDD(Static):
 		power=list(map(int, strpower.split(",") )) # [1,2,3,4]
 		fruitsTXT='{"type": "FruitDemon", "name": \"'+fruitsName+'\", "power": \"'+str(power)+'\"}'
 		#fruitsTXT="{"+"\"type\": \"FruitDemon\", \"name\": \"{}\", \"power\": \"{}\"".format(fruitsName, str(power)) + "}"
-		txt='{"type": "'+type+'", "name": \"'+piratesName+'\", "level": \"'+str(level)+ '\", "qualite": \"'+str(qualite)+'\", "fruit": \"'+ fruitsTXT+'\", "stats": \"'+str(StatsPirate.generateStats(level, qualite, power))+'\", "availableToFight": "True", "mort": "False"}'
+		txt='{"type": "'+type+'", "name": \"'+piratesName+'\", "level": \"'+str(level)+ '\", "qualite": \"'+str(qualite)+'\", "fruit": \"'+ fruitsTXT+'\", "stats": \"'+str(StatsPirate.generateStats(int(level), int(qualite), power))+'\", "availableToFight": "True", "mort": "False"}'
 		#txt="{"+ "\"type\": \"{}\", \"name\": \"{}\", \"level\": \"{}\", \"qualite\": \"{}\", \"fruit\": \"{}\", \"stats\": \"{}\", \"availableToFight\": \"True\", \"mort\": \"False\"".format(type, piratesName, str(level), str(qualite), fruitsTXT, str(StatsPirate.generateStats(level, qualite, power)) ) +"}"
 		return txt
 
