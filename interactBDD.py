@@ -1,6 +1,5 @@
 import mariadb
 
-from fruitdemon import FruitDemon
 from statsPirate import StatsPirate
 
 
@@ -98,8 +97,10 @@ class InteractBDD(Static):
 		for elem in description:
 			level=elem[1]
 			qualite=elem[3]
-			fruit=FruitDemon(str(elem[2]), )
-			txt='{"type": "Pirate", "name": \"'+str(elem[0])+'\", "level": '+str(level)+ ', "qualite": '+str(qualite)+', "fruit": '+ str(fruit)+', "stats": '+str(StatsPirate.generateStats(level, qualite, fruit.power))+', "availableToFight": "True", "mort": "False"}'
+			powerAsString=InteractBDD.fruitsPowerInternal(str(elem[2]), conn, cur)
+			power=powerAsString.split(",")
+			fruitsTXT='{"type": "FruitDemon", "name": \"'+str(elem[2])+'\","power": '+powerAsString+'}'
+			txt='{"type": "Pirate", "name": \"'+str(elem[0])+'\", "level": '+str(level)+ ', "qualite": '+str(qualite)+', "fruit": '+ fruitsTXT +', "stats": '+str(StatsPirate.generateStats(level, qualite, power))+', "availableToFight": "True", "mort": "False"}'
 			pirates.append(txt) #pas besoin de separation avec une ',', il n'y en a qu'un avec cet id
 		InteractBDD.endQuery(conn, cur)
 		return pirates
@@ -112,9 +113,10 @@ class InteractBDD(Static):
 		for elem in description:
 			level=elem[1]
 			qualite=elem[3]
-			power=InteractBDD.fruitsPowerInternal(str(elem[2]), conn, cur).split(",")
-			fruit=FruitDemon(str(elem[2]), power)
-			txt='{"type": "Pirate", "name": \"'+str(elem[0])+'\", "level": '+str(level)+ ', "qualite": '+str(qualite)+', "fruit": '+ str(fruit)+', "stats": '+str(StatsPirate.generateStats(level, qualite, fruit.power))+', "availableToFight": "True", "mort": "False"}'
+			powerAsString=InteractBDD.fruitsPowerInternal(str(elem[2]), conn, cur)
+			power=powerAsString.split(",")
+			fruitsTXT='{"type": "FruitDemon", "name": \"'+str(elem[2])+'\","power": '+powerAsString+'}'
+			txt='{"type": "Pirate", "name": \"'+str(elem[0])+'\", "level": '+str(level)+ ', "qualite": '+str(qualite)+', "fruit": '+ fruitsTXT +', "stats": '+str(StatsPirate.generateStats(level, qualite, power))+', "availableToFight": "True", "mort": "False"}'
 		InteractBDD.endQuery(conn, cur)
 		return txt
 
@@ -284,9 +286,10 @@ class InteractBDD(Static):
 		for elem in description:
 			level=elem[1]
 			qualite=elem[3]
-			power=InteractBDD.fruitsPowerInternal(str(elem[2]), conn, cur).split(",")
-			fruit=FruitDemon(str(elem[2]), power)
-			txt='{"type": "Legende", "name": \"'+str(elem[0])+'\", "level": '+str(level)+ ', "qualite": '+str(qualite)+', "fruit": '+ str(fruit)+', "stats": '+str(StatsPirate.generateStats(level, qualite, fruit.power))+', "availableToFight": "True", "mort": "False"}'
+			powerAsString=InteractBDD.fruitsPowerInternal(str(elem[2]), conn, cur)
+			power=powerAsString.split(",")
+			fruitsTXT='{"type": "FruitDemon", "name": \"'+str(elem[2])+'\","power": '+powerAsString+'}'
+			txt='{"type": "Pirate", "name": \"'+str(elem[0])+'\", "level": '+str(level)+ ', "qualite": '+str(qualite)+', "fruit": '+ fruitsTXT +', "stats": '+str(StatsPirate.generateStats(level, qualite, power))+', "availableToFight": "True", "mort": "False"}'
 		InteractBDD.endQuery(conn, cur)
 		return txt
 
