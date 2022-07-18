@@ -95,7 +95,7 @@ class InteractBDD(Static):
 		request = "SELECT name, level, fruit, qualite FROM pirate WHERE username='"+username+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
-			txt=InteractBDD.pirateTXT(elem)
+			txt=InteractBDD.pirateTXT(elem, conn, cur)
 			pirates.append(txt) #pas besoin de separation avec une ',', il n'y en a qu'un avec cet id
 		InteractBDD.endQuery(conn, cur)
 		return pirates
@@ -106,7 +106,7 @@ class InteractBDD(Static):
 		request = "SELECT name, level, fruit, qualite FROM pirate WHERE id='"+str(id)+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
-			txt=InteractBDD.pirateTXT(elem)
+			txt=InteractBDD.pirateTXT(elem, conn, cur)
 		InteractBDD.endQuery(conn, cur)
 		return txt
 
@@ -274,7 +274,7 @@ class InteractBDD(Static):
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		txt=""
 		for elem in description:
-			txt=InteractBDD.pirateTXT(elem)
+			txt=InteractBDD.pirateTXT(elem, conn, cur)
 		InteractBDD.endQuery(conn, cur)
 		return txt
 
@@ -589,7 +589,7 @@ class InteractBDD(Static):
 		conn.close()
 		
 	@staticmethod
-	def pirateTXT(elem):
+	def pirateTXT(elem, conn, cur):
 		level=elem[1]
 		qualite=elem[3]
 		powerAsString=InteractBDD.fruitsPowerInternal(str(elem[2]), conn, cur)
