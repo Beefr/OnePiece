@@ -4,7 +4,7 @@ import os
 
 from fruitdemon import FruitFactory
 from multiLineMessage import MultiLineMessage
-from pirate import Pirate
+from pirate import Pirate, Legende
 from message import Message
 
 import json
@@ -159,7 +159,9 @@ class Utils(Static):
 	@staticmethod
 	def decode(dict):
 		tuple=namedtuple('Metamorph', dict.keys())(*dict.values())
-		if tuple.type=="Pirate":
+		if tuple.type=="Legende":
+			obj= Legende(tuple.name, tuple.level, tuple.fruit, tuple.qualite)
+		elif tuple.type=="Pirate":
 			obj= Pirate(tuple.level)
 			obj.name=tuple.name
 			obj.qualite=tuple.qualite

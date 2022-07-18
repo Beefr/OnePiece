@@ -279,13 +279,13 @@ class InteractBDD(Static):
 		[conn, cur]=InteractBDD.beginQuery()
 		request = "SELECT nom, level, fruit, qualite FROM pnj WHERE ile='"+currentIslandName+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
-		
-		levels=[]
 		for elem in description:
-			levels.append(int(elem[0]))
-
+			level=elem[1]
+			qualite=elem[3]
+			fruit=FruitFactory.giveThatFruit(str(elem[2]))
+			txt='{"type": "Legende", "name": \"'+str(elem[0])+'\", "level": '+str(level)+ ', "qualite": '+str(qualite)+', "fruit": '+ str(fruit)+', "stats": '+str(StatsPirate.generateStats(level, qualite, fruit.power))+', "availableToFight": "True", "mort": "False"}'
 		InteractBDD.endQuery(conn, cur)
-		return sum(levels)/len(levels)
+		return txt
 
 		
 	@staticmethod
