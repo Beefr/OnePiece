@@ -96,7 +96,7 @@ class InteractBDD(Static):
 		request = "SELECT name, level, fruit, qualite FROM pirate WHERE username='"+username+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
-			txt=InteractBDD.pirateTXT(elem, conn, cur)
+			txt=InteractBDD.pirateTXT(elem, conn, cur, 'Pirate')
 			pirates.append(txt) #pas besoin de separation avec une ',', il n'y en a qu'un avec cet id
 		InteractBDD.endQuery(conn, cur)
 		return pirates
@@ -107,7 +107,7 @@ class InteractBDD(Static):
 		request = "SELECT name, level, fruit, qualite FROM pirate WHERE id='"+str(id)+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
-			txt=InteractBDD.pirateTXT(elem, conn, cur)
+			txt=InteractBDD.pirateTXT(elem, conn, cur, 'Pirate')
 		InteractBDD.endQuery(conn, cur)
 		return txt
 
@@ -275,7 +275,7 @@ class InteractBDD(Static):
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		txt=""
 		for elem in description:
-			txt=InteractBDD.pirateTXT(elem, conn, cur)
+			txt=InteractBDD.pirateTXT(elem, conn, cur, 'Legende')
 		InteractBDD.endQuery(conn, cur)
 		return txt
 
@@ -592,7 +592,7 @@ class InteractBDD(Static):
 		conn.close()
 		
 	@staticmethod
-	def pirateTXT(elem, conn, cur):
+	def pirateTXT(elem, conn, cur, type):
 		piratesName=str(elem[0])
 		level=elem[1]
 		fruitsName=str(elem[2])
@@ -601,7 +601,7 @@ class InteractBDD(Static):
 		strpower=InteractBDD.fruitsPowerInternal(fruitsName, conn, cur) # "1,2,3,4"
 		power=list(imap(int, strpower.split(",") )) # [1,2,3,4]
 		fruitsTXT='{'+'"type": "FruitDemon", "name": "{}","power": "{}"'.format(fruitsName, str(power)) + '}'
-		txt='{"type": "Pirate", "name": \"'+piratesName+'\", "level": '+str(level)+ ', "qualite": '+str(qualite)+', "fruit": '+ fruitsTXT +', "stats": '+str(StatsPirate.generateStats(level, qualite, power))+', "availableToFight": "True", "mort": "False"}'
+		txt='{"type": "'+type+'", "name": \"'+piratesName+'\", "level": '+str(level)+ ', "qualite": '+str(qualite)+', "fruit": '+ fruitsTXT +', "stats": '+str(StatsPirate.generateStats(level, qualite, power))+', "availableToFight": "True", "mort": "False"}'
 		return txt
 
 
