@@ -1,4 +1,5 @@
 import mariadb
+from itertools import imap
 
 from statsPirate import StatsPirate
 
@@ -597,7 +598,8 @@ class InteractBDD(Static):
 		fruitsName=str(elem[2])
 		qualite=elem[3]
 
-		power=list(map(int, InteractBDD.fruitsPowerInternal(fruitsName, conn, cur).split(","))) # [1,2,3,4]
+		strpower=InteractBDD.fruitsPowerInternal(fruitsName, conn, cur) # "1,2,3,4"
+		power=list(imap(int, strpower.split(",") )) # [1,2,3,4]
 		fruitsTXT='{'+'"type": "FruitDemon", "name": "{}","power": "{}"'.format(fruitsName, str(power)) + '}'
 		txt='{"type": "Pirate", "name": \"'+piratesName+'\", "level": '+str(level)+ ', "qualite": '+str(qualite)+', "fruit": '+ fruitsTXT +', "stats": '+str(StatsPirate.generateStats(level, qualite, power))+', "availableToFight": "True", "mort": "False"}'
 		return txt
