@@ -159,7 +159,7 @@ class InteractBDD(Static):
 		for elem in description:
 			for i in range(len(elem)):
 				if i==0:
-					#strpower=InteractBDD.fruitsPowerInternal(str(elem[0]), conn, cur) # "1,2,3,4"
+					strpower=InteractBDD.fruitsPowerInternal(str(elem[0]), conn, cur) # "1,2,3,4"
 					power = str(elem[0])#strpower#.split(",")
 					#power=list(map(int, strpower.split(",") )) # [1,2,3,4]
 					txt=txt+str(power)				
@@ -403,7 +403,8 @@ class InteractBDD(Static):
 	@staticmethod
 	def fruitsPower(fruitsName):
 		[conn, cur]=InteractBDD.beginQuery()
-
+		if fruitsName=='None':
+			return [0,0,0,0]
 		request = "SELECT power FROM fruit WHERE name='"+str(fruitsName)+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		power=""
@@ -417,6 +418,8 @@ class InteractBDD(Static):
 
 	def fruitsPowerInternal(fruitsName, conn, cur):
 		#used only by InteractBDD
+		if fruitsName=='None':
+			return [0,0,0,0]
 
 		request = "SELECT power FROM fruit WHERE name='"+str(fruitsName)+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
