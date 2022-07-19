@@ -155,7 +155,7 @@ class InteractBDD(Static):
 
 		
 		txt=txt+"TEEEEEEEEEEEEST: <br>"
-		request = "select nom from pnj;"
+		request = "select * from pnj;"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		compteur=0
 		for elem in description:
