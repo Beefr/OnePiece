@@ -159,12 +159,14 @@ class InteractBDD(Static):
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		compteur=0
 		for elem in description:
-			strpower=InteractBDD.fruitsPowerInternal(str(elem[0]), conn, cur) # "1,2,3,4"
-			power = str(elem[0])#strpower#.split(",")
-			#power=list(map(int, strpower.split(",") )) # [1,2,3,4]
-			txt=txt+str(compteur)+": "+str(power)
-			compteur+=1
-			txt=txt+"<br>"
+			for i in range(len(elem)):
+				if i==0:
+					strpower=InteractBDD.fruitsPowerInternal(str(elem[0]), conn, cur) # "1,2,3,4"
+					power = str(elem[0])#strpower#.split(",")
+					#power=list(map(int, strpower.split(",") )) # [1,2,3,4]
+					txt=txt+str(compteur)+": "+str(power)
+					compteur+=1
+					txt=txt+"<br>"
 		txt=txt+"<br>"
 
 
