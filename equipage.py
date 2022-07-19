@@ -1,5 +1,6 @@
 
 import random
+from onepiece.OnePiece.interactBDD import InteractBDD
 from utils import Utils
 from pirate import Pirate
 from message import Message
@@ -48,10 +49,15 @@ class Equipage(object):
 	def attaque(self, equipage):
 		pirate=self._turn.next()
 		if pirate==None:
-			return Message("Cet équipage n'a plus personne de vivant. Fin du combat.")
-		tank=equipage.whoIsGonnaTankThatHit()
-		[tank, phrase] = pirate.isAttacking(tank)
-		return phrase
+			return Message("Cet équipage n'a plus personne de vivant. Fin du combat.", True, True)
+		
+		pirate.increaseFatigue() # probably doesnt work, check it up
+		if pirate.is_instance()=="Legende":
+			Utils.isAttacking(pirate, equipage.whoIsGonnaTankThatHit(), InteractBDD.phraseDeCombat(pirate.name))
+		else:
+			Utils.isAttacking(pirate, equipage.whoIsGonnaTankThatHit())
+		return equipage.whoIsGonnaTankThatHit().isAttacking(pirate) 
+		# c'est bien le pirate qui attaque equipage
 
 
 	def whoIsGonnaTankThatHit(self):

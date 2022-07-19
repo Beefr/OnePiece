@@ -101,6 +101,25 @@ class Utils(Static):
 
 
 	@staticmethod
+	def isAttacking(atk, tank, phrase=None):
+		degats=atk.stats[1]-tank.defense()
+		if phrase!=None:
+			if degats<=0: #aucun degat reçu
+				texte=(atk.name+" {} "+tank.name()+", mais celui-ci ne prend aucun degats et garde ses "+str(tank.vie())+"pts de vie").format(phrase)
+				return Message(texte)
+			
+			tank.takeDamages(degats)
+			texte=(atk.name+" {} "+tank.name()+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(tank.vie())+"pts de vie").format(phrase)
+			return Message(texte, True, False)
+		else:
+			if degats<=0: #aucun degat reçu
+				return Message(atk.name+" attaque "+tank.name+", mais celui-ci ne prend aucun degats et garde ses "+str(tank.vie())+"pts de vie")
+			
+			tank.takeDamages(degats)
+			return Message(atk.name+" inflige "+str(degats)+"pts de degats à "+tank.name+", il ne lui reste plus que "+str(tank.vie())+"pts de vie")
+
+
+	@staticmethod
 	def shuffle(pirates):
 		places=np.arange(0,len(pirates))
 		random.shuffle(places)
