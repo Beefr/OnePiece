@@ -87,8 +87,7 @@ class Pirate(object):
 	@staticmethod
 	def takeDamages(pirateStats, degats):
 		vie=pirateStats[0]-degats
-		pirateStats.pop(0)
-		pirateStats.insert(0, vie)
+		pirateStats[0]=vie
 		
 
 	def fatigue(self):
