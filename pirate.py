@@ -118,7 +118,7 @@ class Pirate(object):
 	def isAttacking(self, pirate): 
 		self.increaseFatigue()
 
-		degats=self._stats[1]-pirate.defense()
+		degats=int(self._stats[1]-pirate.defense())
 		if degats<=0: #aucun degat reçu
 			return Message(self._name+" attaque "+pirate.name+", mais celui-ci ne prend aucun degats et garde ses "+str(pirate.vie())+"pts de vie")
 		
