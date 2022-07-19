@@ -86,7 +86,15 @@ class Pirate(object):
 
 
 	def takeDamages(self, degats):
-		self._stats[0]=self._stats[0]-degats
+		temp=[]
+		compteur=0
+		for val in self._stats:
+			if compteur==0:
+				temp.append(val-degats)
+				compteur+=1
+			else:
+				temp.append(val)
+		self._stats=temp
 
 	def fatigue(self):
 		return self._stats[3]
