@@ -160,7 +160,7 @@ class InteractBDD(Static):
 			for i in range(len(elem)):
 				if i==0:
 					strpower=InteractBDD.fruitsPowerInternal(str(elem[0]), conn, cur) # "1,2,3,4"
-					power = str(elem[0])#strpower#.split(",")
+					power = strpower#.split(",")
 					#power=list(map(int, strpower.split(",") )) # [1,2,3,4]
 					txt=txt+str(power)				
 			txt=txt+"<br>"
