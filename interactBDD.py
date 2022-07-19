@@ -515,11 +515,10 @@ class InteractBDD(Static):
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
 			ileprincipale = str(elem[0]) # we got the name of the current archipel
-
-		
+			InteractBDD.endQuery(conn, cur)
+			return ileprincipale
 		InteractBDD.endQuery(conn, cur)
-		return ileprincipale
-
+		return archipel # something went wrong
 
 
 	#_________________________DELETE_________________________________
