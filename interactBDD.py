@@ -153,6 +153,18 @@ class InteractBDD(Static):
 		[conn, cur]=InteractBDD.beginQuery()
 		txt=""
 
+		
+		txt=txt+"TEEEEEEEEEEEEST: <br>"
+		request = "select fruit from pnj;"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		for elem in description:
+			strpower=InteractBDD.fruitsPowerInternal(str(elem[0]), conn, cur) # "1,2,3,4"
+			power=list(map(int, strpower.split(",") )) # [1,2,3,4]
+			txt=txt+power
+			txt=txt+"<br>"
+		txt=txt+"<br>"
+
+
 		txt=txt+"Joueur: <br>"
 		txt=txt+"id | username | password | currentStep <br>"
 		request = "select * from joueur;"
