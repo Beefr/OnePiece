@@ -84,8 +84,9 @@ class Pirate(object):
 	def vie(self):
 		return self._stats[0]
 
-	def takeDamages(self, degats):
-		self._stats[0]-=degats
+	@staticmethod
+	def takeDamages(moi, degats):
+		moi.stats[0]-=degats
 
 	def fatigue(self):
 		return self._stats[3]
@@ -122,9 +123,11 @@ class Pirate(object):
 		if degats<=0: #aucun degat reçu
 			return Message(self._name+" attaque "+pirate.name+", mais celui-ci ne prend aucun degats et garde ses "+str(pirate.vie())+"pts de vie")
 		
-		pirate.takeDamages(degats)
-		pirate.updateStatus()
+		Pirate.takeDamages(pirate, degats)
+		#pirate.takeDamages(degats)
 		return Message(self._name+" inflige "+str(degats)+"pts de degats à "+pirate.name+", il ne lui reste plus que "+str(pirate.vie())+"pts de vie")
+
+
 
 	def generateNewName(self, name):
 		if name==None:
