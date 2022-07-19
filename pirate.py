@@ -129,7 +129,10 @@ class Pirate(object):
 			return Message(self._name+" attaque "+pirate.name+", mais celui-ci ne prend aucun degats et garde ses "+str(pirate.vie())+"pts de vie")
 		
 		pirate.stats=Pirate.takeDamages(pirate.stats, degats)
-		return [pirate, Message(self._name+" inflige "+str(degats)+"pts de degats à "+pirate.name+", il ne lui reste plus que "+str(pirate.vie())+"pts de vie")]
+		obj=[]
+		obj.append(pirate)
+		obj.append(Message(self._name+" inflige "+str(degats)+"pts de degats à "+pirate.name+", il ne lui reste plus que "+str(pirate.vie())+"pts de vie"))
+		return obj
 
 
 
