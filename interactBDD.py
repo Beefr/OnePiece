@@ -159,9 +159,7 @@ class InteractBDD(Static):
 		request = "select fruit from pnj;"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
-			strpower=InteractBDD.fruitsPower(str(elem[0])) # "'1','2','3','4'"
-			#power = strpower.split(",") # ['1', '2', '3', '4']
-			power=list(map(int, strpower.split(",") )) # [1,2,3,4]
+			power=InteractBDD.fruitsPower(str(elem[0])) 
 			txt=txt+str(power)				
 			txt=txt+"<br>"
 		txt=txt+"<br>"
@@ -404,14 +402,15 @@ class InteractBDD(Static):
 	def fruitsPower(fruitsName):
 		[conn, cur]=InteractBDD.beginQuery()
 		if fruitsName=='None':
-			return '0,0,0,0'
+			return [0,0,0,0]
 
 		[conn, cur]=InteractBDD.beginQuery()
 		request = "SELECT power FROM fruit WHERE name='"+str(fruitsName)+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		power=""
 		for elem in description:
-			power=str(elem[0])
+			strpower=str(elem[0])
+			power=list(map(int, strpower.split(",") )) # [1,2,3,4]
 		
 		InteractBDD.endQuery(conn, cur)
 		return power
@@ -602,8 +601,7 @@ class InteractBDD(Static):
 		fruitsName=elem[2]
 		qualite=elem[3]
 
-		strpower=InteractBDD.fruitsPower(fruitsName) # "1,2,3,4"
-		power=list(map(int, strpower.split(",") )) # [1,2,3,4]
+		power=InteractBDD.fruitsPower(fruitsName)
 		#fruitsTXT='{"type": "FruitDemon", "name": \"'+fruitsName+'\", "power": \"'+str(power)+'\"}'
 		#fruitsTXT="{"+"\"type\": \"FruitDemon\", \"name\": \"{}\", \"power\": \"{}\"".format(fruitsName, str(power)) + "}"
 		fruitsTXT='{"type": "FruitDemon", "name": "%s", "power": "%s"}' % (fruitsName, str(power)) 
