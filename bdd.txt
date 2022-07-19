@@ -59,9 +59,8 @@ CREATE TABLE ile(nom varchar(60) PRIMARY KEY NOT NULL, archipel varchar(40) NOT 
 CREATE TABLE archipel(nom varchar(60) PRIMARY KEY NOT NULL, ileprincipale varchar(60) NOT NULL);
 
 INSERT INTO fruit VALUES('GumGum','30,40,30,0', 0);
-INSERT INTO fruit VALUES('Fire','25,50,0,25', 0);
+INSERT INTO fruit VALUES('Feu','25,50,0,25', 0);
 INSERT INTO fruit VALUES('Ice','25,0,50,25', 0);
-INSERT INTO fruit VALUES('Electric','50,0,0,50', 0);
 INSERT INTO fruit VALUES('Homme','25,25,25,25', 0);
 INSERT INTO fruit VALUES('Conversion','0,100,0,0', 0);
 INSERT INTO fruit VALUES('Allosaure','0,100,0,0', 0);
