@@ -287,8 +287,9 @@ class InteractBDD(Static):
 		txt=""
 		for elem in description:
 			txt=InteractBDD.pirateTXT(elem, 'Legende')
-		InteractBDD.endQuery(conn, cur)
-		return txt
+			InteractBDD.endQuery(conn, cur)
+			return txt
+		return None
 
 		
 	@staticmethod
