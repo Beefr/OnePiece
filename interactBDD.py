@@ -446,6 +446,7 @@ class InteractBDD(Static):
 	def availableIslandsInCurrentArchipel(currentIslandName):
 		[conn, cur]=InteractBDD.beginQuery()
 
+		currentArchipelName=""
 		request = "SELECT archipel FROM ile WHERE nom='"+currentIslandName+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
