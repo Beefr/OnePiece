@@ -255,7 +255,7 @@ class Legende(Pirate):
 			texte=(self._name+" {} "+pirate.name+", mais celui-ci ne prend aucun degats et garde ses "+str(pirate.vie())+"pts de vie").format(InteractBDD.phraseDeCombat(self._name))
 			return Message(texte)
 		
-		pirate.takeDamages(degats)
+		Pirate.takeDamages(pirate, degats)
 		pirate.updateStatus()
 		texte=(self._name+" {} "+pirate.name+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(pirate.vie())+"pts de vie").format(InteractBDD.phraseDeCombat(self._name))
 		return Message(texte, True, False)

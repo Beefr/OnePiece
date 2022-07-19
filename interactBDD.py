@@ -483,7 +483,7 @@ class InteractBDD(Static):
 			InteractBDD.endQuery(conn, cur)
 			return currentArchipelName
 		InteractBDD.endQuery(conn, cur)
-		return None
+		return currentIslandName # something went wrong
 
 
 	@staticmethod

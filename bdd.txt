@@ -176,7 +176,7 @@ INSERT INTO archipel VALUES('Totto Land', 'Ile de Cacao');
 
 INSERT INTO ile VALUES('Ile de Goat', 'Ile de Goat', 1);
 INSERT INTO ile VALUES('Shells Town', 'Shells Town', 1);
-INSERT INTO ile VALUES('Shimotsuki', 'Shimotsuki', 1);
+INSERT INTO ile VALUES('Shinotsuki', 'Shinotsuki', 1);
 INSERT INTO ile VALUES('Archipel des Orgao', 'Archipel des Orgao', 1);
 INSERT INTO ile VALUES('Ile des animaux rares', 'Ile des animaux rares', 1);
 INSERT INTO ile VALUES('Baratie', 'Baratie', 1);
