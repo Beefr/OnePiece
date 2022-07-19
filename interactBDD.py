@@ -159,7 +159,7 @@ class InteractBDD(Static):
 		request = "select fruit from pnj;"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
-			strpower=InteractBDD.fruitsPowerInternal(str(elem[0]), conn2, cur2) # "1,2,3,4"
+			strpower=InteractBDD.fruitsPower(str(elem[0]), conn2, cur2) # "1,2,3,4"
 			#power = strpower#.split(",")
 			power=list(map(int, strpower.split(",") )) # [1,2,3,4]
 			txt=txt+str(power)				
