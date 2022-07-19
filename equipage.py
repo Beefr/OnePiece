@@ -52,11 +52,12 @@ class Equipage(object):
 			return Message("Cet équipage n'a plus personne de vivant. Fin du combat.", True, True)
 		
 		pirate.increaseFatigue() # probably doesnt work, check it up
+		msg=""
 		if pirate.is_instance()=="Legende":
-			Utils.isAttacking(pirate, equipage.whoIsGonnaTankThatHit(), InteractBDD.phraseDeCombat(pirate.name))
+			msg=Utils.isAttacking(pirate, equipage.whoIsGonnaTankThatHit(), InteractBDD.phraseDeCombat(pirate.name))
 		else:
-			Utils.isAttacking(pirate, equipage.whoIsGonnaTankThatHit())
-		return equipage.whoIsGonnaTankThatHit().isAttacking(pirate) 
+			msg=Utils.isAttacking(pirate, equipage.whoIsGonnaTankThatHit())
+		return msg
 		# c'est bien le pirate qui attaque equipage
 
 
