@@ -1,6 +1,6 @@
 
 import random
-from onepiece.OnePiece.interactBDD import InteractBDD
+from interactBDD import InteractBDD
 from utils import Utils
 from pirate import Pirate
 from message import Message
