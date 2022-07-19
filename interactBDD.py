@@ -123,6 +123,19 @@ class InteractBDD(Static):
 		InteractBDD.endQuery(conn, cur)
 		return pirates
 
+		
+
+	@staticmethod
+	def getMyCrewMinLevel(username):
+		[conn, cur]=InteractBDD.beginQuery()
+		request = "SELECT MIN(level) FROM pirate WHERE username='"+username+"';"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		for elem in description:
+			lvl=int(elem[0])
+			InteractBDD.endQuery(conn, cur)
+			return lvl
+		return 1
+
 
 	@staticmethod
 	def getMyLocation(username):

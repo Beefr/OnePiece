@@ -123,7 +123,7 @@ class Joueur(object):
 		number=5
 		output.content+ Message("Des pirates sont disponibles au recrutement.", True, False, "rouge")
 		for i in range(0,number):
-			pirate=Pirate(self._position.level)
+			pirate=Pirate(InteractBDD.getMyCrewMinLevel(self._username))
 			InteractBDD.addNewFighter("recrutement"+self._username, pirate)
 			output.content+ "Choix "
 			output.content* Message(str(i))
