@@ -414,7 +414,6 @@ class InteractBDD(Static):
 
 	@staticmethod
 	def fruitsPower(fruitsName):
-		[conn, cur]=InteractBDD.beginQuery()
 		if fruitsName=='None':
 			return [0,0,0,0]
 
@@ -425,9 +424,9 @@ class InteractBDD(Static):
 		for elem in description:
 			strpower=str(elem[0])
 			power=list(map(int, strpower.split(",") )) # [1,2,3,4]
-		
-		InteractBDD.endQuery(conn, cur)
-		return power
+			InteractBDD.endQuery(conn, cur)
+			return power
+		return [0,0,0,0] # something went wrong
 
 	@staticmethod
 	def allocateFruit(fruitsName):
