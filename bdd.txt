@@ -370,7 +370,7 @@ INSERT INTO pnj VALUES('Marco', 'Angel Island', 200, 'Phoenix', 1, 'fonce sur');
 INSERT INTO pnj VALUES('Enel', 'Shandora', 100, 'Electricite', 1, 'decharge ses batteries sur');
 INSERT INTO pnj VALUES('Aokiji', 'Whiskey Peak', 150, 'Glace', 1, 'congele');
 INSERT INTO pnj VALUES('Rob Lucci', 'Enies Lobby', 100, 'Guepard', 1, 'fonce de sa vitesse foudroyante sur');
-INSERT INTO pnj VALUES('Garp', 'Mont Corvo', 80, 'None', 1, 'met une turbo patate e');
+INSERT INTO pnj VALUES('Garp', 'Mont Corvo', 80, 'None', 1, 'met une turbo patate a');
 INSERT INTO pnj VALUES('Gecko Moria', 'Thriller Bark', 100, 'Ombre', 1, 'prend l ombre de');
 INSERT INTO pnj VALUES('Trafalgar Law', '12', 150, 'Bistouri', 1, 'arrache le coeur de');
 INSERT INTO pnj VALUES('Basil Hawkins', '14', 150, 'Vaudou', 1, 'tire une carte et... ça va mal se passer pour');
