@@ -417,12 +417,12 @@ INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Archipel des Orgao', 'Lo
 INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Loguetown', 'Royaume d Oykot');
 INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Village de Konomi', 'Royaume d Oykot');
 INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Loguetown', 'Village de Konomi');
-INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Syrup', 'Mirrorball');
-INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Syrup', 'Tequila Wolf');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Archipel des Gekko', 'Mirrorball');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Archipel des Gekko', 'Tequila Wolf');
 INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Village de Konomi', 'Tequila Wolf');
 
 INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Red Line', 'Village de Konomi');
-INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Red Line', 'Syrup');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Red Line', 'Archipel des Gekko');
 INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Red Line', 'South Blue');
 INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Red Line', 'North Blue');
 INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Red Line', 'West Blue');
