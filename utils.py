@@ -102,7 +102,7 @@ class Utils(Static):
 
 	@staticmethod
 	def isAttacking(atk, tank, phrase=None):
-		degats=atk.stats[1]-tank.defense()
+		degats=int(atk.stats[1]-tank.defense())
 		if phrase!=None:
 			if degats<=0: #aucun degat reçu
 				texte=(atk.name+" {} "+tank.name+", mais celui-ci ne prend aucun degats et garde ses "+str(tank.vie())+"pts de vie").format(phrase)
