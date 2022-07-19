@@ -70,6 +70,10 @@ class Pirate(object):
 		self._stats=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
 
 
+	@stats.setter
+	def stats(self, st):
+		self._stats=st
+
 	@staticmethod
 	def regenerateHealth(level, qualite):
 		return 100*level*(5-qualite)
