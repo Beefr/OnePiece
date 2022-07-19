@@ -153,6 +153,16 @@ class InteractBDD(Static):
 		[conn, cur]=InteractBDD.beginQuery()
 		txt=""
 
+		txt=txt+"PNJ: <br>"
+		txt=txt+" nom | ile | level | fruit | qualite | phrase<br>"
+		request = "select * from pnj;"
+		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+		for elem in description:
+			for i in range(len(elem)):
+				txt= txt+" | " + str(elem[i])
+			txt=txt+"<br>"
+		txt=txt+"<br>"
+
 		
 		txt=txt+"TEEEEEEEEEEEEST: <br>"
 		request = "select * from pnj;"
