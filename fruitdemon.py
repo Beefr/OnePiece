@@ -64,8 +64,8 @@ class FruitFactory(metaclass=FruitFactoryMeta):
 			fruitsName=InteractBDD.notAllocatedFruits()[fruitsNumber]
 			InteractBDD.allocateFruit(fruitsName)
 			string=InteractBDD.fruitsPower(fruitsName) #1,2,3,4
-			array=string.split(",")
-			return FruitDemon(fruitsName,array)
+			power=list(map(int, string.split(",") )) # [1,2,3,4]
+			return FruitDemon(fruitsName,power)
 					
 		return FruitDemon("None",[0,0,0,0])
 
@@ -76,8 +76,8 @@ class FruitFactory(metaclass=FruitFactoryMeta):
 			return FruitDemon("None",[0,0,0,0])
 		InteractBDD.allocateFruit(fruitsName)
 		string=InteractBDD.fruitsPower(fruitsName) #1,2,3,4
-		array=string.split(",")
-		return FruitDemon(fruitsName, array)
+		power=list(map(int, string.split(",") )) # [1,2,3,4]
+		return FruitDemon(fruitsName, power)
 
 	@staticmethod
 	def giveAFruit():
@@ -88,8 +88,8 @@ class FruitFactory(metaclass=FruitFactoryMeta):
 		fruitsName=InteractBDD.notAllocatedFruits()[fruitsNumber]
 		InteractBDD.allocateFruit(fruitsName)
 		string=InteractBDD.fruitsPower(fruitsName) #1,2,3,4
-		array=string.split(",")
-		return FruitDemon(fruitsName,array)
+		power=list(map(int, string.split(",") )) # [1,2,3,4]
+		return FruitDemon(fruitsName,power)
 
 
 
