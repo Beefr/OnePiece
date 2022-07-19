@@ -95,7 +95,7 @@ class InteractBDD(Static):
 		request = "SELECT name, level, fruit, qualite FROM pirate WHERE username='"+username+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
-			txt=InteractBDD.pirateTXT(elem, conn, cur, 'Pirate')
+			txt=InteractBDD.pirateTXT(elem, 'Pirate')
 			pirates.append(txt) #pas besoin de separation avec une ',', il n'y en a qu'un avec cet id
 		InteractBDD.endQuery(conn, cur)
 		return pirates
@@ -106,7 +106,7 @@ class InteractBDD(Static):
 		request = "SELECT name, level, fruit, qualite FROM pirate WHERE id='"+str(id)+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		for elem in description:
-			txt=InteractBDD.pirateTXT(elem, conn, cur, 'Pirate')
+			txt=InteractBDD.pirateTXT(elem, 'Pirate')
 		InteractBDD.endQuery(conn, cur)
 		return txt
 
@@ -273,10 +273,8 @@ class InteractBDD(Static):
 		request = "SELECT nom, level, fruit, qualite FROM pnj WHERE ile='"+currentIslandName+"';"
 		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 		txt=""
-		[conn2, cur2]=InteractBDD.beginQuery()
 		for elem in description:
-			txt=InteractBDD.pirateTXT(elem, conn2, cur2, 'Legende')
-		InteractBDD.endQuery(conn2, cur2)
+			txt=InteractBDD.pirateTXT(elem, 'Legende')
 		InteractBDD.endQuery(conn, cur)
 		return txt
 
@@ -402,20 +400,6 @@ class InteractBDD(Static):
 		InteractBDD.endQuery(conn, cur)
 		return power
 
-		
-
-	def fruitsPowerInternal(fruitsName, conn, cur):
-		#used only by InteractBDD
-		if fruitsName=='None':
-			return '0,0,0,0'
-
-		request = "SELECT power FROM fruit WHERE name='"+str(fruitsName)+"';"
-		description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
-		power=""
-		for elem in description:
-			power=str(elem[0])
-		return power
-		
 	@staticmethod
 	def allocateFruit(fruitsName):
 		[conn, cur]=InteractBDD.beginQuery()
@@ -596,13 +580,13 @@ class InteractBDD(Static):
 		conn.close()
 		
 	@staticmethod
-	def pirateTXT(elem, conn, cur, type):
+	def pirateTXT(elem, type):
 		piratesName=elem[0]
 		level=elem[1]
 		fruitsName=elem[2]
 		qualite=elem[3]
 
-		strpower=InteractBDD.fruitsPowerInternal(fruitsName, conn, cur) # "1,2,3,4"
+		strpower=InteractBDD.fruitsPower(fruitsName) # "1,2,3,4"
 		power=list(map(int, strpower.split(",") )) # [1,2,3,4]
 		#fruitsTXT='{"type": "FruitDemon", "name": \"'+fruitsName+'\", "power": \"'+str(power)+'\"}'
 		#fruitsTXT="{"+"\"type\": \"FruitDemon\", \"name\": \"{}\", \"power\": \"{}\"".format(fruitsName, str(power)) + "}"
