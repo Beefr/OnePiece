@@ -84,11 +84,11 @@ class Pirate(object):
 	def vie(self):
 		return int(self._stats[0])
 
-
-	def takeDamages(self, degats):
-		vie=self._stats[0]-degats
-		self._stats.pop(0)
-		self._stats.insert(0, vie)
+	@staticmethod
+	def takeDamages(pirateStats, degats):
+		vie=pirateStats[0]-degats
+		pirateStats.pop(0)
+		pirateStats.insert(0, vie)
 		
 
 	def fatigue(self):
@@ -126,7 +126,7 @@ class Pirate(object):
 		if degats<=0: #aucun degat reçu
 			return Message(self._name+" attaque "+pirate.name+", mais celui-ci ne prend aucun degats et garde ses "+str(pirate.vie())+"pts de vie")
 		
-		pirate.takeDamages(degats)
+		Pirate.takeDamages(pirate.stats, degats)
 		return Message(self._name+" inflige "+str(degats)+"pts de degats à "+pirate.name+", il ne lui reste plus que "+str(pirate.vie())+"pts de vie")
 
 
@@ -257,8 +257,7 @@ class Legende(Pirate):
 			texte=(self._name+" {} "+pirate.name+", mais celui-ci ne prend aucun degats et garde ses "+str(pirate.vie())+"pts de vie").format(InteractBDD.phraseDeCombat(self._name))
 			return Message(texte)
 		
-		pirate.takeDamages(degats)
-		pirate.updateStatus()
+		Pirate.takeDamages(pirate.stats, degats)
 		texte=(self._name+" {} "+pirate.name+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(pirate.vie())+"pts de vie").format(InteractBDD.phraseDeCombat(self._name))
 		return Message(texte, True, False)
 
