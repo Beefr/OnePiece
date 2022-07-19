@@ -105,11 +105,11 @@ class Utils(Static):
 		degats=atk.stats[1]-tank.defense()
 		if phrase!=None:
 			if degats<=0: #aucun degat reçu
-				texte=(atk.name+" {} "+tank.name()+", mais celui-ci ne prend aucun degats et garde ses "+str(tank.vie())+"pts de vie").format(phrase)
+				texte=(atk.name+" {} "+tank.name+", mais celui-ci ne prend aucun degats et garde ses "+str(tank.vie())+"pts de vie").format(phrase)
 				return Message(texte)
 			
 			tank.takeDamages(degats)
-			texte=(atk.name+" {} "+tank.name()+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(tank.vie())+"pts de vie").format(phrase)
+			texte=(atk.name+" {} "+tank.name+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(tank.vie())+"pts de vie").format(phrase)
 			return Message(texte, True, False)
 		else:
 			if degats<=0: #aucun degat reçu
