@@ -153,7 +153,7 @@ class InteractBDD(Static):
 		[conn, cur]=InteractBDD.beginQuery()
 		txt=""
 		
-		
+		'''
 		[conn2, cur2]=InteractBDD.beginQuery()
 		txt=txt+"TEEEEEEEEEEEEST: <br>"
 		request = "select fruit from pnj;"
@@ -165,7 +165,7 @@ class InteractBDD(Static):
 			txt=txt+str(power)				
 			txt=txt+"<br>"
 		txt=txt+"<br>"
-		InteractBDD.endQuery(conn2, cur2)
+		InteractBDD.endQuery(conn2, cur2)'''
 
 		txt=txt+"Joueur: <br>"
 		txt=txt+"id | username | password | currentStep <br>"
