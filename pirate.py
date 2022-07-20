@@ -19,7 +19,8 @@ class Pirate(object):
 
 		self._name=self.generateNewName(name)
 		self._level=level
-		self._stats=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
+		array=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
+		self._stats=[Vie(array[0]), array[1], array[2], array[3]]
 		self._availableToFight=True
 		self._mort=False
 
@@ -244,3 +245,33 @@ class Legende(Pirate):
 
 	def is_instance(self):
 		return "Legende"
+
+
+class Stat(object):
+
+	def __init__(self, amount):
+		self._amount=amount
+
+	
+	@property
+	def amount(self):
+		return self._amount
+
+	@amount.setter
+	def amount(self, am):
+		self._amount=am
+
+	def __sub__(self, val):
+		self._amount=self._amount-val
+
+	def __hash__(self):
+		return self._amount
+
+	def __eq__(self, val):
+		return self._amount==val
+
+	def __cmp__(self, val):
+		return self._amount-val
+
+class Vie(Stat):
+	pass
