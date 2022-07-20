@@ -119,21 +119,10 @@ class Joueur(object):
 
 	def phraseDeCombat(self, entryB, first):
 		output = MultiLineMessage()
-		if first==1: # entryB attacks
-			if entryB.isinstance()=="Joueur":
-				output+ Message("L'équipage de "+entryB.username+" attaque:", True)
-				output+ self.equipage.isAttacked(entryB.equipage.attaquant())
 
-			elif entryB.isinstance()=="Equipage":
-				output+ Message("Tour de l'équipage PNJ d'attaquer:")
-				output+ self.isAttacked(entryB.attaquant())
-		else: # we attack
-			output+ Message("L'équipage de "+self.username+" attaque:", True)
+		output+ Joueur.intro(self, entryB, first)
 
-			if entryB.isinstance()=="Joueur":
-				output+ entryB.equipage.isAttacked(self.attaquant())
-			elif entryB.isinstance()=="Equipage":
-				output+ entryB.isAttacked(self.attaquant())
+		output+ self.attaque(entryB, first)
 
 		self.equipage.updateStatus()
 		if entryB.isinstance()=="Joueur":
@@ -142,6 +131,36 @@ class Joueur(object):
 			entryB.updateStatus()
 
 		return output
+
+
+	def attaque(self, entryB, first):
+		output = MultiLineMessage()
+		if first==1: # entryB attacks
+			if entryB.isinstance()=="Joueur":
+				output+ self.equipage.isAttacked(entryB.equipage.attaquant())
+			elif entryB.isinstance()=="Equipage":
+				output+ self.isAttacked(entryB.attaquant())
+
+		else: # we attack
+			if entryB.isinstance()=="Joueur":
+				output+ entryB.equipage.isAttacked(self.attaquant())
+			elif entryB.isinstance()=="Equipage":
+				output+ entryB.isAttacked(self.attaquant())
+		return output
+
+
+	@staticmethod
+	def intro(entryA, entryB, first):
+		attaquant="PNJ"
+		boolean=False
+		if first==1 and entryB.isinstance()=="Joueur":
+			attaquant="de "+entryB.username
+			boolean=True
+		elif first==0: # self est forcement un joueur
+			attaquant="de "+entryA.username
+			boolean=True
+		intro="Tour de l'équipage {} d'attaquer:".format(attaquant)
+		return Message(intro, boolean)
 
 	@staticmethod
 	def phraseDeVictoire(entry):
