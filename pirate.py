@@ -118,7 +118,7 @@ class Pirate(object):
 			texte=(pirate.name+" {} "+self.name+", mais celui-ci ne prend aucun degats et garde ses "+str(self.vie())+"pts de vie").format(phrase)
 			return Message(texte)
 		
-		self.takeDamages(degats)
+		self._stats[0]=self._stats[0]-degats
 		texte=(pirate.name+" {} "+self.name+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(self.vie())+"pts de vie").format(phrase)
 		return Message(texte, True, False)
 
