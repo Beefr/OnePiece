@@ -75,8 +75,8 @@ class Equipage(object):
 		for count in range(len(self._team)-1,0):
 			if self._team[count].updateStatus():
 				self._dead.append(self._team[count])
-				self._turn.removePirate()
 				self._team.pop(count)
+		self._turn.removePirate()
 		self._numberOfPirates=len(self._team)
 		if self._numberOfPirates==0:
 			self._availableToFight=False

@@ -137,18 +137,20 @@ class Joueur(object):
 	def attaque(self, entryB, first):
 		output = MultiLineMessage()
 		if first==1: # entryB attacks
-			if entryB.isinstance()=="Joueur":
-				output+ self.equipage.isAttacked(entryB.equipage.attaquant())
-			elif entryB.isinstance()=="Equipage":
-				output+ self.isAttacked(entryB.attaquant())
+			output+ self.isAttacked(entryB.attaquant())
 
 		else: # we attack
-			if entryB.isinstance()=="Joueur":
-				output+ entryB.equipage.isAttacked(self.attaquant())
-			elif entryB.isinstance()=="Equipage":
-				output+ entryB.isAttacked(self.attaquant())
+			output+ entryB.isAttacked(self.attaquant())
+
 		return output
 
+
+	def isAttacked(self, attaquant):
+		return self.equipage.isAttacked(attaquant)
+
+
+	def attaquant(self):
+		return self.equipage.attaquant()
 
 	@staticmethod
 	def intro(entryA, entryB, first):
