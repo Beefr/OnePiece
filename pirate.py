@@ -14,13 +14,12 @@ class Pirate(object):
 			self._qualite=1
 			self._fruit=FruitFactory.giveAFruit()
 		else:
-			self._qualite=self.generateQualite([1,10,50,100])
+			self._qualite=Pirate.generateQualite([1,10,50,100])
 			self._fruit=FruitFactory.allocateFruit([1,100])
 
-		self._name=self.generateNewName(name)
+		self._name=Pirate.generateNewName(name)
 		self._level=level
-		array=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
-		self._stats=[Vie(array[0]), array[1], array[2], array[3]]
+		[self._vie, self._atk, self._dfs, self._ftg]=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
 		self._availableToFight=True
 		self._mort=False
 
@@ -30,8 +29,20 @@ class Pirate(object):
 		return self._name
 
 	@property
-	def stats(self):
-		return self._stats
+	def vie(self):
+		return self._vie
+
+	@property
+	def atk(self):
+		return self._vie
+
+	@property
+	def dfs(self):
+		return self._dfs
+
+	@property
+	def ftg(self):
+		return self._ftg
 
 	@property
 	def availableToFight(self):
@@ -51,7 +62,7 @@ class Pirate(object):
 		
 	@property
 	def mort(self):
-		if self._stats[0]<=0:
+		if self._vie<=0:
 			self._mort=True
 		return self._mort
 
@@ -63,85 +74,86 @@ class Pirate(object):
 	@qualite.setter
 	def qualite(self, qualite):
 		self._qualite=qualite
-		self._stats=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
+		[self._vie, self._atk, self._dfs, self._ftg]=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
 
 	@fruit.setter
 	def fruit(self, frui):
 		self._fruit=frui
-		self._stats=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
+		[self._vie, self._atk, self._dfs, self._ftg]=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
 
 
-	@stats.setter
-	def stats(self, st):
-		self._stats=st
+	@vie.setter
+	def vie(self, st):
+		self._vie=st
+
+	@atk.setter
+	def atk(self, st):
+		self._atk=st
+
+	@dfs.setter
+	def dfs(self, st):
+		self._dfs=st
+
+	@ftg.setter
+	def ftg(self, st):
+		self._ftg=st
 
 	@staticmethod
 	def regenerateHealth(level, qualite):
 		return 100*level*(5-qualite)
 
-	def defense(self):
-		return self._stats[2]
-	
-	def attaque(self):
-		return self._stats[1]
-
-
-	def vie(self):
-		return int(self._stats[0])
 
 	def takeDamages(self, degats):
-		self._stats[0]=self._stats[0]-degats
+		self._vie-degats
 
-	def fatigue(self):
-		return self._stats[3]
 
 	def increaseFatigue(self):
-		self._stats[3]-=1
-		if self._stats[3]<=0:
+		self._ftg-1
+		if self._ftg<=0:
 			self._availableToFight=False
 
-	def is_instance(self):
+	def isinstance(self):
 		return "Pirate"
 
 	def updateStatus(self):
 		self._mort=self.mort
-		self._availableToFight= self._stats[3]>0
+		self._availableToFight= self._ftg>0
 		return self._mort
 
 	def isAttacked(self, pirate):
 		if pirate is None:
 			return Message("Cet équipage n'a plus personne de vivant. Fin du combat.", True, True)
 		# c'est pirate qui attaque self
-		degats=int(pirate.attaque()-self.defense())
+		degats=int(pirate.atk-self.dfs)
 		phrase=InteractBDD.phraseDeCombat(pirate.name)
 
 		if degats<=0: #aucun degat reçu
-			texte=(pirate.name+" {} "+self.name+", mais celui-ci ne prend aucun degats et garde ses "+str(self.vie())+"pts de vie").format(phrase)
+			texte=(pirate.name+" {} "+self.name+", mais celui-ci ne prend aucun degats et garde ses "+str(self.vie)+"pts de vie").format(phrase)
 			return Message(texte)
 		
 		self.takeDamages(degats)
-		texte=(pirate.name+" {} "+self.name+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(self.vie())+"pts de vie").format(phrase)
+		texte=(pirate.name+" {} "+self.name+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(self.vie)+"pts de vie").format(phrase)
 		if phrase=="attaque":
 			return Message(texte)
 		return Message(texte, True, False)
 
-
-	def generateNewName(self, name):
+	@staticmethod
+	def generateNewName(name):
 		if name==None:
 			return Firstname()+Secondname()
 		return name
 		
 
-
-	def giveAFruit(self, fruit):
+	@staticmethod
+	def giveAFruit(fruit):
 		if fruit=="":
 			return FruitFactory.giveAFruit()
 		else:
 			return FruitFactory.giveThatFruit(fruit)
 
 	
-
-	def generateQualite(self, percentageQualite):
+	@staticmethod
+	def generateQualite(percentageQualite):
 		
 		percent = random.randint(0,100)
 		if percent<=percentageQualite[0]:
@@ -155,8 +167,8 @@ class Pirate(object):
 
 		return qualite
 
-
-	def generateDemonBool(self, percentageDemonBool):
+	@staticmethod
+	def generateDemonBool(percentageDemonBool):
 		percent = random.randint(0,100)	
 		if percent<=percentageDemonBool[0]:
 			demonBool=True
@@ -170,7 +182,7 @@ class Pirate(object):
 		array=[]
 		array.append([Message(self._name, True)])
 		array.append([Message("niveau: "+str(self._level)+" | qualité: "+str(self._qualite)+" | fruit: "+self._fruit.name, True)])
-		array.append([Message('vie: '+str(int(self._stats[0]))+" | dps: "+str(int(self._stats[1]))+" | def: "+str(int(self._stats[2]))+" | fatigue: "+str(int(self._stats[3])))])
+		array.append([Message('vie: '+str(int(self._vie))+" | dps: "+str(int(self._atk))+" | def: "+str(int(self._dfs))+" | fatigue: "+str(int(self._ftg)))])
 		array.append([Message("___________________________________________________", False, True)])
 		return array
 
@@ -239,39 +251,10 @@ class Legende(Pirate):
 		self._fruit=FruitFactory.giveThatFruit(fruit)
 		self._name=nom
 		self._level=level
-		self._stats=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
+		[self._vie, self._atk, self._dfs, self._ftg]=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
 		self._availableToFight=True
 		self._mort=False
 
 	def is_instance(self):
 		return "Legende"
 
-
-class Stat(object):
-
-	def __init__(self, amount):
-		self._amount=amount
-
-	
-	@property
-	def amount(self):
-		return self._amount
-
-	@amount.setter
-	def amount(self, am):
-		self._amount=am
-
-	def __sub__(self, val):
-		self._amount=self._amount-val
-
-	def __hash__(self):
-		return self._amount
-
-	def __eq__(self, val):
-		return self._amount==val
-
-	def __cmp__(self, val):
-		return self._amount-val
-
-class Vie(Stat):
-	pass
