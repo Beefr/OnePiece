@@ -66,10 +66,10 @@ class Equipage(object):
 		self.countAvailableToTank()
 		who=random.randint(0, self._numberOfPirates-1)
 		count=0
-		for pirate in self._team:
-			if pirate.mort==False:
+		for i in range(len(self._team)):
+			if self._team[i].mort==False:
 				if who==count:
-					return pirate
+					return self._team[i]
 				count+=1
 		return None # something went wrong
 	
