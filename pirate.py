@@ -112,9 +112,6 @@ class Pirate(object):
 		if self._ftg<=0:
 			self._availableToFight=False
 
-	def isinstance(self):
-		return "Pirate"
-
 	def updateStatus(self):
 		self._mort=self.mort
 		self._availableToFight= self._ftg>0
@@ -237,6 +234,4 @@ class Legende(Pirate):
 		self._availableToFight=True
 		self._mort=False
 
-	def is_instance(self):
-		return "Legende"
 
