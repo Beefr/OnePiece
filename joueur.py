@@ -1,4 +1,5 @@
-
+import random
+from multiLineMessage import MultiLineMessage
 from utils import Utils
 from equipage import Equipage
 from pirate import Pirate
@@ -77,7 +78,7 @@ class Joueur(object):
 				# TODO eventuellement rajouter un petit message quand le gars se reconnecte?
 
 		else:
-			ennemies=Equipage.generateEnnemies(InteractBDD.averagePirateLevel(self._username), self._equipage.numberOfPirates)
+			ennemies=Equipage.generateEnnemies(InteractBDD.averagePirateLevel(self._username), max(self._equipage.numberOfPirates,5))
 			isThereBoss=InteractBDD.checkBoss(self._position.name)
 			if isThereBoss!=None:
 				ennemies.newFighter(Utils.load(isThereBoss))
@@ -85,16 +86,73 @@ class Joueur(object):
 			output.content+ "Arrivé sur "
 			output.content* self._position.name
 			output.content* ", tu fais face à de nombreux pirates hostiles."
-			output.content+ Utils.fight(self, ennemies)
+			output.content+ self.fight(ennemies)
 
 
-		output.content+self.cleanUpDeadPirates()
+		output.content+ self.cleanUpDeadPirates()
 
 		output.team+ "Voici ton équipage:"
 		output.team+ "___________________________________________________"
 		output.team+ self._equipage.asMessageArray()
 
 		output.map+ World.showMap(self._position.name)
+
+	def fight(self, entry2):		
+		array= MultiLineMessage()
+		first=random.randint(1,2)
+		turnsCount=0
+		while self.availableToFight and entry2.availableToFight:
+			array+ Message("Tour "+str(turnsCount), True, False, "rouge")
+			array+ self.phraseDeCombat(entry2, first)
+			array+ self.phraseDeCombat(entry2, 1-first)
+			turnsCount+=1
+
+		if self.availableToFight:
+			self.increaseCrewLevel()
+			array+ Joueur.phraseDeVictoire(self)
+		else:
+			if entry2.isinstance()=="Joueur":
+				entry2.increaseCrewLevel()
+			array+ Joueur.phraseDeVictoire(entry2)
+		return array
+
+
+	def phraseDeCombat(self, entryB, first):
+		output = MultiLineMessage()
+		if first==1: # entryB attacks
+			if entryB.isinstance()=="Joueur":
+				output+ Message("L'équipage de "+entryB.username+" attaque:", True)
+				output+ self.equipage.isAttacked(entryB.equipage.attaquant())
+
+			elif entryB.isinstance()=="Equipage":
+				output+ Message("Tour de l'équipage PNJ d'attaquer:")
+				output+ self.isAttacked(entryB.attaquant())
+		else: # we attack
+			output+ Message("L'équipage de "+self.username+" attaque:", True)
+
+			if entryB.isinstance()=="Joueur":
+				output+ entryB.equipage.isAttacked(self.attaquant())
+			elif entryB.isinstance()=="Equipage":
+				output+ entryB.isAttacked(self.attaquant())
+
+		self.equipage.updateStatus()
+		if entryB.isinstance()=="Joueur":
+			entryB.equipage.updateStatus()
+		else:
+			entryB.updateStatus()
+
+		return output
+
+	@staticmethod
+	def phraseDeVictoire(entry):
+		if entry.isinstance()=="Joueur":
+			output= MultiLineMessage()
+			output+ Message("L'équipage de "+entry.username+" remporte le combat, ils remportent tous un niveau:", True, True, "rouge")
+			output+ entry.equipage.asMessageArray()
+			return output
+		elif entry.isinstance()=="Equipage":
+			return Message("L'équipage PNJ remporte le combat!", True, True, "rouge")
+
 
 	def recrutement(self, output, piratesID, value=0):
 		

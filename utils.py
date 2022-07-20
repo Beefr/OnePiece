@@ -3,9 +3,7 @@ import numpy as np
 import os
 
 from fruitdemon import FruitFactory
-from multiLineMessage import MultiLineMessage
 from pirate import Pirate, Legende
-from message import Message
 
 import json
 from collections import namedtuple
@@ -19,79 +17,7 @@ class Static:
 
 class Utils(Static):
 
-	@staticmethod
-	def fight(entry1, entry2):		
-		array= MultiLineMessage()
-		first=random.randint(1,2)
-		turnsCount=0
-		while entry1.availableToFight and entry2.availableToFight:
-			array+ Message("Tour "+str(turnsCount), True, False, "rouge")
-			if first==1: # aléatoire sur qui commence
-				array+ Utils.phraseDeCombat(entry2, entry1)
-				array+ Utils.phraseDeCombat(entry1, entry2)
-			else:
-				array+ Utils.phraseDeCombat(entry1, entry2)
-				array+ Utils.phraseDeCombat(entry2, entry1)
-			
-			turnsCount+=1
-		if entry1.availableToFight:
-			entry1.increaseCrewLevel()
-			array+ Utils.phraseDeVictoire(entry1)
-		else:
-			entry2.increaseCrewLevel()
-			array+ Utils.phraseDeVictoire(entry2)
-		return array
 
-
-	@staticmethod
-	def increaseCrewLevel(entry):
-		if entry.isinstance()=="Joueur":
-			entry.equipage.increaseCrewLevel()
-		
-
-
-	@staticmethod
-	def updateStatus(entry):
-		if entry.isinstance()=="Joueur":
-			entry.equipage.updateStatus()
-		elif entry.isinstance()=="Equipage":
-			entry.updateStatus()
-
-
-	@staticmethod
-	def phraseDeCombat(entryA, entryB):
-		output = MultiLineMessage()
-		if entryA.isinstance()=="Joueur":
-			if entryB.isinstance()=="Joueur":
-				output+ Message("L'équipage de "+entryA.username+" attaque:", True)
-				output+ entryB.equipage.isAttacked(entryA.equipage.attaquant())
-
-			elif entryB.isinstance()=="Equipage":
-				output+ Message("L'équipage de "+entryA.username+" attaque:", True)
-				output+ entryB.isAttacked(entryA.equipage.attaquant())
-
-		elif entryA.isinstance()=="Equipage":
-			if entryB.isinstance()=="Joueur":
-				output+ Message("Tour de l'équipage PNJ d'attaquer:")
-				output+ entryB.equipage.isAttacked(entryA.attaquant())
-
-			elif entryB.isinstance()=="Equipage":
-				output+ Message("Tour de l'équipage PNJ d'attaquer:")
-				output+ entryB.isAttacked(entryA.attaquant())
-		
-		Utils.updateStatus(entryB)
-		return output
-
-
-	@staticmethod
-	def phraseDeVictoire(entry):
-		if entry.isinstance()=="Joueur":
-			output= MultiLineMessage()
-			output+ Message("L'équipage de "+entry.username+" remporte le combat, ils remportent tous un niveau:", True, True, "rouge")
-			output+ entry.equipage.asMessageArray()
-			return output
-		elif entry.isinstance()=="Equipage":
-			return Message("L'équipage PNJ remporte le combat!", True, True, "rouge")
 
 
 	@staticmethod
