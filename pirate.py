@@ -117,22 +117,25 @@ class Pirate(object):
 		self._availableToFight= self._ftg>0
 		return self._mort
 
-	def isAttacked(self, pirate):
+	def isAttacked(self, pirate, output):
 		if pirate is None:
-			return Message("Cet équipage n'a plus personne de vivant. Fin du combat.", True, True)
-		# c'est pirate qui attaque self
-		degats=int(pirate.atk-self.dfs)
-		phrase=InteractBDD.phraseDeCombat(pirate.name)
+			output+ Message("Cet équipage n'a plus personne de vivant. Fin du combat.", True, True)
+		else:
+			# c'est pirate qui attaque self
+			degats=int(pirate.atk-self.dfs)
+			phrase=InteractBDD.phraseDeCombat(pirate.name)
 
-		if degats<=0: #aucun degat reçu
-			texte=(pirate.name+" {} "+self.name+", mais celui-ci ne prend aucun degats et garde ses "+str(self.vie)+"pts de vie").format(phrase)
-			return Message(texte)
-		
-		self.takeDamages(degats)
-		texte=(pirate.name+" {} "+self.name+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(self.vie)+"pts de vie").format(phrase)
-		if phrase=="attaque":
-			return Message(texte)
-		return Message(texte, True, False)
+			if degats<=0: #aucun degat reçu
+				texte=(pirate.name+" {} "+self.name+", mais celui-ci ne prend aucun degats et garde ses "+str(self.vie)+"pts de vie").format(phrase)
+				output+ Message(texte)
+			
+			else:
+				self.takeDamages(degats)
+				texte=(pirate.name+" {} "+self.name+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(self.vie)+"pts de vie").format(phrase)
+				if phrase=="attaque":
+					output+ Message(texte)
+				else:
+					output+ Message(texte, True, False)
 
 	@staticmethod
 	def generateNewName(name):

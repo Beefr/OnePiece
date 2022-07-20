@@ -47,19 +47,11 @@ class Equipage(object):
 		pirate.increaseFatigue()
 		return pirate
 
-	def isAttacked(self, attaquant):
-		return self.defenseur().isAttacked(attaquant)
+	def isAttacked(self, attaquant, output):
+		self.defenseur().isAttacked(attaquant, output)
 
-
-	def isAttacking(self, defenseur):
-		return defenseur.isAttacked(self.attaquant())
 
 	def defenseur(self):
-		pirate=self._turn.next()
-		if pirate==None:
-			return None
-		return pirate
-		'''
 		self.countAvailableToTank()
 		who=random.randint(0, self._numberOfPirates-1)
 		count=0
@@ -67,7 +59,7 @@ class Equipage(object):
 			if self._team[i].mort==False:
 				if who==count:
 					return self._team[i]
-				count+=1'''
+				count+=1
 
 	
 	def countAvailableToTank(self):
@@ -159,18 +151,6 @@ class Turn(object):
 
 		return pirate
 
-	def nextDef(self): # TODO dont ignore the tired ones that can still tank
-		if len(self._pirates)==0:
-			return None
-		pirate = self._pirates[self._turnCount]
-		while pirate.availableToFight==False or pirate.mort:
-			self.removeCurrent()
-			if len(self._pirates)==0:
-				return None
-			self.increaseTurnCount()
-			pirate = self._pirates[self._turnCount]
-
-		return pirate
 
 	def increaseTurnCount(self):
 		self._turnCount+=1
