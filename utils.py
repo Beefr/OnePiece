@@ -26,16 +26,12 @@ class Utils(Static):
 		turnsCount=0
 		while entry1.availableToFight and entry2.availableToFight:
 			array+ Message("Tour "+str(turnsCount), True)
-			if first==1:
+			if first==1: # aléatoire sur qui commence
 				array+ Utils.phraseDeCombat(entry2, entry1)
-				Utils.updateStatus(entry1)
 				array+ Utils.phraseDeCombat(entry1, entry2)
-				Utils.updateStatus(entry2)
 			else:
 				array+ Utils.phraseDeCombat(entry1, entry2)
-				Utils.updateStatus(entry2)
 				array+ Utils.phraseDeCombat(entry2, entry1)
-				Utils.updateStatus(entry1)
 			
 			turnsCount+=1
 		if entry1.availableToFight:
@@ -64,30 +60,28 @@ class Utils(Static):
 
 	@staticmethod
 	def phraseDeCombat(entryA, entryB):
+		output = MultiLineMessage()
 		if entryA.isinstance()=="Joueur":
 			if entryB.isinstance()=="Joueur":
-				output = MultiLineMessage()
-				output+ Message("L'équipage de "+entryA.username+" attaque:", True)
+				output+ Message("L'équipage de "+entryA.username+" attaque:", True, False, "rouge")
 				output+ entryA.equipage.attaque(entryB.equipage)
-				return output
+
 			elif entryB.isinstance()=="Equipage":
-				output = MultiLineMessage()
-				output+ Message("L'équipage de "+entryA.username+" attaque:", True)
+				output+ Message("L'équipage de "+entryA.username+" attaque:", True, False, "rouge")
 				output+ entryA.equipage.attaque(entryB)
-				return output
+
 		elif entryA.isinstance()=="Equipage":
 			if entryB.isinstance()=="Joueur":
-				output = MultiLineMessage()
 				output+ Message("Tour de l'équipage PNJ d'attaquer:")
 				output+ entryA.attaque(entryB.equipage)
-				return output
+
 			elif entryB.isinstance()=="Equipage":
-				output = MultiLineMessage()
 				output+ Message("Tour de l'équipage PNJ d'attaquer:")
 				output+ entryA.attaque(entryB)
-				return output
 		
-		
+		Utils.updateStatus(entryB)
+		return output
+
 
 	@staticmethod
 	def phraseDeVictoire(entry):

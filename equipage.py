@@ -62,19 +62,24 @@ class Equipage(object):
 
 
 	def whoIsGonnaTankThatHit(self):
-		alive=self.availableToTank()
+		self.countAvailableToTank()
 		who=random.randint(0, self._numberOfPirates-1)
-		return alive[who]
-	
-	def availableToTank(self):
-		alive=[]
+		count=0
 		for pirate in self._team:
 			if pirate.mort==False:
-				alive.append(pirate)
-		self._numberOfPirates=len(alive)
+				if who==count:
+					return pirate
+				count+=1
+		return None # something went wrong
+	
+	def countAvailableToTank(self):
+		count=0
+		for pirate in self._team:
+			if pirate.mort==False:
+				count+=1
+		self._numberOfPirates=count
 		if self._numberOfPirates==0:
 			self._availableToFight=False
-		return alive
 
 
 	def isinstance(self):
