@@ -131,11 +131,12 @@ class Joueur(object):
 	def attaque(self, entryB, first):
 		output = MultiLineMessage()
 		if first==1: # entryB attacks
-			#output+ self.isAttacked(entryB.attaquant())
-			output+ entryB.isAttacking(self.defenseur())
+			#output+ self.isAttacked(entryB.attaquant()) # it doesn't work
+			output+ entryB.isAttacking(self.defenseur()) # it doesn't work
 
 		else: # we attack
-			output+ entryB.isAttacked(self.attaquant())
+			#output+ entryB.isAttacked(self.attaquant()) # it works
+			output+ self.isAttacking(entryB.defenseur()) # it doesn't work
 
 		return output
 
