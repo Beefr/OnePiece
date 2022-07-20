@@ -114,11 +114,8 @@ class Pirate(object):
 		if degats<=0: #aucun degat reçu
 			texte=(pirate.name+" {} "+self.name+", mais celui-ci ne prend aucun degats et garde ses "+str(self.vie())+"pts de vie").format(phrase)
 			return Message(texte)
-		
-		vie = self._stats[0]-degats
-		self._stats.pop(0)
-		self._stats.insert(0, vie)
-		#self._stats[0]=self._stats[0]-degats
+
+		self._stats[0]=self._stats[0]-degats
 		texte=(pirate.name+" {} "+self.name+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(self.vie())+"pts de vie").format(phrase)
 		if phrase=="attaque":
 			return Message(texte)

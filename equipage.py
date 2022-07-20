@@ -58,7 +58,8 @@ class Equipage(object):
 		for i in range(len(self._team)):
 			if self._team[i].mort==False:
 				if who==count:
-					return self._team[i].isAttacked(attaquant)
+					message=self._team[i].isAttacked(attaquant)
+					return message
 				count+=1
 
 	
