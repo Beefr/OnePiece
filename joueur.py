@@ -124,11 +124,12 @@ class Joueur(object):
 
 		output+ self.attaque(entryB, first)
 
+		'''
 		self.equipage.updateStatus()
 		if entryB.isinstance()=="Joueur":
 			entryB.equipage.updateStatus()
 		else:
-			entryB.updateStatus()
+			entryB.updateStatus()'''
 
 		return output
 
