@@ -88,9 +88,6 @@ class Pirate(object):
 	def vie(self):
 		return int(self._stats[0])
 
-	def takeDamages(self, degats):
-		self._stats[0]=self._stats[0]-degats
-
 	def fatigue(self):
 		return self._stats[3]
 
@@ -120,6 +117,8 @@ class Pirate(object):
 		
 		self._stats[0]=self._stats[0]-degats
 		texte=(pirate.name+" {} "+self.name+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(self.vie())+"pts de vie").format(phrase)
+		if phrase=="attaque":
+			return Message(texte)
 		return Message(texte, True, False)
 
 
