@@ -1,9 +1,7 @@
 
 import random
-from interactBDD import InteractBDD
 from utils import Utils
 from pirate import Pirate
-from message import Message
 
 
 class Equipage(object):
