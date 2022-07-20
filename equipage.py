@@ -54,9 +54,10 @@ class Equipage(object):
 		return pirate
 
 	def isAttacked(self, attaquant):
-		if attaquant==None:
+		try:
+			return self.whoIsGonnaTankThatHit().isAttacked(attaquant)
+		except:
 			return Message("Cet équipage n'a plus personne de vivant. Fin du combat.", True, True)
-		return self.whoIsGonnaTankThatHit().isAttacked(attaquant)
 
 
 
