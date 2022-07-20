@@ -136,7 +136,7 @@ class Joueur(object):
 
 		else: # we attack
 			#output+ entryB.isAttacked(self.attaquant()) # it works
-			output+ self.isAttacking(entryB.defenseur()) # it doesn't work
+			output+ self.isAttacking(entryB.defenseur()) # it works
 
 		return output
 
