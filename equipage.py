@@ -46,14 +46,19 @@ class Equipage(object):
 	def cleanUpDeadArray(self):
 		self._dead=[]
 
-	def attaque(self, defenseur):
+	def attaquant(self):
 		pirate=self._turn.next()
 		if pirate==None:
+			return None
+		pirate.increaseFatigue()
+		return pirate
+
+	def isAttacked(self, attaquant):
+		defenseur=self.whoIsGonnaTankThatHit()
+		if attaquant==None:
 			return Message("Cet équipage n'a plus personne de vivant. Fin du combat.", True, True)
-		
-		pirate.increaseFatigue() # probably doesnt work, check it up
-		return defenseur.isAttacking(pirate)
-		# c'est bien le pirate qui attaque equipage
+		return defenseur.isAttacked(attaquant)
+
 
 
 

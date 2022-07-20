@@ -64,24 +64,20 @@ class Utils(Static):
 		if entryA.isinstance()=="Joueur":
 			if entryB.isinstance()=="Joueur":
 				output+ Message("L'équipage de "+entryA.username+" attaque:", True)
-				defenseur=entryB.equipage.whoIsGonnaTankThatHit()
-				output+ entryA.equipage.attaque(defenseur)
+				output+ entryB.equipage.whoIsGonnaTankThatHit().isAttacked(entryA.equipage.attaquant())
 
 			elif entryB.isinstance()=="Equipage":
 				output+ Message("L'équipage de "+entryA.username+" attaque:", True)
-				defenseur=entryB.whoIsGonnaTankThatHit()
-				output+ entryA.equipage.attaque(defenseur)
+				output+ entryB.whoIsGonnaTankThatHit().isAttacked(entryA.equipage.attaquant())
 
 		elif entryA.isinstance()=="Equipage":
 			if entryB.isinstance()=="Joueur":
 				output+ Message("Tour de l'équipage PNJ d'attaquer:")
-				defenseur=entryB.equipage.whoIsGonnaTankThatHit()
-				output+ entryA.attaque(defenseur)
+				output+ entryB.equipage.whoIsGonnaTankThatHit().isAttacked(entryA.attaquant())
 
 			elif entryB.isinstance()=="Equipage":
 				output+ Message("Tour de l'équipage PNJ d'attaquer:")
-				defenseur=entryB.whoIsGonnaTankThatHit()
-				output+ entryA.attaque(defenseur)
+				output+ entryB.whoIsGonnaTankThatHit().isAttacked(entryA.attaquant())
 		
 		Utils.updateStatus(entryB)
 		return output

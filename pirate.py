@@ -107,7 +107,7 @@ class Pirate(object):
 		self._availableToFight= self._stats[3]>0
 		return self._mort
 
-	def isAttacking(self, pirate):
+	def isAttacked(self, pirate):
 		# c'est pirate qui attaque self
 		degats=int(pirate.attaque()-self.defense())
 		phrase=InteractBDD.phraseDeCombat(pirate.name)
