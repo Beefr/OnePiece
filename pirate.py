@@ -143,14 +143,6 @@ class Pirate(object):
 			return Firstname()+Secondname()
 		return name
 		
-
-	@staticmethod
-	def giveAFruit(fruit):
-		if fruit=="":
-			return FruitFactory.giveAFruit()
-		else:
-			return FruitFactory.giveThatFruit(fruit)
-
 	
 	@staticmethod
 	def generateQualite(percentageQualite):
@@ -166,16 +158,6 @@ class Pirate(object):
 			qualite=4
 
 		return qualite
-
-	@staticmethod
-	def generateDemonBool(percentageDemonBool):
-		percent = random.randint(0,100)	
-		if percent<=percentageDemonBool[0]:
-			demonBool=True
-		else:
-			demonBool=False
-
-		return demonBool
 
 
 	def asMessageArray(self):
