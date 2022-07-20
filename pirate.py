@@ -115,11 +115,11 @@ class Pirate(object):
 		phrase=InteractBDD.phraseDeCombat(pirate.name)
 
 		if degats<=0: #aucun degat reçu
-			texte=(pirate.name+" {} "+self.name+", mais celui-ci ne prend aucun degats et garde ses "+str(self.vie())+"pts de vie").format(phrase)
+			texte=(pirate.name+" {} "+self.name+", mais celui-ci ne prend aucun degats et garde ses "+str(self._stats[0])+"pts de vie").format(phrase)
 			return Message(texte)
 		
-		self._stats[0]=self._stats[0]-degats
-		texte=(pirate.name+" {} "+self.name+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(self.vie())+"pts de vie").format(phrase)
+		self.takeDamages(degats)
+		texte=(pirate.name+" {} "+self.name+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(self._stats[0])+"pts de vie").format(phrase)
 		if phrase=="attaque":
 			return Message(texte)
 		return Message(texte, True, False)
