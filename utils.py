@@ -25,7 +25,7 @@ class Utils(Static):
 		first=random.randint(1,2)
 		turnsCount=0
 		while entry1.availableToFight and entry2.availableToFight:
-			array+ Message("Tour "+str(turnsCount), True)
+			array+ Message("Tour "+str(turnsCount), True, False, "rouge")
 			if first==1: # aléatoire sur qui commence
 				array+ Utils.phraseDeCombat(entry2, entry1)
 				array+ Utils.phraseDeCombat(entry1, entry2)
@@ -63,21 +63,25 @@ class Utils(Static):
 		output = MultiLineMessage()
 		if entryA.isinstance()=="Joueur":
 			if entryB.isinstance()=="Joueur":
-				output+ Message("L'équipage de "+entryA.username+" attaque:", True, False, "rouge")
-				output+ entryA.equipage.attaque(entryB.equipage)
+				output+ Message("L'équipage de "+entryA.username+" attaque:", True)
+				defenseur=entryB.equipage.whoIsGonnaTankThatHit()
+				output+ entryA.equipage.attaque(defenseur)
 
 			elif entryB.isinstance()=="Equipage":
-				output+ Message("L'équipage de "+entryA.username+" attaque:", True, False, "rouge")
-				output+ entryA.equipage.attaque(entryB)
+				output+ Message("L'équipage de "+entryA.username+" attaque:", True)
+				defenseur=entryB.whoIsGonnaTankThatHit()
+				output+ entryA.equipage.attaque(defenseur)
 
 		elif entryA.isinstance()=="Equipage":
 			if entryB.isinstance()=="Joueur":
 				output+ Message("Tour de l'équipage PNJ d'attaquer:")
-				output+ entryA.attaque(entryB.equipage)
+				defenseur=entryB.equipage.whoIsGonnaTankThatHit()
+				output+ entryA.attaque(defenseur)
 
 			elif entryB.isinstance()=="Equipage":
 				output+ Message("Tour de l'équipage PNJ d'attaquer:")
-				output+ entryA.attaque(entryB)
+				defenseur=entryB.whoIsGonnaTankThatHit()
+				output+ entryA.attaque(defenseur)
 		
 		Utils.updateStatus(entryB)
 		return output
@@ -92,25 +96,6 @@ class Utils(Static):
 			return output
 		elif entry.isinstance()=="Equipage":
 			return Message("L'équipage PNJ remporte le combat!", True, True, "rouge")
-
-
-	@staticmethod
-	def isAttacking(atk, tank, phrase=None):
-		degats=int(atk.stats[1]-tank.defense())
-		if phrase!=None:
-			if degats<=0: #aucun degat reçu
-				texte=(atk.name+" {} "+tank.name+", mais celui-ci ne prend aucun degats et garde ses "+str(tank.vie())+"pts de vie").format(phrase)
-				return Message(texte)
-			
-			tank.takeDamages(degats)
-			texte=(atk.name+" {} "+tank.name+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(tank.vie())+"pts de vie").format(phrase)
-			return Message(texte, True, False)
-		else:
-			if degats<=0: #aucun degat reçu
-				return Message(atk.name+" attaque "+tank.name+", mais celui-ci ne prend aucun degats et garde ses "+str(tank.vie())+"pts de vie")
-			
-			tank.takeDamages(degats)
-			return Message(atk.name+" inflige "+str(degats)+"pts de degats à "+tank.name+", il ne lui reste plus que "+str(tank.vie())+"pts de vie")
 
 
 	@staticmethod

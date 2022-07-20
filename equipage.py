@@ -46,19 +46,15 @@ class Equipage(object):
 	def cleanUpDeadArray(self):
 		self._dead=[]
 
-	def attaque(self, equipage):
+	def attaque(self, defenseur):
 		pirate=self._turn.next()
 		if pirate==None:
 			return Message("Cet équipage n'a plus personne de vivant. Fin du combat.", True, True)
 		
 		pirate.increaseFatigue() # probably doesnt work, check it up
-		msg=""
-		if pirate.is_instance()=="Legende":
-			msg=Utils.isAttacking(pirate, equipage.whoIsGonnaTankThatHit(), InteractBDD.phraseDeCombat(pirate.name))
-		else:
-			msg=Utils.isAttacking(pirate, equipage.whoIsGonnaTankThatHit())
-		return msg
+		return defenseur.isAttacking(pirate)
 		# c'est bien le pirate qui attaque equipage
+
 
 
 	def whoIsGonnaTankThatHit(self):

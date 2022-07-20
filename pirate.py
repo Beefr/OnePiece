@@ -106,30 +106,25 @@ class Pirate(object):
 		self._mort=self.mort
 		self._availableToFight= self._stats[3]>0
 		return self._mort
-	'''
-	def getAttackedBy(self, pirate): 
-		degats=pirate.attaque()-self._stats[2]
-		if degats<=0: #aucun degat reçu
-			pirate.increaseFatigue()
-			return Message(self._name+" reçoit 0 pts de degats de la part de "+pirate.name+", il garde ses "+str(self._stats[0])+"pts de vie")
-		self._stats[0]=self._stats[0]-degats
 
-		pirate.increaseFatigue()
-		if self._stats[0]<=0:
-			self._availableToFight=False
-			self._mort=True
-		return Message(self._name+" reçoit "+str(degats)+"pts de degats de la part de "+pirate.name+", il ne lui reste plus que "+str(self._stats[0])+"pts de vie")
-		
-
-	def isAttacking(self, pirate): 
+	def isAttacking(self, pirate):
 		# c'est pirate qui attaque self
-		degats=pirate.attaque()-self._stats[2]
-		if degats<=0: #aucun degat reçu
-			return Message(pirate.name+" attaque "+self._name+", mais celui-ci ne prend aucun degats et garde ses "+str(self.vie())+"pts de vie")
-		
-		self.takeDamages(self, degats)
-		return Message(pirate.name+" inflige "+str(degats)+"pts de degats à "+self._name+", il ne lui reste plus que "+str(self.vie())+"pts de vie")
-		'''
+		degats=int(pirate.attaque()-self.defense())
+		phrase=InteractBDD.phraseDeCombat(pirate.name)
+		if phrase!=None:
+			if degats<=0: #aucun degat reçu
+				texte=(pirate.name+" {} "+self.name+", mais celui-ci ne prend aucun degats et garde ses "+str(self.vie())+"pts de vie").format(phrase)
+				return Message(texte)
+			
+			self.takeDamages(degats)
+			texte=(pirate.name+" {} "+self.name+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(self.vie())+"pts de vie").format(phrase)
+			return Message(texte, True, False)
+		else:
+			if degats<=0: #aucun degat reçu
+				return Message(pirate.name+" attaque "+self.name+", mais celui-ci ne prend aucun degats et garde ses "+str(self.vie())+"pts de vie")
+			
+			self.takeDamages(degats)
+			return Message(pirate.name+" inflige "+str(degats)+"pts de degats à "+self.name+", il ne lui reste plus que "+str(self.vie())+"pts de vie")
 
 
 	def generateNewName(self, name):
