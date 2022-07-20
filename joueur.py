@@ -119,20 +119,14 @@ class Joueur(object):
 
 	def phraseDeCombat(self, entryB, first):
 		output = MultiLineMessage()
-
 		output+ Joueur.intro(self, entryB, first)
-
 		output+ self.attaque(entryB, first)
-
-		
-		self.equipage.updateStatus()
-		if entryB.isinstance()=="Joueur":
-			entryB.equipage.updateStatus()
-		else:
-			entryB.updateStatus()
-
+		self.updateStatus()
+		entryB.updateStatus()
 		return output
 
+	def updateStatus(self):
+		self._equipage.updateStatus()
 
 	def attaque(self, entryB, first):
 		output = MultiLineMessage()
@@ -146,11 +140,11 @@ class Joueur(object):
 
 
 	def isAttacked(self, attaquant):
-		return self.equipage.isAttacked(attaquant)
+		return self._equipage.isAttacked(attaquant)
 
 
 	def attaquant(self):
-		return self.equipage.attaquant()
+		return self._equipage.attaquant()
 
 	@staticmethod
 	def intro(entryA, entryB, first):
