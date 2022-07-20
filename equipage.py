@@ -21,7 +21,7 @@ class Equipage(object):
 
 	@property
 	def availableToFight(self):
-		self.updateTurn()
+		self._turn=Turn(self._team)
 		for pirate in self._team:
 			if pirate.mort==False and pirate.availableToFight:
 				return True
@@ -36,10 +36,6 @@ class Equipage(object):
 	@property
 	def dead(self):
 		return self._dead
-
-
-	def updateTurn(self):
-		self._turn=Turn(self._team)
 
 	def cleanUpDeadArray(self):
 		self._dead=[]
@@ -76,17 +72,15 @@ class Equipage(object):
 		return "Equipage"
 
 	def updateStatus(self):
-		temp=[]
-		for pirate in self._team:
-			if pirate.updateStatus():
-				self._dead.append(pirate)
+		for count in range(len(self._team)-1,0):
+			if self._team[count].updateStatus():
+				self._dead.append(self._team[count])
 				self._turn.removePirate()
-			else:
-				temp.append(pirate)
-		self._team=temp
+				self._team.pop(count)
 		self._numberOfPirates=len(self._team)
 		if self._numberOfPirates==0:
 			self._availableToFight=False
+
 
 	def regenerateHealth(self):
 		for pirate in self._team:
@@ -125,38 +119,17 @@ class Turn(object):
 	def add(self, pirate):
 		self._numberOfPirates+=1
 		place=random.randint(0,self._numberOfPirates)
-		if place==0:
-			temp=[pirate]
-
-			for p in self._pirates:
-				temp.append(p)
-
-			self._pirates=temp
-		elif place==self._numberOfPirates:
-			self._pirates.append(pirate)
-		else:
-			temp=[]
-			for p in self._pirates[0:place]:
-				temp.append(p)
-			
-			temp.append(pirate)
-			
-			for p in self._pirates[place+1:len(self._pirates)-1]:
-				temp.append(p)
-
-			self._pirates=temp
+		self._pirates.insert(place,pirate)
 
 	def removeCurrent(self):
 		self._numberOfPirates-=1
-		self._pirates=Utils.removeElement(self._pirates, self._turnCount)
+		self._pirates.pop(self._turnCount)
 
 
 	def removePirate(self):
-		temp=[]
-		for pirate in self._pirates:
-			if pirate.mort==False:
-				temp.append(pirate)
-		self._pirates=temp
+		for count in range(len(self._pirates)-1,0):
+			if self._pirates[count].mort==True:
+				self._pirates.pop(count)
 		self._numberOfPirates=len(self._pirates)
 
 
