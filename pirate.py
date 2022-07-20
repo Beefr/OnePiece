@@ -113,20 +113,14 @@ class Pirate(object):
 		# c'est pirate qui attaque self
 		degats=int(pirate.attaque()-self.defense())
 		phrase=InteractBDD.phraseDeCombat(pirate.name)
-		if phrase!=None:
-			if degats<=0: #aucun degat reçu
-				texte=(pirate.name+" {} "+self.name+", mais celui-ci ne prend aucun degats et garde ses "+str(self.vie())+"pts de vie").format(phrase)
-				return Message(texte)
-			
-			self.takeDamages(degats)
-			texte=(pirate.name+" {} "+self.name+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(self.vie())+"pts de vie").format(phrase)
-			return Message(texte, True, False)
-		else:
-			if degats<=0: #aucun degat reçu
-				return Message(pirate.name+" attaque "+self.name+", mais celui-ci ne prend aucun degats et garde ses "+str(self.vie())+"pts de vie")
-			
-			self.takeDamages(degats)
-			return Message(pirate.name+" inflige "+str(degats)+"pts de degats à "+self.name+", il ne lui reste plus que "+str(self.vie())+"pts de vie")
+
+		if degats<=0: #aucun degat reçu
+			texte=(pirate.name+" {} "+self.name+", mais celui-ci ne prend aucun degats et garde ses "+str(self.vie())+"pts de vie").format(phrase)
+			return Message(texte)
+		
+		self.takeDamages(degats)
+		texte=(pirate.name+" {} "+self.name+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(self.vie())+"pts de vie").format(phrase)
+		return Message(texte, True, False)
 
 
 	def generateNewName(self, name):
