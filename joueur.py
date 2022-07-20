@@ -143,7 +143,6 @@ class Joueur(object):
 
 	@property
 	def equipage(self):
-		self._equipage= self.getMyCrew()
 		return self._equipage
 
 	@property
