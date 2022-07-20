@@ -131,15 +131,15 @@ class Joueur(object):
 	def attaque(self, entryB, first):
 		output = MultiLineMessage()
 		if first==1: # entryB attacks
-			self.isAttacked(entryB.attaquant(), output)
+			output+ self.isAttacked(entryB.attaquant())
 
 		else: # we attack
-			entryB.isAttacked(self.attaquant(), output) 
+			output+ entryB.isAttacked(self.attaquant()) 
 
 		return output
 
-	def isAttacked(self, attaquant, output):
-		self._equipage.isAttacked(attaquant, output)
+	def isAttacked(self, attaquant):
+		return self._equipage.isAttacked(attaquant)
 
 	def attaquant(self):
 		return self._equipage.attaquant()

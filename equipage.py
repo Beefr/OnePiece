@@ -47,8 +47,8 @@ class Equipage(object):
 		pirate.increaseFatigue()
 		return pirate
 
-	def isAttacked(self, attaquant, output):
-		self.defenseur().isAttacked(attaquant, output)
+	def isAttacked(self, attaquant):
+		return self.defenseur().isAttacked(attaquant)
 
 
 	def defenseur(self):
