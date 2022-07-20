@@ -54,21 +54,15 @@ class Equipage(object):
 		return pirate
 
 	def isAttacked(self, attaquant):
-		return self.whoIsGonnaTankThatHit().isAttacked(attaquant)
-
-
-
-
-	def whoIsGonnaTankThatHit(self):
 		self.countAvailableToTank()
 		who=random.randint(0, self._numberOfPirates-1)
 		count=0
 		for i in range(len(self._team)):
 			if self._team[i].mort==False:
 				if who==count:
-					return self._team[i]
+					return self._team[i].isAttacked(attaquant)
 				count+=1
-		return None # something went wrong
+
 	
 	def countAvailableToTank(self):
 		count=0
