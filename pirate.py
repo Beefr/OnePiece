@@ -115,7 +115,10 @@ class Pirate(object):
 			texte=(pirate.name+" {} "+self.name+", mais celui-ci ne prend aucun degats et garde ses "+str(self.vie())+"pts de vie").format(phrase)
 			return Message(texte)
 		
-		self._stats[0]=self._stats[0]-degats
+		vie = self._stats[0]-degats
+		self._stats.pop(0)
+		self._stats.insert(0, vie)
+		#self._stats[0]=self._stats[0]-degats
 		texte=(pirate.name+" {} "+self.name+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(self.vie())+"pts de vie").format(phrase)
 		if phrase=="attaque":
 			return Message(texte)
@@ -242,15 +245,4 @@ class Legende(Pirate):
 	def is_instance(self):
 		return "Legende"
 
-	'''
-	def isAttacking(self, pirate):
-		# c'est pirate qui attaque self
-		degats=self._stats[1]-pirate.defense()
-		if degats<=0: #aucun degat reçu
-			texte=(pirate.name+" {} "+self.name()+", mais celui-ci ne prend aucun degats et garde ses "+str(self.vie())+"pts de vie").format(InteractBDD.phraseDeCombat(pirate.name))
-			return Message(texte)
-		
-		self.takeDamages(self, degats)
-		texte=(pirate.name+" {} "+self.name()+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(self.vie())+"pts de vie").format(InteractBDD.phraseDeCombat(pirate.name))
-		return Message(texte, True, False)
-		'''
+	
