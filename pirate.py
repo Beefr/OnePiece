@@ -108,6 +108,8 @@ class Pirate(object):
 		return self._mort
 
 	def isAttacked(self, pirate):
+		if pirate is None:
+			return Message("Cet équipage n'a plus personne de vivant. Fin du combat.", True, True)
 		# c'est pirate qui attaque self
 		degats=int(pirate.attaque()-self.defense())
 		phrase=InteractBDD.phraseDeCombat(pirate.name)
