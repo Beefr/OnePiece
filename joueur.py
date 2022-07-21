@@ -101,7 +101,7 @@ class Joueur(object):
 
 	def fight(self, entry2):		
 		array= MultiLineMessage()
-		first=random.randint(1,2)
+		first=random.randint(0,1)
 		turnsCount=0
 		while self.availableToFight and entry2.availableToFight:
 			array+ Message("Tour "+str(turnsCount), True, False, "rouge")

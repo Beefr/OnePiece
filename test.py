@@ -1,3 +1,7 @@
+import os
+print("\n" * 100)
+os.system('cls')
+
 
 from joueur import Joueur
 from pirate import Pirate
@@ -21,7 +25,7 @@ def decode(dict):
         obj.fruit=tuple.fruit
     elif tuple.type=="FruitDemon":
         obj= FruitFactory.giveThatFruit(tuple.name)
-    print(type(obj))
+    #print(type(obj))
     return obj
 
 
@@ -42,9 +46,10 @@ joueur = load(joueurTXT)
 
 ennemies=[]
 numberEnnemies=5
+name="pirateTest"
 for i in range(numberEnnemies):
-    pirate=Pirate(100)
-    print(str(pirate))
+    pirate=Pirate(100, True, name+str(i))
+    #print(str(pirate))
     ennemies.append(pirate)
     
 equipageEnnemy=Equipage(ennemies)
