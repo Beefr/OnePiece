@@ -2,7 +2,7 @@
 import random
 from utils import Utils
 from pirate import Pirate
-
+from message import Message
 
 class Equipage(object):
 
@@ -48,11 +48,18 @@ class Equipage(object):
 		return pirate
 
 	def isAttacked(self, attaquant):
-		return self.defenseur().isAttacked(attaquant)
+		defenseur=self.defenseur()
+		if defenseur==None:
+			return Message("Cet équipage n'a plus personne de vivant. Fin du combat.", True, True)
+		return defenseur.isAttacked(attaquant)
 
 
 	def defenseur(self):
 		self.countAvailableToTank()
+		if self._numberOfPirates<=0:
+			return None
+		elif self._numberOfPirates==1:
+			return self._team[0]
 		who=random.randint(0, self._numberOfPirates-1)
 		count=0
 		for i in range(len(self._team)):
@@ -131,6 +138,9 @@ class Turn(object):
 
 
 	def removePirate(self):
+		if len(self._pirates)==0:
+			self._numberOfPirates=0
+			return None
 		for count in range(len(self._pirates)-1,0):
 			if self._pirates[count].mort==True:
 				self._pirates.pop(count)

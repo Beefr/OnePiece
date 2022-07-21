@@ -1,6 +1,9 @@
+
 from joueur import Joueur
 from pirate import Pirate
 from equipage import Equipage
+from fruitdemon import FruitFactory
+
 import json
 from collections import namedtuple
 
@@ -10,12 +13,14 @@ from collections import namedtuple
 def decode(dict):
     tuple=namedtuple('Metamorph', dict.keys())(*dict.values())
     if tuple.type=="Joueur":
-        obj= Joueur(tuple.username, tuple.equipage, tuple.position, tuple.availableToFight)
+        obj= Joueur(tuple.username)
     elif tuple.type=="Pirate":
         obj= Pirate(tuple.level)
         obj.name=tuple.name
         obj.qualite=tuple.qualite
         obj.fruit=tuple.fruit
+    elif tuple.type=="FruitDemon":
+        obj= FruitFactory.giveThatFruit(tuple.name)
     print(type(obj))
     return obj
 
@@ -29,18 +34,17 @@ def load(obj):
 
 
 
+joueurTXT='{"type": "Joueur", "username": "Beefr"}'
 
-
-
-
-
-
-fruit = '{"type": "FruitDemon", "name": "%s", "power": %s}' % ("GumGum", "[50,50,0,0]") 
-pirate='{"type": "Pirate", "level": 150, "name": "Beefr", "qualite": 1, "fruit": "%s"}' % (fruit)
-joueurTXT= '{ "type": "Joueur", "username": "Beefr", "equipage": [%s], "position": "Amazon Lily", "availableToFight": true }' % (pirate)
+#print(joueurTXT)
 joueur = load(joueurTXT)
 
 
-ennemies=Equipage([Pirate(150)])
+ennemies=[]
+numberEnnemies=5
+for i in range(numberEnnemies):
+    ennemies.append(Pirate(150))
 
-#print(joueur.fight(ennemies))
+equipageEnnemy=Equipage(ennemies)
+
+print(joueur.fight(equipageEnnemy))

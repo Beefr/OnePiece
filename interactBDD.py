@@ -636,9 +636,59 @@ class InteractBDD(Static):
 
 	else:
 
+
+		crewLevel=150
+		crewQuality=1
+		crewFruit="GumGum"
+		crewNumber=1
+
+		username="Beefr"
+		location="Amazon Lily"
+
 		@staticmethod
 		def countAvailableFruits():
 			return 0
 
+		@staticmethod
+		def allocateFruit(cool):
+			return None
+
+		@staticmethod
+		def fruitsPower(fruit):
+			if fruit=="None":
+				fruitPower=[0,0,0,0]
+			else:
+				fruitPower=[50,50,0,0]
+			return fruitPower
+
+		@staticmethod
+		def getMyCrew(cool):
+			level=InteractBDD.crewLevel
+			qualite=InteractBDD.crewQuality
+			fruit=InteractBDD.crewFruit
+			if fruit=="None":
+				fruitPower=[0,0,0,0]
+			else:
+				fruitPower=[50,50,0,0]
+
+			pirates=[]
+			for i in range(InteractBDD.crewNumber):
+				fruitTXT = '{"type": "FruitDemon", "name": "%s", "power": %s}' % (fruit, str(fruitPower)) 
+				pirateTXT='{"type": "Pirate", "name": "%s", "level": %s, "qualite": %s, "fruit": %s, "stats": "%s", "availableToFight": "True", "mort": "False"}' % (InteractBDD.username+str(i), str(level), str(qualite), fruitTXT, str(StatsPirate.generateStats(level, qualite, fruitPower)))
+				pirates.append(pirateTXT)
+				#print(pirateTXT)
+			return pirates
 
 
+		@staticmethod
+		def getMyLocation(cool):
+			return InteractBDD.location
+
+
+		@staticmethod
+		def phraseDeCombat(cool):
+			return "attaque"
+
+		@staticmethod
+		def increasePirateLevel(cool):
+			return None

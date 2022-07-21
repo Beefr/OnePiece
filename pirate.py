@@ -104,7 +104,9 @@ class Pirate(object):
 
 
 	def takeDamages(self, degats):
-		self._vie-degats
+		print(self._name+str(self._vie)+"_"+str(degats))
+		self._vie=self._vie-degats
+		print(self._name+str(self._vie))
 
 
 	def increaseFatigue(self):
