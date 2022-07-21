@@ -83,7 +83,7 @@ class Equipage(object):
 		return "Equipage"
 
 	def updateStatus(self):
-		for count in range(len(self._team)-1,0):
+		for count in range(len(self._team)-1,-1,-1):
 			if self._team[count].updateStatus():
 				self._dead.append(self._team[count])
 				self._team.pop(count)
@@ -141,8 +141,8 @@ class Turn(object):
 		if len(self._pirates)==0:
 			self._numberOfPirates=0
 			return None
-		for count in range(len(self._pirates)-1,0):
-			if self._pirates[count].mort==True:
+		for count in range(len(self._pirates)-1,-1,-1):
+			if self._pirates[count].mort:
 				self._pirates.pop(count)
 		self._numberOfPirates=len(self._pirates)
 

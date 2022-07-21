@@ -331,7 +331,7 @@ class InteractBDD(Static):
 		#_____________________STORE_______________________________
 
 		@staticmethod
-		def setMyCrew(username, positionsName, pirates):
+		def setMyCrew(username, positionsName, pirates, currentstep):
 			[conn, cur]=InteractBDD.beginQuery()
 
 			for pirate in pirates:
@@ -339,6 +339,9 @@ class InteractBDD(Static):
 				InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 
 			request = "UPDATE island SET position='"+positionsName+"' WHERE username='"+username+"';"
+			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+
+			request = "UPDATE joueur SET currentstep="+currentstep+" WHERE username='"+username+"';"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 
 			InteractBDD.endQuery(conn, cur)

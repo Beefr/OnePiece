@@ -43,8 +43,22 @@ joueur = load(joueurTXT)
 ennemies=[]
 numberEnnemies=5
 for i in range(numberEnnemies):
-    ennemies.append(Pirate(150))
-
+    pirate=Pirate(100)
+    print(str(pirate))
+    ennemies.append(pirate)
+    
 equipageEnnemy=Equipage(ennemies)
 
 print(joueur.fight(equipageEnnemy))
+
+
+
+'''
+test=["mort",1,2,3,"mort",5]
+for count in range(len(test)-1,-1,-1):
+    print(count)
+    print(test[count])
+    if test[count]=="mort":
+        test.pop(count)
+
+print(test)'''

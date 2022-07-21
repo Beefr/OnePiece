@@ -43,7 +43,7 @@ class Joueur(object):
 
 	def resetCrew(self):
 		InteractBDD.deleteUserProgress(self._username)
-		InteractBDD.setMyCrew(self._username, Joueur.villeDeDepart, [Pirate(1, True, self._username)])
+		InteractBDD.setMyCrew(self._username, Joueur.villeDeDepart, [Pirate(1, True, self._username)],1)
 		self._equipage= self.getMyCrew() # TODO possible to remove those 2 lines to reduce bdd calls?
 		self._position= self.getMyLocation()
 		self._availableToFight=True
@@ -246,7 +246,7 @@ class Joueur(object):
 		txtPirates=InteractBDD.getMyCrew(self._username)
 		if len(txtPirates)==0:
 			pirate=Pirate(1, True, self._username)
-			InteractBDD.setMyCrew(self._username, Joueur.villeDeDepart, [pirate])
+			InteractBDD.setMyCrew(self._username, Joueur.villeDeDepart, [pirate],1)
 			return Equipage([pirate])
 
 		else:

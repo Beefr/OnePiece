@@ -104,8 +104,8 @@ class Pirate(object):
 
 
 	def takeDamages(self, degats):
-		print(self._name+str(self._vie)+"_"+str(degats))
-		self._vie=self._vie-degats
+		#print(self._name+str(self._vie)+"_"+str(degats))
+		self._vie=self._vie-abs(degats)
 		print(self._name+str(self._vie))
 
 
@@ -169,7 +169,8 @@ class Pirate(object):
 
 
 
-
+	def __str__(self):
+		return self._name+" 	-lvl:"+str(self._level)+" 	-qual:"+str(self._qualite)+" 	-fruit:"+self._fruit.name+" 	-stats"+str([self._vie, self._atk, self._dfs])
 
 
 class Name(object):
