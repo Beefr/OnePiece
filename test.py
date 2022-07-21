@@ -54,7 +54,7 @@ for i in range(numberEnnemies):
     
 equipageEnnemy=Equipage(ennemies)
 
-print(joueur.fight(equipageEnnemy))
+joueur.fight(equipageEnnemy)
 
 
 

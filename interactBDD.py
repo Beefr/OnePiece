@@ -433,6 +433,8 @@ class InteractBDD(Static):
 			power=""
 			for elem in description:
 				strpower=str(elem[0])
+				print(fruitsName)
+				print(strpower)
 				power=list(map(int, strpower.split(",") )) # [1,2,3,4]
 				InteractBDD.endQuery(conn, cur)
 				return power
