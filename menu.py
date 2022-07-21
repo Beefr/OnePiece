@@ -38,7 +38,10 @@ class Menu(object):
 
 	def showMenu(self, user_input="None"):
 		self._output.reset()
-
+		try:
+			user_input=int(user_input)
+		except:
+			pass
 		if self._died==True or not isinstance(user_input, int):
 			self._died=False
 			self._userInput=[]
