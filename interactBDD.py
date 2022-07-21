@@ -341,7 +341,7 @@ class InteractBDD(Static):
 			request = "UPDATE island SET position='"+positionsName+"' WHERE username='"+username+"';"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 
-			request = "UPDATE joueur SET currentstep="+currentstep+" WHERE username='"+username+"';"
+			request = "UPDATE joueur SET currentstep="+str(currentstep)+" WHERE username='"+username+"';"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 
 			InteractBDD.endQuery(conn, cur)
