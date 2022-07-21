@@ -56,8 +56,6 @@ equipageEnnemy=Equipage(ennemies)
 
 joueur.fight(equipageEnnemy)
 
-
-
 '''
 test=["mort",1,2,3,"mort",5]
 for count in range(len(test)-1,-1,-1):

@@ -36,20 +36,18 @@ class Menu(object):
 		self._joueur=joueur
 
 
-	def showMenu(self, user_input=None):
+	def showMenu(self, user_input="None"):
 		self._output.reset()
 
-
-		if user_input!="None" and self._died==False:
-			self._userInput=user_input
-			str(eval(Menu.steps[self._currentStep] + "(" + self.getParameters() + ")"))
-			self.nextStep()
-		else:
+		if user_input=="None" and self._died==True or not isinstance(user_input, int):
 			self._died=False
 			self._userInput=[]
 			self._currentStep=1
 			self.choseThatIsland()
-		
+		else:
+			self._userInput=user_input
+			str(eval(Menu.steps[self._currentStep] + "(" + self.getParameters() + ")"))
+			self.nextStep()
 			
 		return self._output.toBeDisplayed()
 
