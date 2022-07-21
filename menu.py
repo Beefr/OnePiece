@@ -39,7 +39,7 @@ class Menu(object):
 	def showMenu(self, user_input="None"):
 		self._output.reset()
 
-		if user_input=="None" and self._died==True or not isinstance(user_input, int):
+		if self._died==True or isinstance(user_input, int):
 			self._died=False
 			self._userInput=[]
 			self._currentStep=1
