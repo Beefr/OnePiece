@@ -402,7 +402,7 @@ INSERT INTO pnj VALUES('Nekomamushi', 'Zo', 80, 'None', 1, 'griffe');
 
 INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ile de Dawn', 'Shinotsuki');
 INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ile de Dawn', 'Shells Town');
-INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ile de Dawn', 'ile de Goat');
+INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Ile de Dawn', 'Ile de Goat');
 INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Baratie', 'Shinotsuki');
 INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Baratie', 'Shells Town');
 INSERT INTO `world` (`archipel1`, `archipel2`) VALUES ('Baratie', 'Tequila Wolf');
