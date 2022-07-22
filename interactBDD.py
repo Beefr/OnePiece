@@ -564,9 +564,6 @@ class InteractBDD(Static):
 		def deletePirates(username):
 
 			[conn, cur]=InteractBDD.beginQuery()
-
-
-			
 			
 			[conn2, cur2]=InteractBDD.beginQuery()
 			request = "SELECT fruit FROM pirate WHERE username='"+username+"';"

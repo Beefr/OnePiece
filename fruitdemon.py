@@ -70,10 +70,11 @@ class FruitFactory(metaclass=FruitFactoryMeta):
 
 
 	@staticmethod
-	def giveThatFruit(fruitsName):
+	def giveThatFruit(fruitsName, boss=False):
 		if fruitsName=="None":
 			return FruitDemon("None",[0,0,0,0])
-		InteractBDD.allocateFruit(fruitsName) # TODO deallocate...?
+		if not boss: 
+			InteractBDD.allocateFruit(fruitsName) # TODO deallocate...?
 		power=InteractBDD.fruitsPower(fruitsName) 
 		return FruitDemon(fruitsName, power)
 
