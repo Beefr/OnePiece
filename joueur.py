@@ -73,7 +73,7 @@ class Joueur(object):
 			output.content+ Message(isThereOtherPlayer, True, False, "rouge")
 			output.content* " et son équipage sont présents sur l'ile,"
 			output.content+ "le combat est inévitable."
-			output.content+Utils.fight(self, otherPlayer)
+			output.content+self.fight(otherPlayer)
 			otherPlayer.cleanUpDeadPirates()
 			if otherPlayer.availableToFight==False:
 				otherPlayer.resetCrew()
