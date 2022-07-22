@@ -70,7 +70,7 @@ class Menu(object):
 
 	def getParameters(self):
 		if self._userInput==[]:
-			return None
+			return ""
 		return str(self._userInput)
 		'''
 		array=eval(Menu.parameters[self._currentStep])

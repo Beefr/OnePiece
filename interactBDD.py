@@ -764,8 +764,10 @@ class InteractBDD(Static):
 
 
 		@staticmethod
-		def addNewFighter(cool):
+		def addNewFighter(cool, cool2):
 			return None
+
+
 
 
 
