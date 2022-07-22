@@ -643,7 +643,7 @@ class InteractBDD(Static):
 
 		currentStep=1
 
-		crewLevel=1
+		crewLevel=10
 		crewQuality=1
 		crewFruit="GumGum"
 		crewNumber=1

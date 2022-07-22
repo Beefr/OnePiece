@@ -63,6 +63,8 @@ menu.joueur=joueur
 
 output=menu.showMenu(1)
 output['content'].print()
+output=menu.showMenu("y")
+output['content'].print()
 
 '''
 test=["mort",1,2,3,"mort",5]

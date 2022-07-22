@@ -48,7 +48,6 @@ class Menu(object):
 		if self._died==True or not isinstance(user_input, int):
 			self._died=False
 			self._userInput=[]
-			#self._currentStep=1
 			#self.choseThatIsland()
 			str(eval(Menu.steps[self._currentStep] + "(" + self.getParameters() + ")"))
 		else:
@@ -102,6 +101,7 @@ class Menu(object):
 			self._joueur.resetCrew()
 			self._output.content+ "Ton équipage est mort, il va falloir recommencer du début pour devenir le roi des pirates. y/n"
 			self._died=True
+			self._currentStep=1
 
 
 	def choseThatPirate(self, value=None):
