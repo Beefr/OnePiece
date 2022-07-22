@@ -544,8 +544,18 @@ class InteractBDD(Static):
 			request = "DELETE FROM island WHERE username='"+username+"';"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 
+			
+			[conn2, cur2]=InteractBDD.beginQuery()
+			request = "SELECT fruit FROM pirate WHERE username='"+username+"';"
+			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+			for elem in description:
+				fruitsName=str(elem[0]) # we got the name of the current archipel
+				request = "UPDATE fruit SET allocated=0 WHERE name='"+str(fruitsName)+"';"
+				InteractBDD.connectAndExecuteRequest(request, True, conn2, cur2)
+			InteractBDD.endQuery(conn2, cur2)
+
 			request = "DELETE FROM pirate WHERE username='"+username+"';"
-			InteractBDD.connectAndExecuteRequest(request, True, conn, cur) # TODO remove allocated fruits
+			InteractBDD.connectAndExecuteRequest(request, True, conn, cur) 
 
 			InteractBDD.endQuery(conn, cur)
 			return None
