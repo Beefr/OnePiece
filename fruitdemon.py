@@ -81,7 +81,7 @@ class FruitFactory(metaclass=FruitFactoryMeta):
 	def giveAFruit():
 		availableFruits=InteractBDD.countAvailableFruits()
 		if availableFruits==0:
-			return FruitDemon("None",[0,0,0,0])
+			return FruitDemon("GumGum",[30,40,30,0])
 		fruitsNumber=random.randint(0,availableFruits-1)
 		fruitsName=InteractBDD.notAllocatedFruits()[fruitsNumber]
 		InteractBDD.allocateFruit(fruitsName)
