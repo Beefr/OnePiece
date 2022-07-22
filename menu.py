@@ -53,7 +53,6 @@ class Menu(object):
 		else:
 			self._userInput=user_input
 			str(eval(Menu.steps[self._currentStep] + "(" + self.getParameters() + ")"))
-			self.nextStep()
 			
 		return self._output.toBeDisplayed()
 
@@ -97,6 +96,7 @@ class Menu(object):
 	def checkAliveForRecruitment(self):
 		if self._joueur.availableToFight:
 			self._joueur.askForRecruitment(self._output) # put the pirates id that we want to recruit
+			self.nextStep()
 		else:
 			self._joueur.resetCrew()
 			self._output.content+ "Ton équipage est mort, il va falloir recommencer du début pour devenir le roi des pirates. y/n"
@@ -108,5 +108,7 @@ class Menu(object):
 		if value!=None:
 			recruitablePirates=InteractBDD.getMyCrewsID("recrutement"+self._joueur.username)
 			self._joueur.recrutement(self._output, recruitablePirates, value)
+			self.nextStep()
 		else:
 			self.checkAliveForRecruitment()
+		

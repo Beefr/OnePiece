@@ -643,7 +643,7 @@ class InteractBDD(Static):
 
 		currentStep=1
 
-		crewLevel=10
+		crewLevel=100
 		crewQuality=1
 		crewFruit="GumGum"
 		crewNumber=1
@@ -766,6 +766,11 @@ class InteractBDD(Static):
 		@staticmethod
 		def addNewFighter(cool, cool2):
 			return None
+
+
+		@staticmethod
+		def availableIslandsInAvailableArchipels(cool):
+			return ["Impel Down"]
 
 
 
