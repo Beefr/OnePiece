@@ -7,6 +7,7 @@ from joueur import Joueur
 from pirate import Pirate
 from equipage import Equipage
 from fruitdemon import FruitFactory
+from menu import Menu
 
 import json
 from collections import namedtuple
@@ -54,7 +55,14 @@ for i in range(numberEnnemies):
     
 equipageEnnemy=Equipage(ennemies)
 
-joueur.fight(equipageEnnemy)
+#joueur.fight(equipageEnnemy)
+
+
+menu=Menu()
+menu.joueur=joueur
+
+output=menu.showMenu(1)
+output['content'].print()
 
 '''
 test=["mort",1,2,3,"mort",5]

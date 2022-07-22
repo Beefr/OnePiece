@@ -9,9 +9,11 @@ class Menu(object):
 	steps={ #1: "self.instanciateJoueur",
 			1: "self.choseThatIsland", 
 			2: "self.choseThatPirate"}
+	'''
 	parameters={#1: "[Menu.userInput[0],Menu.userInput[1]]",  
 				1: "[self._userInput[-1]]",  
 				2: "[self._userInput[-1]]"}
+	'''
 	
 
 
@@ -42,11 +44,13 @@ class Menu(object):
 			user_input=int(user_input)
 		except:
 			pass
+
 		if self._died==True or not isinstance(user_input, int):
 			self._died=False
 			self._userInput=[]
-			self._currentStep=1
-			self.choseThatIsland()
+			#self._currentStep=1
+			#self.choseThatIsland()
+			str(eval(Menu.steps[self._currentStep] + "(" + self.getParameters() + ")"))
 		else:
 			self._userInput=user_input
 			str(eval(Menu.steps[self._currentStep] + "(" + self.getParameters() + ")"))
@@ -65,6 +69,10 @@ class Menu(object):
 
 
 	def getParameters(self):
+		if self._userInput==[]:
+			return None
+		return str(self._userInput)
+		'''
 		array=eval(Menu.parameters[self._currentStep])
 		txt=""
 		if array!=[]:
@@ -75,7 +83,7 @@ class Menu(object):
 					txt=txt+'"'+param+'"'
 				except: 
 					txt= "Error: list and str concatenation"+str(param)
-		return txt
+		return txt'''
 
 	
 	def choseThatIsland(self, value=None):
@@ -96,6 +104,9 @@ class Menu(object):
 			self._died=True
 
 
-	def choseThatPirate(self, value):
-		recruitablePirates=InteractBDD.getMyCrewsID("recrutement"+self._joueur.username)
-		self._joueur.recrutement(self._output, recruitablePirates, value)
+	def choseThatPirate(self, value=None):
+		if value!=None:
+			recruitablePirates=InteractBDD.getMyCrewsID("recrutement"+self._joueur.username)
+			self._joueur.recrutement(self._output, recruitablePirates, value)
+		else:
+			self.checkAliveForRecruitment()

@@ -28,3 +28,9 @@ class MultiLineMessage(object):
             self._myMessages[-1].append(message)
         elif isinstance(message, str):
             self._myMessages[-1].append(Message(message))
+
+
+    def print(self):
+        for line in self._myMessages:
+            for elem in line:
+                print(elem.texte)

@@ -641,8 +641,9 @@ class InteractBDD(Static):
 
 	else:
 
+		currentStep=1
 
-		crewLevel=150
+		crewLevel=1
 		crewQuality=1
 		crewFruit="GumGum"
 		crewNumber=1
@@ -697,3 +698,74 @@ class InteractBDD(Static):
 		@staticmethod
 		def increasePirateLevel(cool):
 			return None
+
+
+		@staticmethod
+		def getMyCurrentStep(cool):
+			return InteractBDD.currentStep
+
+
+		@staticmethod
+		def availableIslandsInCurrentArchipel(cool):
+			return ["Impel Down"]
+
+		@staticmethod
+		def availableArchipels(cool):
+			return ["Impel Down"]
+
+
+		@staticmethod
+		def ilePrincipale(cool):
+			return "Impel Down"
+
+		@staticmethod
+		def checkPlayer(cool):
+			return None
+
+		@staticmethod
+		def setMyLocation(cool, cool2):
+			return None
+
+		@staticmethod
+		def averagePirateLevel(cool):
+			return InteractBDD.crewLevel
+
+		@staticmethod
+		def checkBoss(cool):
+			return None
+
+		@staticmethod
+		def removeFighter(cool, cool2):
+			return None
+
+		@staticmethod
+		def deleteUserProgress(cool):
+			return None
+
+
+		@staticmethod
+		def setMyCrew(cool, cool2, cool3, cool4):
+			return None
+
+
+		@staticmethod
+		def setMyCurrentStep(cool, cool2):
+			return None
+
+
+		@staticmethod
+		def deletePirates(cool):
+			return None
+
+
+		@staticmethod
+		def getMyCrewMinLevel(cool):
+			return InteractBDD.crewLevel
+
+
+		@staticmethod
+		def addNewFighter(cool):
+			return None
+
+
+
