@@ -337,7 +337,7 @@ class InteractBDD(Static):
 			for pirate in pirates:
 				request = "INSERT INTO `pirate` (`username`, `name`, `level`, `fruit`, `qualite`) VALUES ('"+username+"','"+pirate.name+"','"+str(pirate.level)+"','"+pirate.fruit.name+"','"+str(pirate.qualite)+"');"
 				InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
-
+			# TODO not a problem to not allocate fruits? 
 			request = "UPDATE island SET position='"+positionsName+"' WHERE username='"+username+"';"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 
@@ -370,7 +370,7 @@ class InteractBDD(Static):
 
 		@staticmethod
 		def addNewFighter(username, pirate):
-			[conn, cur]=InteractBDD.beginQuery()
+			[conn, cur]=InteractBDD.beginQuery() # TODO not a problem to not allocate fruits? 
 			request = "INSERT INTO `pirate` (`username`, `name`, `level`, `fruit`, `qualite`) VALUES ('"+username+"','"+pirate.name+"','"+str(pirate.level)+"','"+pirate.fruit.name+"','"+str(pirate.qualite)+"');"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 			InteractBDD.endQuery(conn, cur)
@@ -564,6 +564,18 @@ class InteractBDD(Static):
 		def deletePirates(username):
 
 			[conn, cur]=InteractBDD.beginQuery()
+
+
+			
+			
+			[conn2, cur2]=InteractBDD.beginQuery()
+			request = "SELECT fruit FROM pirate WHERE username='"+username+"';"
+			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+			for elem in description:
+				fruitsName=str(elem[0]) # we got the name of the current archipel
+				request = "UPDATE fruit SET allocated=0 WHERE name='"+str(fruitsName)+"';"
+				InteractBDD.connectAndExecuteRequest(request, True, conn2, cur2)
+			InteractBDD.endQuery(conn2, cur2)
 
 			request = "DELETE FROM pirate WHERE username='"+username+"';"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
