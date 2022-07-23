@@ -582,7 +582,7 @@ class InteractBDD(Static):
 
 		@staticmethod
 		def deallocateFruitsFromCrew(obj):
-			if object.isinstance()=="Joueur":
+			if obj.isinstance()=="Joueur":
 				crew=obj.equipage
 			else: #equipage
 				crew=obj
