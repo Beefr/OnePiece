@@ -43,9 +43,9 @@ class Joueur(object):
 
 	def resetCrew(self):
 		InteractBDD.deleteUserProgress(self._username)
-		InteractBDD.setMyCrew(self._username, Joueur.villeDeDepart, [Pirate(1, True, self._username)],1)
-		self._equipage= self.getMyCrew() # TODO possible to remove those 2 lines to reduce bdd calls?
-		self._position= self.getMyLocation()
+		self._equipage=Equipage([Pirate(1, True, self._username)])
+		self._position= Island(Joueur.villeDeDepart)
+		InteractBDD.setMyCrew(self._username, Joueur.villeDeDepart, self._equipage.team, 1)
 		self._availableToFight=True
 
 
@@ -80,7 +80,7 @@ class Joueur(object):
 				# TODO eventuellement rajouter un petit message quand le gars se reconnecte?
 
 		else:
-			ennemies=Equipage.generateEnnemies(InteractBDD.averagePirateLevel(self._username), max(self._equipage.numberOfPirates,5))
+			ennemies=Equipage.generateEnnemies(InteractBDD.averagePirateLevel(self._username), max(self._equipage.numberOfPirates,4))
 			isThereBoss=InteractBDD.checkBoss(self._position.name)
 			if isThereBoss!=None:
 				ennemies.newFighter(Utils.load(isThereBoss))

@@ -116,7 +116,7 @@ class Equipage(object):
 	def generateEnnemies(level, ennemies):
 		pirates=[]
 		for i in range(ennemies):
-			pirates.append(Pirate(level))
+			pirates.append(Pirate(level, False, None, True))
 		return Equipage(pirates)
 
 class Turn(object):

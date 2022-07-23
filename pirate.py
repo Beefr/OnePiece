@@ -1,6 +1,6 @@
 
 from abc import abstractmethod
-from fruitdemon import FruitFactory
+from fruitdemon import FruitFactory, FruitDemon
 import random
 from interactBDD import InteractBDD
 from statsPirate import StatsPirate
@@ -9,13 +9,16 @@ from message import Message
 class Pirate(object):
 
 
-	def __init__(self, level, capitaine=False, name=None):
+	def __init__(self, level, capitaine=False, name=None, pnj=False):
 		if capitaine:
 			self._qualite=1
 			self._fruit=FruitFactory.giveAFruit()
-		else:
+		elif pnj==False:
 			self._qualite=Pirate.generateQualite([1,10,50,100])
 			self._fruit=FruitFactory.allocateFruit([1,100])
+		else: # pnj = True
+			self._qualite=Pirate.generateQualite([0,10,50,100])
+			self._fruit= FruitDemon("None",[0,0,0,0])
 
 		self._name=Pirate.generateNewName(name)
 		self._level=level
