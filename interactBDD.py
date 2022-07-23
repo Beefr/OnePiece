@@ -580,6 +580,22 @@ class InteractBDD(Static):
 			InteractBDD.endQuery(conn, cur)
 			return None
 
+		@staticmethod
+		def deallocateFruitsFromCrew(obj):
+			if object.isinstance()=="Joueur":
+				crew=obj.equipage
+			else: #equipage
+				crew=obj
+
+
+			[conn2, cur2]=InteractBDD.beginQuery()
+			for pirate in crew.team:
+				if pirate.fruit.name!="None":
+					request = "UPDATE fruit SET allocated=0 WHERE name='"+str(pirate.fruit.name)+"';"
+					InteractBDD.connectAndExecuteRequest(request, True, conn2, cur2)
+			InteractBDD.endQuery(conn2, cur2)
+			return None	
+
 
 		@staticmethod
 		def deleteAll():

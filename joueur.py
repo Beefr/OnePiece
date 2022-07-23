@@ -112,10 +112,12 @@ class Joueur(object):
 		if self.availableToFight:
 			self.increaseCrewLevel()
 			array+ Joueur.phraseDeVictoire(self)
+			InteractBDD.deallocateFruitsFromCrew(entry2)
 		else:
 			if entry2.isinstance()=="Joueur":
 				entry2.increaseCrewLevel()
 			array+ Joueur.phraseDeVictoire(entry2)
+			InteractBDD.deallocateFruitsFromCrew(self)
 		return array
 
 
