@@ -332,7 +332,7 @@ class InteractBDD(Static):
 			[conn, cur]=InteractBDD.beginQuery()
 
 
-			request = "SELECT drop FROM pnj WHERE ile='"+currentIslandName+"';"
+			request = "SELECT perc FROM pnj WHERE ile='"+currentIslandName+"';"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			drop=0
 			for elem in description:

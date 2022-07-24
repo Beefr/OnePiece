@@ -55,7 +55,7 @@ CREATE TABLE island(username varchar(40) PRIMARY KEY NOT NULL, position varchar(
 CREATE TABLE fruit(name varchar(20)  PRIMARY KEY NOT NULL, power varchar(20), allocated INT);
 CREATE TABLE pirate(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, username varchar(40) NOT NULL, name varchar(60), level INT, fruit varchar(20), qualite INT);
 CREATE TABLE world(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, archipel1 varchar(60) NOT NULL, archipel2 varchar(60) NOT NULL);
-CREATE TABLE pnj(nom varchar(20) PRIMARY KEY NOT NULL, ile varchar(60) NOT NULL, level INT NOT NULL, fruit varchar(20) NOT NULL, qualite INT NOT NULL, phrase varchar(256) NOT NULL);
+CREATE TABLE pnj(nom varchar(20) PRIMARY KEY NOT NULL, ile varchar(60) NOT NULL, level INT NOT NULL, fruit varchar(20) NOT NULL, qualite INT NOT NULL, phrase varchar(256) NOT NULL, perc INT NOT NULL);
 CREATE TABLE ile(nom varchar(60) PRIMARY KEY NOT NULL, archipel varchar(40) NOT NULL, pvp INT NOT NULL);
 CREATE TABLE archipel(nom varchar(60) PRIMARY KEY NOT NULL, ileprincipale varchar(60) NOT NULL);
 
