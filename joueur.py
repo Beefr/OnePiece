@@ -59,37 +59,9 @@ class Joueur(object):
 		isThereOtherPlayer=InteractBDD.checkPlayer(self._position.name) # returns the username or None
 		InteractBDD.setMyLocation(self._username, self._position.name)
 		if isThereOtherPlayer!=None:
-			ennemies=[]
-			txtPirates=InteractBDD.getMyCrew(isThereOtherPlayer)
-			for txt in txtPirates:
-				ennemy=Utils.load(txt)
-				ennemies.append(ennemy)
-			otherPlayer=Joueur(isThereOtherPlayer)
-			otherPlayer.equipage=Equipage(ennemies)
-			otherPlayer.position=self._position
-			output.content+ "Aie c'est le bordel sur "
-			output.content* self._position.name
-			output.content* ","
-			output.content+ Message(isThereOtherPlayer, True, False, "rouge")
-			output.content* " et son équipage sont présents sur l'ile,"
-			output.content+ "le combat est inévitable."
-			output.content+self.fight(otherPlayer)
-			otherPlayer.cleanUpDeadPirates()
-			if otherPlayer.availableToFight==False:
-				otherPlayer.resetCrew()
-				# TODO eventuellement rajouter un petit message quand le gars se reconnecte?
-
+			self.fightOtherPlayer(isThereOtherPlayer, output)
 		else:
-			ennemies=Equipage.generateEnnemies(InteractBDD.averagePirateLevel(self._username), max(self._equipage.numberOfPirates,4))
-			isThereBoss=InteractBDD.checkBoss(self._position.name)
-			if isThereBoss!=None:
-				ennemies.newFighter(Utils.load(isThereBoss))
-			
-			output.content+ "Arrivé sur "
-			output.content* self._position.name
-			output.content* ", tu fais face à de nombreux pirates hostiles."
-			output.content+ self.fight(ennemies)
-
+			self.fightPNJ(output)
 
 		output.content+ self.cleanUpDeadPirates()
 
@@ -98,6 +70,40 @@ class Joueur(object):
 		output.team+ self._equipage.asMessageArray()
 
 		output.map+ World.showMap(self._position.name)
+
+	def fightOtherPlayer(self, isThereOtherPlayer, output):
+		ennemies=[]
+		txtPirates=InteractBDD.getMyCrew(isThereOtherPlayer)
+		for txt in txtPirates:
+			ennemy=Utils.load(txt)
+			ennemies.append(ennemy)
+		otherPlayer=Joueur(isThereOtherPlayer)
+		otherPlayer.equipage=Equipage(ennemies)
+		otherPlayer.position=self._position
+		output.content+ "Aie c'est le bordel sur "
+		output.content* self._position.name
+		output.content* ","
+		output.content+ Message(isThereOtherPlayer, True, False, "rouge")
+		output.content* " et son équipage sont présents sur l'ile,"
+		output.content+ "le combat est inévitable."
+		output.content+self.fight(otherPlayer)
+		otherPlayer.cleanUpDeadPirates()
+		if otherPlayer.availableToFight==False:
+			otherPlayer.resetCrew()
+			# TODO eventuellement rajouter un petit message quand le gars se reconnecte?
+
+	def fightPNJ(self, output):
+		ennemies=Equipage.generateEnnemies(InteractBDD.averagePirateLevel(self._username), max(self._equipage.numberOfPirates,4))
+		isThereBoss=InteractBDD.checkBoss(self._position.name)
+		if isThereBoss!=None:
+			ennemies.newFighter(Utils.load(isThereBoss))
+		
+		output.content+ "Arrivé sur "
+		output.content* self._position.name
+		output.content* ", tu fais face à de nombreux pirates hostiles."
+		output.content+ self.fight(ennemies)
+
+
 
 	def fight(self, entry2):		
 		array= MultiLineMessage()
@@ -196,10 +202,25 @@ class Joueur(object):
 
 	def askForRecruitment(self, output):
 		InteractBDD.deletePirates("recrutement"+self._username) # clean up precedent recrutement
+		crewMinLevel=InteractBDD.getMyCrewMinLevel(self._username)
 		number=5
+		start=0
 		output.content+ Message("Des pirates sont disponibles au recrutement.", True, False, "rouge")
-		for i in range(0,number):
-			pirate=Pirate(InteractBDD.getMyCrewMinLevel(self._username))
+
+		obj=InteractBDD.getDrop(self._position.name, self._username)
+		if obj!=None:
+			[isThereBoss, drop]=obj
+			percent = random.randint(0,100)
+			if percent<=drop:
+				start=1
+				boss=Utils.load(isThereBoss)
+				boss.level=crewMinLevel
+				InteractBDD.addNewFighter("recrutement"+self._username, boss)
+				output.content+ "Choix 0:"
+				output.content+ boss.asMessageArray()
+
+		for i in range(start,number):
+			pirate=Pirate(crewMinLevel)
 			InteractBDD.addNewFighter("recrutement"+self._username, pirate)
 			output.content+ "Choix "
 			output.content* Message(str(i))

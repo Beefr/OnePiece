@@ -87,7 +87,7 @@ class Utils(Static):
 			obj.qualite=tuple.qualite
 			obj.fruit=tuple.fruit
 		elif tuple.type=="FruitDemon":
-			obj= FruitFactory.giveThatFruit(tuple.name)
+			obj= FruitFactory.giveThatFruit(tuple.name, tuple.boss)
 		else:
 			obj=None
 		return obj

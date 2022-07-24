@@ -326,6 +326,48 @@ class InteractBDD(Static):
 			return "attaque"
 
 
+			
+		@staticmethod
+		def getDrop(currentIslandName, username):
+			[conn, cur]=InteractBDD.beginQuery()
+
+
+			request = "SELECT drop FROM pnj WHERE ile='"+currentIslandName+"';"
+			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+			drop=0
+			for elem in description:
+				drop = int(elem[0])
+				if drop==0:
+					return None
+
+			request = "SELECT nom, level, fruit, qualite FROM pnj WHERE ile='"+currentIslandName+"';"
+			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+			txt=""
+			for elem in description:
+				bossName=str(elem[0])
+				has=InteractBDD.hasThatBoss(bossName, username)
+				if has:
+					InteractBDD.endQuery(conn, cur)
+					return None
+
+				txt=InteractBDD.pirateTXT(elem, 'Legende')
+				InteractBDD.endQuery(conn, cur)
+				return [txt, drop]
+			return None
+
+
+		@staticmethod
+		def hasThatBoss(bossName, username):
+			[conn, cur]=InteractBDD.beginQuery()
+
+			request = "SELECT nom FROM pirate WHERE username='"+username+"' and name='"+bossName+"';"
+			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+			for elem in description:
+				InteractBDD.endQuery(conn, cur)
+				return True
+			
+			InteractBDD.endQuery(conn, cur)
+			return False
 
 
 		#_____________________STORE_______________________________
@@ -433,8 +475,6 @@ class InteractBDD(Static):
 			power=""
 			for elem in description:
 				strpower=str(elem[0])
-				print(fruitsName)
-				print(strpower)
 				power=list(map(int, strpower.split(",") )) # [1,2,3,4]
 				InteractBDD.endQuery(conn, cur)
 				return power
@@ -661,16 +701,20 @@ class InteractBDD(Static):
 			conn.close()
 			
 		@staticmethod
-		def pirateTXT(elem, type):
+		def pirateTXT(elem, cls):
 			piratesName=elem[0]
 			level=elem[1]
 			fruitsName=elem[2]
 			qualite=elem[3]
 
+			boss=False
+			if cls=="Legende":
+				boss=True
+
 			power=InteractBDD.fruitsPower(fruitsName)
 			#fruitsTXT='{"type": "FruitDemon", "name": \"'+fruitsName+'\", "power": \"'+str(power)+'\"}'
 			#fruitsTXT="{"+"\"type\": \"FruitDemon\", \"name\": \"{}\", \"power\": \"{}\"".format(fruitsName, str(power)) + "}"
-			fruitsTXT='{"type": "FruitDemon", "name": "%s", "power": %s}' % (fruitsName, str(power)) 
+			fruitsTXT='{"type": "FruitDemon", "name": "%s", "power": %s, "boss": "%s"}' % (fruitsName, str(power), str(boss)) 
 			#txt='{"type": "'+type+'", "name": \"'+piratesName+'\", "level": \"'+str(level)+ '\", "qualite": \"'+str(qualite)+'\", "fruit": \"'+ fruitsTXT+'\", "stats": \"'+str(StatsPirate.generateStats(level, qualite, power))+'\", "availableToFight": "True", "mort": "False"}'
 			#txt="{"+ '\"type": "{}", "name": "{}", "level": "{}", "qualite": "{}", "fruit": "{}", "stats": "{}", "availableToFight": "True", "mort": "False\"'.format(type, piratesName, str(level), str(qualite), fruitsTXT, str(StatsPirate.generateStats(level, qualite, power)) ) +"}"
 			txt='{"type": "%s", "name": "%s", "level": %s, "qualite": %s, "fruit": %s, "stats": "%s", "availableToFight": "True", "mort": "False"}' % (type, piratesName, str(level), str(qualite), fruitsTXT, str(StatsPirate.generateStats(level, qualite, power)) )
@@ -720,7 +764,7 @@ class InteractBDD(Static):
 
 			pirates=[]
 			for i in range(InteractBDD.crewNumber):
-				fruitTXT = '{"type": "FruitDemon", "name": "%s", "power": %s}' % (fruit, str(fruitPower)) 
+				fruitTXT = '{"type": "FruitDemon", "name": "%s", "power": %s, "boss": "False"}' % (fruit, str(fruitPower)) 
 				pirateTXT='{"type": "Pirate", "name": "%s", "level": %s, "qualite": %s, "fruit": %s, "stats": "%s", "availableToFight": "True", "mort": "False"}' % (InteractBDD.username+str(i), str(level), str(qualite), fruitTXT, str(StatsPirate.generateStats(level, qualite, fruitPower)))
 				pirates.append(pirateTXT)
 				#print(pirateTXT)
@@ -812,6 +856,18 @@ class InteractBDD(Static):
 		@staticmethod
 		def availableIslandsInAvailableArchipels(cool):
 			return ["Impel Down"]
+
+
+		@staticmethod
+		def deallocateFruitsFromCrew(cool):
+			return None
+
+
+		@staticmethod
+		def getDrop(cool, cool2):
+			fruitTXT = '{"type": "FruitDemon", "name": "%s", "power": %s, "boss": "True"}' % ("Lave", str([100,0,0,0])) 
+			pirateTXT='{"type": "Legende", "name": "%s", "level": %s, "qualite": %s, "fruit": %s, "stats": "%s", "availableToFight": "True", "mort": "False"}' % ("Akainu", 30, 1, fruitTXT, str(StatsPirate.generateStats(30, 1, [100,0,0,0])))
+			return [pirateTXT, 50]
 
 
 

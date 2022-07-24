@@ -101,6 +101,10 @@ class Pirate(object):
 	def ftg(self, st):
 		self._ftg=st
 
+	@level.setter
+	def level(self, lvl):
+		self._level=lvl
+
 	@staticmethod
 	def regenerateHealth(level, qualite):
 		return 100*level*(5-qualite)
@@ -233,7 +237,7 @@ class Legende(Pirate):
 
 	def __init__(self, nom, level, fruit, qualite):
 		self._qualite=qualite
-		self._fruit=FruitFactory.giveThatFruit(fruit)
+		self._fruit=fruit
 		self._name=nom
 		self._level=level
 		[self._vie, self._atk, self._dfs, self._ftg]=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)

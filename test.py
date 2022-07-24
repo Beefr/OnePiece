@@ -25,7 +25,7 @@ def decode(dict):
         obj.qualite=tuple.qualite
         obj.fruit=tuple.fruit
     elif tuple.type=="FruitDemon":
-        obj= FruitFactory.giveThatFruit(tuple.name)
+        obj= FruitFactory.giveThatFruit(tuple.name, tuple.boss)
     #print(type(obj))
     return obj
 
@@ -63,8 +63,8 @@ menu.joueur=joueur
 
 output=menu.showMenu(1)
 output['content'].print()
-output=menu.showMenu("y")
-output['content'].print()
+#output=menu.showMenu("y")
+#output['content'].print()
 
 '''
 test=["mort",1,2,3,"mort",5]
