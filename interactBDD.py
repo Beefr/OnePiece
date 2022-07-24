@@ -471,7 +471,7 @@ class InteractBDD(Static):
 			
 			InteractBDD.endQuery(conn2, cur2)
 			InteractBDD.endQuery(conn, cur)
-			return value
+			return None
 
 
 
