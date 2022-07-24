@@ -208,7 +208,7 @@ class InteractBDD(Static):
 			txt=txt+"<br>"
 
 			txt=txt+"Pirate: <br>"
-			txt=txt+" owner | name | level | fruit's name | qualite <br>"
+			txt=txt+" id | owner | name | level | fruit's name | qualite <br>"
 			request = "select * from pirate;"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
@@ -717,7 +717,7 @@ class InteractBDD(Static):
 			fruitsTXT='{"type": "FruitDemon", "name": "%s", "power": %s, "boss": "%s"}' % (fruitsName, str(power), str(boss)) 
 			#txt='{"type": "'+type+'", "name": \"'+piratesName+'\", "level": \"'+str(level)+ '\", "qualite": \"'+str(qualite)+'\", "fruit": \"'+ fruitsTXT+'\", "stats": \"'+str(StatsPirate.generateStats(level, qualite, power))+'\", "availableToFight": "True", "mort": "False"}'
 			#txt="{"+ '\"type": "{}", "name": "{}", "level": "{}", "qualite": "{}", "fruit": "{}", "stats": "{}", "availableToFight": "True", "mort": "False\"'.format(type, piratesName, str(level), str(qualite), fruitsTXT, str(StatsPirate.generateStats(level, qualite, power)) ) +"}"
-			txt='{"type": "%s", "name": "%s", "level": %s, "qualite": %s, "fruit": %s, "stats": "%s", "availableToFight": "True", "mort": "False"}' % (type, piratesName, str(level), str(qualite), fruitsTXT, str(StatsPirate.generateStats(level, qualite, power)) )
+			txt='{"type": "%s", "name": "%s", "level": %s, "qualite": %s, "fruit": %s, "stats": "%s", "availableToFight": "True", "mort": "False"}' % (cls, piratesName, str(level), str(qualite), fruitsTXT, str(StatsPirate.generateStats(level, qualite, power)) )
 			return txt
 
 
