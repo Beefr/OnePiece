@@ -628,14 +628,13 @@ class InteractBDD(Static):
 			InteractBDD.endQuery(conn, cur)
 			return None
 
-		'''
 		@staticmethod
 		def deletePirates(username):
 
 			[conn, cur]=InteractBDD.beginQuery()
 			
 			[conn2, cur2]=InteractBDD.beginQuery()
-			request = "SELECT fruit FROM pirate WHERE username='"+username+"' AND name NOT IN (SELECT nom FROM pnj);"
+			request = "SELECT fruit FROM pirate WHERE username='"+username+"';"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
 				fruitsName=str(elem[0]) # we got the name of the current archipel
@@ -643,14 +642,11 @@ class InteractBDD(Static):
 				InteractBDD.connectAndExecuteRequest(request, True, conn2, cur2)
 			InteractBDD.endQuery(conn2, cur2)
 
-			request = "DELETE FROM pirate WHERE username='"+username+"' AND name NOT IN (SELECT nom FROM pnj);"
+			request = "DELETE FROM pirate WHERE username='"+username+"';"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 
-			request = "UPDATE pirate SET level=1 WHERE username='"+username+"';"
-			InteractBDD.connectAndExecuteRequest(request, True, conn, cur) 
-
 			InteractBDD.endQuery(conn, cur)
-			return None'''
+			return None
 
 		@staticmethod
 		def deallocateFruitsFromCrew(obj):
