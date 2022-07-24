@@ -628,6 +628,7 @@ class InteractBDD(Static):
 			InteractBDD.endQuery(conn, cur)
 			return None
 
+		'''
 		@staticmethod
 		def deletePirates(username):
 
@@ -649,7 +650,7 @@ class InteractBDD(Static):
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur) 
 
 			InteractBDD.endQuery(conn, cur)
-			return None
+			return None'''
 
 		@staticmethod
 		def deallocateFruitsFromCrew(obj):
