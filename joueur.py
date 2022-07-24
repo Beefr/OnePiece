@@ -215,6 +215,7 @@ class Joueur(object):
 				start=1
 				boss=Utils.load(isThereBoss)
 				boss.level=crewMinLevel
+				boss.qualite=0
 				InteractBDD.addNewFighter("recrutement"+self._username, boss)
 				output.content+ "Choix 0:"
 				output.content+ boss.asMessageArray()

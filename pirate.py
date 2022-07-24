@@ -11,7 +11,7 @@ class Pirate(object):
 
 	def __init__(self, level, capitaine=False, name=None, pnj=False):
 		if capitaine:
-			self._qualite=1
+			self._qualite=0
 			self._fruit=FruitFactory.giveAFruit()
 		elif pnj==False:
 			self._qualite=Pirate.generateQualite([1,10,50,100])
