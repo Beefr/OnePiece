@@ -1,5 +1,4 @@
 
-from joueur import Joueur
 from interactBDD import InteractBDD
 from output import Output
 
