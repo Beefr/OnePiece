@@ -439,7 +439,7 @@ class InteractBDD(Static):
 		def countAvailableFruits():
 			[conn, cur]=InteractBDD.beginQuery()
 
-			InteractBDD.deallocatefruits()
+			InteractBDD.checkAllocatedFruits()
 
 			request = "SELECT COUNT(*) FROM fruit WHERE allocated='0';"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
@@ -451,7 +451,7 @@ class InteractBDD(Static):
 
 
 		@staticmethod
-		def deallocatefruits():
+		def checkAllocatedFruits():
 			[conn, cur]=InteractBDD.beginQuery()
 
 			request = "UPDATE fruit SET allocated=0;"
