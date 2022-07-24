@@ -687,7 +687,7 @@ class InteractBDD(Static):
 			[conn, cur]=InteractBDD.beginQuery()
 
 			boss=False
-			request = "SELECT name FROM pnj WHERE name='"+pirate.name+"';"
+			request = "SELECT nom FROM pnj WHERE nom='"+pirate.name+"';"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
 				boss=True
