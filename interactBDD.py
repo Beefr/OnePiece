@@ -360,7 +360,7 @@ class InteractBDD(Static):
 		def hasThatBoss(bossName, username):
 			[conn, cur]=InteractBDD.beginQuery()
 
-			request = "SELECT nom FROM pirate WHERE username='"+username+"' and name='"+bossName+"';"
+			request = "SELECT name FROM pirate WHERE username='"+username+"' and name='"+bossName+"';"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
 				InteractBDD.endQuery(conn, cur)
