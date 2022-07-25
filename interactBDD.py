@@ -691,7 +691,7 @@ class InteractBDD(Static):
 
 			if boss:
 				
-				request = "UPDATE pirate SET level=level-10 WHERE username='"+username+"' AND name='"+pirate.name+"';"
+				request = "UPDATE pirate SET level=level-10 WHERE username='"+username+"' AND name='"+pirate.name+"' AND level>10;"
 				InteractBDD.connectAndExecuteRequest(request, True, conn, cur) 
 
 				InteractBDD.endQuery(conn, cur)
