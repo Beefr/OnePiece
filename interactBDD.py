@@ -75,7 +75,7 @@ class InteractBDD(Static):
 			[conn, cur]=InteractBDD.beginQuery()
 
 			gamesid=[]
-			request= "SELECT gameid FROM games WHERE username='"+username+"';"
+			request= "SELECT gameid FROM games WHERE username='"+username+"' and encours=1;"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
 				gamesid.append(int(elem[0]))
