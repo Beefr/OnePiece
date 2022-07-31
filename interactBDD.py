@@ -26,6 +26,87 @@ class InteractBDD(Static):
 
 	if imported:
 
+
+		#___________________________GAMES_____________________________
+
+
+		@staticmethod
+		def createGame(username):
+			[conn, cur]=InteractBDD.beginQuery()
+
+			gameid=InteractBDD.maxGameID()
+			request= "INSERT INTO `games` (`gameid`, `username`, `encours`) VALUES ("+str(gameid)+", '"+username+"', 1);"
+			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+			
+			InteractBDD.endQuery(conn, cur)
+			return gameid
+
+		@staticmethod
+		def addUser(username, gameid):
+			[conn, cur]=InteractBDD.beginQuery()
+
+			request= "SELECT encours, username FROM games WHERE gameid="+str(gameid)+";"
+			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+			for elem in description:
+				if int(elem[0])==0:
+					InteractBDD.endQuery(conn, cur) # si la partie est finie on peut pas la join
+					return None
+				if str(elem[1])==username:
+					InteractBDD.endQuery(conn, cur) # si le joueur est déjà dans la partie il peut pas la rerejoindre
+					return None
+
+			# on le rajoute aux joueurs
+			request= "INSERT INTO `games` (`gameid`, `username`, `encours`) VALUES ("+str(gameid)+", '"+username+"', 1);"
+			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+			
+			InteractBDD.endQuery(conn, cur)
+			return True
+
+			
+
+		@staticmethod
+		def gamesInProgress(username):
+			[conn, cur]=InteractBDD.beginQuery()
+
+			gamesid=[]
+			request= "SELECT gameid FROM games WHERE username='"+username+"';"
+			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+			for elem in description:
+				gamesid.append(int(elem))
+
+
+			InteractBDD.endQuery(conn, cur)
+			return gamesid	
+
+
+		@staticmethod
+		def gameExists(gameid):
+			[conn, cur]=InteractBDD.beginQuery()
+
+			request= "SELECT gameid FROM games WHERE gameid='"+str(gameid)+"';"
+			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+			for elem in description:
+				if gameid==int(elem):
+					InteractBDD.endQuery(conn, cur)
+					return True
+			InteractBDD.endQuery(conn, cur)
+			return False
+
+		@staticmethod
+		def maxGameID():
+			[conn, cur]=InteractBDD.beginQuery()
+
+			gameid=0
+			request = "SELECT max(id) FROM games;"
+			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+			for elem in description:
+				gameid=int(elem)
+
+			InteractBDD.endQuery(conn, cur)
+			return gameid
+
+
+
 		#___________________________CREDENTIALS_______________________
 
 		@staticmethod
@@ -172,6 +253,19 @@ class InteractBDD(Static):
 		def retrieveWholeDatabase():
 			[conn, cur]=InteractBDD.beginQuery()
 			txt=""
+
+			
+			txt=txt+"Games: <br>"
+			txt=txt+"id | gameid | username | encours <br>"
+			request = "select * from games;"
+			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+			for elem in description:
+				txt= txt+"| " + str(elem[0])
+				txt= txt+"| " + str(elem[1])
+				txt= txt+"| " + str(elem[2])
+				txt= txt+"| " + str(elem[3])
+				txt=txt+"<br>"
+			txt=txt+"<br>"
 			
 			'''
 			[conn2, cur2]=InteractBDD.beginQuery()
