@@ -43,31 +43,30 @@ class InteractBDD(Static):
 
 		@staticmethod
 		def addUser(username, gameid):
-			[conn, cur]=InteractBDD.beginQuery()
 
 			if InteractBDD.gameExists(gameid):
-
+				
+				[conn, cur]=InteractBDD.beginQuery()
 
 				request= "SELECT encours, username FROM games WHERE gameid="+str(gameid)+";"
 				description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 				for elem in description:
 					if int(elem[0])==0:
 						InteractBDD.endQuery(conn, cur) # si la partie est finie on peut pas la join
-						return None
+						return False
 					if str(elem[1])==username:
 						InteractBDD.endQuery(conn, cur) # si le joueur est déjà dans la partie il peut pas la rerejoindre
-						return None
+						return False
 
 				# on le rajoute aux joueurs
 				request= "INSERT INTO `games` (`gameid`, `username`, `encours`) VALUES ("+str(gameid)+", '"+username+"', 1);"
 				InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
-			else: # partie existe pas
 				InteractBDD.endQuery(conn, cur)
+				return True
+			else: # partie existe pas
 				gameid=InteractBDD.createGame(username)
 				return gameid
 			
-			InteractBDD.endQuery(conn, cur)
-			return True
 
 			
 
@@ -90,7 +89,7 @@ class InteractBDD(Static):
 		def gameExists(gameid):
 			[conn, cur]=InteractBDD.beginQuery()
 
-			request= "SELECT gameid FROM games WHERE gameid='"+str(gameid)+"';"
+			request= "SELECT gameid FROM games WHERE gameid="+str(gameid)+";"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
 				if gameid==int(elem[0]):
