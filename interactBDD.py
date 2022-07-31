@@ -92,9 +92,8 @@ class InteractBDD(Static):
 			request= "SELECT gameid FROM games WHERE gameid="+str(gameid)+";"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
-				if gameid==int(elem[0]):
-					InteractBDD.endQuery(conn, cur)
-					return True
+				InteractBDD.endQuery(conn, cur)
+				return True
 			InteractBDD.endQuery(conn, cur)
 			return False
 
