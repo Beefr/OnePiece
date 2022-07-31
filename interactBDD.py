@@ -35,8 +35,6 @@ class InteractBDD(Static):
 			[conn, cur]=InteractBDD.beginQuery()
 
 			gameid=InteractBDD.maxGameID()
-			if not isinstance(gameid,int):
-				gameid=1
 			request= "INSERT INTO `games` (`gameid`, `username`, `encours`) VALUES ("+str(gameid)+", '"+username+"', 1);"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 			
@@ -105,7 +103,7 @@ class InteractBDD(Static):
 		def maxGameID():
 			[conn, cur]=InteractBDD.beginQuery()
 
-			gameid=None
+			gameid=0
 			request = "SELECT max(gameid) FROM games;"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
