@@ -34,7 +34,9 @@ class InteractBDD(Static):
 		def createGame(username):
 			[conn, cur]=InteractBDD.beginQuery()
 
-			gameid=InteractBDD.maxGameID()+1
+			gameid=InteractBDD.maxGameID()
+			if gameid==None:
+				gameid=1
 			request= "INSERT INTO `games` (`gameid`, `username`, `encours`) VALUES ("+str(gameid)+", '"+username+"', 1);"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 			
