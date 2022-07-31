@@ -72,7 +72,7 @@ class InteractBDD(Static):
 			request= "SELECT gameid FROM games WHERE username='"+username+"';"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
-				gamesid.append(int(elem))
+				gamesid.append(int(elem[0]))
 
 
 			InteractBDD.endQuery(conn, cur)
@@ -86,7 +86,7 @@ class InteractBDD(Static):
 			request= "SELECT gameid FROM games WHERE gameid='"+str(gameid)+"';"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
-				if gameid==int(elem):
+				if gameid==int(elem[0]):
 					InteractBDD.endQuery(conn, cur)
 					return True
 			InteractBDD.endQuery(conn, cur)
@@ -100,7 +100,7 @@ class InteractBDD(Static):
 			request = "SELECT max(id) FROM games;"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
-				gameid=int(elem)
+				gameid=int(elem[0])
 
 			InteractBDD.endQuery(conn, cur)
 			return gameid
