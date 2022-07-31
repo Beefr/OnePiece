@@ -96,7 +96,7 @@ class InteractBDD(Static):
 		def maxGameID():
 			[conn, cur]=InteractBDD.beginQuery()
 
-			gameid=0
+			gameid=None
 			request = "SELECT max(gameid) FROM games;"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
