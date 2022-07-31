@@ -47,19 +47,26 @@ class InteractBDD(Static):
 		def addUser(username, gameid):
 			[conn, cur]=InteractBDD.beginQuery()
 
-			request= "SELECT encours, username FROM games WHERE gameid="+str(gameid)+";"
-			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
-			for elem in description:
-				if int(elem[0])==0:
-					InteractBDD.endQuery(conn, cur) # si la partie est finie on peut pas la join
-					return None
-				if str(elem[1])==username:
-					InteractBDD.endQuery(conn, cur) # si le joueur est déjà dans la partie il peut pas la rerejoindre
-					return None
+			if InteractBDD.gameExists(gameid):
 
-			# on le rajoute aux joueurs
-			request= "INSERT INTO `games` (`gameid`, `username`, `encours`) VALUES ("+str(gameid)+", '"+username+"', 1);"
-			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+
+				request= "SELECT encours, username FROM games WHERE gameid="+str(gameid)+";"
+				description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+				for elem in description:
+					if int(elem[0])==0:
+						InteractBDD.endQuery(conn, cur) # si la partie est finie on peut pas la join
+						return None
+					if str(elem[1])==username:
+						InteractBDD.endQuery(conn, cur) # si le joueur est déjà dans la partie il peut pas la rerejoindre
+						return None
+
+				# on le rajoute aux joueurs
+				request= "INSERT INTO `games` (`gameid`, `username`, `encours`) VALUES ("+str(gameid)+", '"+username+"', 1);"
+				InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+			else: # partie existe pas
+				InteractBDD.endQuery(conn, cur)
+				gameid=InteractBDD.createGame(username)
+				return gameid
 			
 			InteractBDD.endQuery(conn, cur)
 			return True
