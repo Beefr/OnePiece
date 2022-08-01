@@ -82,7 +82,7 @@ class Utils(Static):
 		if tuple.type=="Legende":
 			obj= Legende(tuple.name, tuple.level, tuple.fruit, tuple.qualite)
 		elif tuple.type=="Pirate":
-			obj= Pirate(tuple.level)
+			obj= Pirate(tuple.gameid, tuple.level)
 			obj.name=tuple.name
 			obj.qualite=tuple.qualite
 			obj.fruit=tuple.fruit

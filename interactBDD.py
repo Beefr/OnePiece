@@ -235,7 +235,7 @@ class InteractBDD(Static):
 		def getMyCrew(username, gameid):
 			[conn, cur]=InteractBDD.beginQuery()
 			pirates=[]
-			request = "SELECT name, level, fruit, qualite FROM pirate WHERE username='"+username+"' and gameid="+str(gameid)+";"
+			request = "SELECT name, level, fruit, qualite, gameid FROM pirate WHERE username='"+username+"' and gameid="+str(gameid)+";"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
 				txt=InteractBDD.pirateTXT(elem, 'Pirate')
@@ -901,6 +901,7 @@ class InteractBDD(Static):
 			level=elem[1]
 			fruitsName=elem[2]
 			qualite=elem[3]
+			gameid=elem[4]
 
 			boss=False
 			if cls=="Legende":
@@ -912,7 +913,7 @@ class InteractBDD(Static):
 			fruitsTXT='{"type": "FruitDemon", "name": "%s", "power": %s, "boss": "%s"}' % (fruitsName, str(power), str(boss)) 
 			#txt='{"type": "'+type+'", "name": \"'+piratesName+'\", "level": \"'+str(level)+ '\", "qualite": \"'+str(qualite)+'\", "fruit": \"'+ fruitsTXT+'\", "stats": \"'+str(StatsPirate.generateStats(level, qualite, power))+'\", "availableToFight": "True", "mort": "False"}'
 			#txt="{"+ '\"type": "{}", "name": "{}", "level": "{}", "qualite": "{}", "fruit": "{}", "stats": "{}", "availableToFight": "True", "mort": "False\"'.format(type, piratesName, str(level), str(qualite), fruitsTXT, str(StatsPirate.generateStats(level, qualite, power)) ) +"}"
-			txt='{"type": "%s", "name": "%s", "level": %s, "qualite": %s, "fruit": %s, "stats": "%s", "availableToFight": "True", "mort": "False"}' % (cls, piratesName, str(level), str(qualite), fruitsTXT, str(StatsPirate.generateStats(level, qualite, power)) )
+			txt='{"type": "%s", "name": "%s", "gameid": %s, "level": %s, "qualite": %s, "fruit": %s, "stats": "%s", "availableToFight": "True", "mort": "False"}' % (cls, piratesName, str(gameid), str(level), str(qualite), fruitsTXT, str(StatsPirate.generateStats(level, qualite, power)) )
 			return txt
 
 
