@@ -20,7 +20,7 @@ class Joueur(object):
 		self._equipage= self.getMyCrew()
 		self._position= self.getMyLocation()
 		self._availableToFight=True
-
+		self._gameid=-1
 		
 
 	def showMenu(self, output):
@@ -248,6 +248,13 @@ class Joueur(object):
 		self._availableToFight=self._equipage.availableToFight
 		return self._availableToFight
 
+	@property
+	def gameid(self):
+		return self._gameid
+
+	@gameid.setter
+	def gameid(self, gid):
+		self._gameid=gid
 
 	@username.setter
 	def username(self, username):

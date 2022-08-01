@@ -24,6 +24,49 @@ class InteractBDD(Static):
 	    'database': 'data'
 	}
 
+
+	fruits=["INSERT INTO fruit VALUES('GumGum','30,40,30,0', 0, {});",
+			"INSERT INTO fruit VALUES('Feu','25,50,0,25', 0, {});",
+			"INSERT INTO fruit VALUES('Ice','25,0,50,25', 0, {});",
+			"INSERT INTO fruit VALUES('Homme','25,25,25,25', 0, {});",
+			"INSERT INTO fruit VALUES('Conversion','0,100,0,0', 0, {});",
+			"INSERT INTO fruit VALUES('Allosaure','0,100,0,0', 0, {});",
+			"INSERT INTO fruit VALUES('Vieillissement','0,0,100,0', 0, {});",
+			"INSERT INTO fruit VALUES('Chateau','25,25,25,25', 0, {});",
+			"INSERT INTO fruit VALUES('Lumiere','0,50,50,0', 0, {});",
+			"INSERT INTO fruit VALUES('Passion','0,100,0,0', 0, {});",
+			"INSERT INTO fruit VALUES('Poison','30,40,30,0', 0, {});",
+			"INSERT INTO fruit VALUES('Hormones','100,0,0,0', 0, {});",
+			"INSERT INTO fruit VALUES('Lave','0,100,0,0', 0, {});",
+			"INSERT INTO fruit VALUES('Gaz','0,0,100,0', 0, {});",
+			"INSERT INTO fruit VALUES('Gravite','25,25,25,25', 0, {});",
+			"INSERT INTO fruit VALUES('Barriere','0,0,100,0', 0, {});",
+			"INSERT INTO fruit VALUES('Mammouth','10,0,0,0', 0, {});",
+			"INSERT INTO fruit VALUES('Mochi','0,50,50,0', 0, {});",
+			"INSERT INTO fruit VALUES('Fumee','0,50,50,0', 0, {});",
+			"INSERT INTO fruit VALUES('Meteo','25,25,25,25', 0, {});",
+			"INSERT INTO fruit VALUES('Sable','0,100,0,0', 0, {});",
+			"INSERT INTO fruit VALUES('Balistique','0,100,0,0', 0, {});",
+			"INSERT INTO fruit VALUES('Bouddha','30,40,30,0', 0, {});",
+			"INSERT INTO fruit VALUES('Tremblement','0,100,0,0', 0, {});",
+			"INSERT INTO fruit VALUES('Phoenix','100,0,0,0', 0, {});",
+			"INSERT INTO fruit VALUES('Electricite','0,50,50,0', 0, {});",
+			"INSERT INTO fruit VALUES('Glace','30,40,30,0', 0, {});",
+			"INSERT INTO fruit VALUES('Guepard','0,100,0,0', 0, {});",
+			"INSERT INTO fruit VALUES('Ombre','100,0,0,0', 0, {});",
+			"INSERT INTO fruit VALUES('Bistouri','50,50,0,0', 0, {});",
+			"INSERT INTO fruit VALUES('Vaudou','25,25,25,25', 0, {});",
+			"INSERT INTO fruit VALUES('Musique','25,25,25,25', 0, {});",
+			"INSERT INTO fruit VALUES('Soul','100,0,0,0', 0, {});",
+			"INSERT INTO fruit VALUES('Dragon','0,100,0,0', 0, {});",
+			"INSERT INTO fruit VALUES('Yami','100,0,0,0', 0, {});",
+			"INSERT INTO fruit VALUES('Ressort','0,100,0,0', 0, {});",
+			"INSERT INTO fruit VALUES('Ferraille','0,100,0,0', 0, {});",
+			"INSERT INTO fruit VALUES('Coussinet','0,0,100,0', 0, {});",
+			"INSERT INTO fruit VALUES('Eclosion','0,100,0,0', 0, {});",
+			"INSERT INTO fruit VALUES('Resurrection','100,0,0,0', 0, {});",
+			"INSERT INTO fruit VALUES('Fragmentation','0,50,50,0', 0, {});"]
+
 	if imported:
 
 
@@ -38,6 +81,10 @@ class InteractBDD(Static):
 			request= "INSERT INTO `games` (`gameid`, `username`, `encours`) VALUES ("+str(gameid)+", '"+username+"', 1);"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 			
+			for request in InteractBDD.fruits:
+				request=request.format(str(gameid))
+				InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+
 			InteractBDD.endQuery(conn, cur)
 			return gameid
 
@@ -59,7 +106,7 @@ class InteractBDD(Static):
 						return False
 
 				# on le rajoute aux joueurs
-				request= "INSERT INTO `games` (`gameid`, `username`, `encours`) VALUES ("+str(gameid)+", '"+username+"', 1);"
+				request= "INSERT INTO `games` (`gameid`, `username`, `encours`, `currentstep`) VALUES ("+str(gameid)+", '"+username+"', 1, 1);"
 				InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 				InteractBDD.endQuery(conn, cur)
 				return True
@@ -134,7 +181,7 @@ class InteractBDD(Static):
 		@staticmethod
 		def createUser(username, password):
 			[conn, cur]=InteractBDD.beginQuery()
-			request = "INSERT INTO `joueur` (`username`, `password`, `currentstep`) VALUES('"+username+"','"+password+"', 1);"
+			request = "INSERT INTO `joueur` (`username`, `password`) VALUES('"+username+"','"+password+"');"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 			InteractBDD.endQuery(conn, cur)
 			return None
@@ -185,10 +232,10 @@ class InteractBDD(Static):
 
 
 		@staticmethod
-		def getMyCrew(username):
+		def getMyCrew(username, gameid):
 			[conn, cur]=InteractBDD.beginQuery()
 			pirates=[]
-			request = "SELECT name, level, fruit, qualite FROM pirate WHERE username='"+username+"';"
+			request = "SELECT name, level, fruit, qualite FROM pirate WHERE username='"+username+"' and gameid="+str(gameid)+";"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
 				txt=InteractBDD.pirateTXT(elem, 'Pirate')
@@ -207,11 +254,11 @@ class InteractBDD(Static):
 			return txt
 
 
-		@staticmethod
-		def getMyCrewsID(username):
+		@staticmethod #y a pas moyen de degager getmypirateid au profit de cette methode là?
+		def getMyCrewsID(username, gameid):
 			[conn, cur]=InteractBDD.beginQuery()
 			pirates=[]
-			request = "SELECT id FROM pirate WHERE username='"+username+"';"
+			request = "SELECT id FROM pirate WHERE username='"+username+"' and gameid="+str(gameid)+";"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
 				id=int(elem[0])
@@ -222,9 +269,9 @@ class InteractBDD(Static):
 			
 
 		@staticmethod
-		def getMyCrewMinLevel(username):
+		def getMyCrewMinLevel(username, gameid):
 			[conn, cur]=InteractBDD.beginQuery()
-			request = "SELECT MIN(level) FROM pirate WHERE username='"+username+"';"
+			request = "SELECT MIN(level) FROM pirate WHERE username='"+username+"' and gameid="+str(gameid)+";"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
 				lvl=int(elem[0])
@@ -234,9 +281,9 @@ class InteractBDD(Static):
 
 
 		@staticmethod
-		def getMyLocation(username):
+		def getMyLocation(username, gameid):
 			[conn, cur]=InteractBDD.beginQuery()
-			request = "SELECT position FROM island WHERE username='"+username+"';"
+			request = "SELECT position FROM island WHERE username='"+username+"' and gameid="+str(gameid)+";"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
 				value = str(elem[0])
@@ -246,9 +293,9 @@ class InteractBDD(Static):
 			return ""
 
 		@staticmethod
-		def getMyCurrentStep(username):
+		def getMyCurrentStep(username, gameid):
 			[conn, cur]=InteractBDD.beginQuery()
-			request = "SELECT currentstep FROM joueur WHERE username='"+username+"';"
+			request = "SELECT currentstep FROM games WHERE username='"+username+"' and gameid="+str(gameid)+";"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
 				value = int(elem[0])
@@ -264,7 +311,7 @@ class InteractBDD(Static):
 
 			
 			txt=txt+"Games: <br>"
-			txt=txt+"id | gameid | username | encours <br>"
+			txt=txt+"id | gameid | username | encours | currentStep<br>"
 			request = "select * from games;"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
@@ -272,6 +319,7 @@ class InteractBDD(Static):
 				txt= txt+"| " + str(elem[1])
 				txt= txt+"| " + str(elem[2])
 				txt= txt+"| " + str(elem[3])
+				txt= txt+"| " + str(elem[4])
 				txt=txt+"<br>"
 			txt=txt+"<br>"
 			
@@ -288,7 +336,7 @@ class InteractBDD(Static):
 			InteractBDD.endQuery(conn2, cur2)'''
 
 			txt=txt+"Joueur: <br>"
-			txt=txt+"id | username | password | currentStep <br>"
+			txt=txt+"id | username | password  <br>"
 			request = "select * from joueur;"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
@@ -300,7 +348,7 @@ class InteractBDD(Static):
 			txt=txt+"<br>"
 
 			txt=txt+"island: <br>"
-			txt=txt+"username | position's name <br>"
+			txt=txt+"username | position's name | gameid <br>"
 			request = "select * from island;"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
@@ -310,7 +358,7 @@ class InteractBDD(Static):
 			txt=txt+"<br>"
 
 			txt=txt+"Pirate: <br>"
-			txt=txt+" id | owner | name | level | fruit's name | qualite <br>"
+			txt=txt+" id | owner | name | level | fruit's name | qualite | gameid <br>"
 			request = "select * from pirate;"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
@@ -320,7 +368,7 @@ class InteractBDD(Static):
 			txt=txt+"<br>"
 
 			txt=txt+"Fruit: <br>"
-			txt=txt+" name | power | allocated <br>"
+			txt=txt+" name | power | allocated  | gameid<br>"
 			request = "select * from fruit;"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
@@ -376,9 +424,9 @@ class InteractBDD(Static):
 
 
 		@staticmethod
-		def checkPlayer(islandName):
+		def checkPlayer(islandName, gameid):
 			[conn, cur]=InteractBDD.beginQuery()
-			request = "SELECT username FROM island WHERE position='"+islandName+"';"
+			request = "SELECT username FROM island WHERE position='"+islandName+"' and gameid="+str(gameid)+";"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
 				value = str(elem[0])
@@ -389,9 +437,9 @@ class InteractBDD(Static):
 
 
 		@staticmethod
-		def averagePirateLevel(username):
+		def averagePirateLevel(username, gameid):
 			[conn, cur]=InteractBDD.beginQuery()
-			request = "SELECT level FROM pirate WHERE username='"+username+"';"
+			request = "SELECT level FROM pirate WHERE username='"+username+"' and gameid="+str(gameid)+";"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			
 			levels=[]
@@ -459,10 +507,10 @@ class InteractBDD(Static):
 
 
 		@staticmethod
-		def hasThatBoss(bossName, username):
+		def hasThatBoss(bossName, username, gameid):
 			[conn, cur]=InteractBDD.beginQuery()
 
-			request = "SELECT name FROM pirate WHERE username='"+username+"' and name='"+bossName+"';"
+			request = "SELECT name FROM pirate WHERE username='"+username+"' and name='"+bossName+"' and gameid="+str(gameid)+";"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
 				InteractBDD.endQuery(conn, cur)
@@ -475,29 +523,29 @@ class InteractBDD(Static):
 		#_____________________STORE_______________________________
 
 		@staticmethod
-		def setMyCrew(username, positionsName, pirates, currentstep):
+		def setMyCrew(username, positionsName, pirates, currentstep, gameid):
 			[conn, cur]=InteractBDD.beginQuery()
 
 			for pirate in pirates:
-				request = "INSERT INTO `pirate` (`username`, `name`, `level`, `fruit`, `qualite`) VALUES ('"+username+"','"+pirate.name+"','"+str(pirate.level)+"','"+pirate.fruit.name+"','"+str(pirate.qualite)+"');"
+				request = "INSERT INTO `pirate` (`username`, `name`, `level`, `fruit`, `qualite`, `gameid`) VALUES ('"+username+"','"+pirate.name+"','"+str(pirate.level)+"','"+pirate.fruit.name+"','"+str(pirate.qualite)+"', "+str(gameid)+");"
 				InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 			# TODO not a problem to not allocate fruits? 
-			request = "UPDATE island SET position='"+positionsName+"' WHERE username='"+username+"';"
+			request = "UPDATE island SET position='"+positionsName+"' WHERE username='"+username+"' and gameid="+str(gameid)+";"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 
-			request = "UPDATE joueur SET currentstep="+str(currentstep)+" WHERE username='"+username+"';"
+			request = "UPDATE games SET currentstep="+str(currentstep)+" WHERE username='"+username+"' and gameid="+str(gameid)+";"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 
 			InteractBDD.endQuery(conn, cur)
 			return None
 		
 		@staticmethod
-		def setMyLocation(username, positionsName):
+		def setMyLocation(username, positionsName, gameid):
 			[conn, cur]=InteractBDD.beginQuery()
-			request = "DELETE FROM island WHERE username='"+username+"';" # an update doesnt do the work since u r maybe not already in the table
+			request = "DELETE FROM island WHERE username='"+username+"' and gameid="+str(gameid)+";" # an update doesnt do the work since u r maybe not already in the table
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 
-			request = "INSERT INTO island VALUES ('"+username+"', '"+positionsName+"');"
+			request = "INSERT INTO island VALUES ('"+username+"', '"+positionsName+"', "+str(gameid)+");"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 			InteractBDD.endQuery(conn, cur)
 			return None
@@ -505,30 +553,30 @@ class InteractBDD(Static):
 			
 
 		@staticmethod
-		def setMyCurrentStep(username, currentStep):
+		def setMyCurrentStep(username, currentStep, gameid):
 			[conn, cur]=InteractBDD.beginQuery()
-			request = "UPDATE joueur SET currentstep='"+str(currentStep)+"' WHERE username='"+username+"';"
+			request = "UPDATE games SET currentstep='"+str(currentStep)+"' WHERE username='"+username+"' and gameid="+str(gameid)+";"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 			InteractBDD.endQuery(conn, cur)
 			return None
 
 		@staticmethod
-		def addNewFighter(username, pirate):
+		def addNewFighter(username, pirate, gameid):
 			[conn, cur]=InteractBDD.beginQuery() # TODO not a problem to not allocate fruits? 
-			request = "INSERT INTO `pirate` (`username`, `name`, `level`, `fruit`, `qualite`) VALUES ('"+username+"','"+pirate.name+"','"+str(pirate.level)+"','"+pirate.fruit.name+"','"+str(pirate.qualite)+"');"
+			request = "INSERT INTO `pirate` (`username`, `name`, `level`, `fruit`, `qualite`, `gameid`) VALUES ('"+username+"','"+pirate.name+"','"+str(pirate.level)+"','"+pirate.fruit.name+"','"+str(pirate.qualite)+"', "+str(gameid)+");"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 			InteractBDD.endQuery(conn, cur)
 			return None
 
 
 		@staticmethod
-		def increasePirateLevel(username):
+		def increasePirateLevel(username, gameid):
 			[conn, cur]=InteractBDD.beginQuery()
 
-			request = "UPDATE pirate SET level=level+1 WHERE username='"+username+"' and fruit='None';"
+			request = "UPDATE pirate SET level=level+1 WHERE username='"+username+"' and fruit='None' and gameid="+str(gameid)+";"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 
-			request = "UPDATE pirate SET level=level+3 WHERE username='"+username+"' and fruit!='None';"
+			request = "UPDATE pirate SET level=level+3 WHERE username='"+username+"' and fruit!='None' and gameid="+str(gameid)+";"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 			InteractBDD.endQuery(conn, cur)
 			return None
@@ -538,12 +586,12 @@ class InteractBDD(Static):
 
 
 		@staticmethod
-		def countAvailableFruits():
+		def countAvailableFruits(gameid):
 			[conn, cur]=InteractBDD.beginQuery()
 
 			InteractBDD.checkAllocatedFruits()
 
-			request = "SELECT COUNT(*) FROM fruit WHERE allocated='0';"
+			request = "SELECT COUNT(*) FROM fruit WHERE allocated='0' and gameid="+str(gameid)+";"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
 				value=int(elem[0])
@@ -553,20 +601,20 @@ class InteractBDD(Static):
 
 
 		@staticmethod
-		def checkAllocatedFruits():
+		def checkAllocatedFruits(gameid):
 			[conn, cur]=InteractBDD.beginQuery()
 
-			request = "UPDATE fruit SET allocated=0;"
+			request = "UPDATE fruit SET allocated=0 WHERE gameid="+str(gameid)+";"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 
 
-			request = "SELECT fruit FROM pirate;"
+			request = "SELECT fruit FROM pirate WHERE gameid="+str(gameid)+";"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			
 			[conn2, cur2]=InteractBDD.beginQuery()
 			for elem in description:
 				fruitsName=str(elem[0])
-				request = "UPDATE fruit SET allocated=1 WHERE name='"+fruitsName+"';"
+				request = "UPDATE fruit SET allocated=1 WHERE name='"+fruitsName+"' and gameid="+str(gameid)+";"
 				InteractBDD.connectAndExecuteRequest(request, True, conn2, cur2)
 
 			
@@ -578,11 +626,11 @@ class InteractBDD(Static):
 
 
 		@staticmethod
-		def notAllocatedFruits():
+		def notAllocatedFruits(gameid):
 			[conn, cur]=InteractBDD.beginQuery()
 
 			fruits=[]
-			request = "SELECT name FROM fruit WHERE allocated=0;"
+			request = "SELECT name FROM fruit WHERE allocated=0 and gameid="+str(gameid)+";"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
 				fruits.append(str(elem[0]))
@@ -608,10 +656,10 @@ class InteractBDD(Static):
 			return [0,0,0,0] # something went wrong
 
 		@staticmethod
-		def allocateFruit(fruitsName):
+		def allocateFruit(fruitsName, gameid):
 			[conn, cur]=InteractBDD.beginQuery()
 
-			request = "UPDATE fruit SET allocated=1 WHERE name='"+str(fruitsName)+"';"
+			request = "UPDATE fruit SET allocated=1 WHERE name='"+str(fruitsName)+"' and gameid="+str(gameid)+";"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 			
 			InteractBDD.endQuery(conn, cur)
@@ -704,54 +752,56 @@ class InteractBDD(Static):
 
 
 		@staticmethod
-		def deleteUserProgress(username):
+		def deleteUserProgress(username, gameid):
 
 			[conn, cur]=InteractBDD.beginQuery()
 
-			request = "DELETE FROM island WHERE username='"+username+"';"
+			request = "DELETE FROM island WHERE username='"+username+"' and gameid="+str(gameid)+";"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 
 			
 			[conn2, cur2]=InteractBDD.beginQuery()
-			request = "SELECT fruit FROM pirate WHERE username='"+username+"' AND name NOT IN (SELECT nom FROM pnj);"
+			#request = "SELECT fruit FROM pirate WHERE username='"+username+"' AND name NOT IN (SELECT nom FROM pnj);" 
+			request = "SELECT fruit FROM pirate WHERE username='"+username+"' and gameid="+str(gameid)+";" 
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
 				fruitsName=str(elem[0]) # we got the name of the current archipel
-				request = "UPDATE fruit SET allocated=0 WHERE name='"+str(fruitsName)+"';"
+				request = "UPDATE fruit SET allocated=0 WHERE name='"+str(fruitsName)+"' and gameid="+str(gameid)+";"
 				InteractBDD.connectAndExecuteRequest(request, True, conn2, cur2)
 			InteractBDD.endQuery(conn2, cur2)
 
-			request = "DELETE FROM pirate WHERE username='"+username+"' AND name NOT IN (SELECT nom FROM pnj);"
+			#request = "DELETE FROM pirate WHERE username='"+username+"' AND name NOT IN (SELECT nom FROM pnj);"
+			request = "DELETE FROM pirate WHERE username='"+username+"' and gameid="+str(gameid)+";"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur) 
 
-			request = "UPDATE pirate SET level=1 WHERE username='"+username+"';"
-			InteractBDD.connectAndExecuteRequest(request, True, conn, cur) 
+			#request = "UPDATE pirate SET level=1 WHERE username='"+username+"';"
+			#InteractBDD.connectAndExecuteRequest(request, True, conn, cur) 
 
 			InteractBDD.endQuery(conn, cur)
 			return None
 
 		@staticmethod
-		def deletePirates(username):
+		def deletePirates(username, gameid):
 
 			[conn, cur]=InteractBDD.beginQuery()
 			
 			[conn2, cur2]=InteractBDD.beginQuery()
-			request = "SELECT fruit FROM pirate WHERE username='"+username+"';"
+			request = "SELECT fruit FROM pirate WHERE username='"+username+"' and gameid="+str(gameid)+";"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
 				fruitsName=str(elem[0]) # we got the name of the current archipel
-				request = "UPDATE fruit SET allocated=0 WHERE name='"+str(fruitsName)+"';"
+				request = "UPDATE fruit SET allocated=0 WHERE name='"+str(fruitsName)+"' and gameid="+str(gameid)+";"
 				InteractBDD.connectAndExecuteRequest(request, True, conn2, cur2)
 			InteractBDD.endQuery(conn2, cur2)
 
-			request = "DELETE FROM pirate WHERE username='"+username+"';"
+			request = "DELETE FROM pirate WHERE username='"+username+"' and gameid="+str(gameid)+";"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 
 			InteractBDD.endQuery(conn, cur)
 			return None
 
 		@staticmethod
-		def deallocateFruitsFromCrew(obj):
+		def deallocateFruitsFromCrew(obj, gameid):
 			if obj.isinstance()=="Joueur":
 				crew=obj.equipage
 			else: #equipage
@@ -760,7 +810,7 @@ class InteractBDD(Static):
 			[conn2, cur2]=InteractBDD.beginQuery()
 			for pirate in crew.team:
 				if pirate.fruit.name!="None":
-					request = "UPDATE fruit SET allocated=0 WHERE name='"+str(pirate.fruit.name)+"';"
+					request = "UPDATE fruit SET allocated=0 WHERE name='"+str(pirate.fruit.name)+"' and gameid="+str(gameid)+";"
 					InteractBDD.connectAndExecuteRequest(request, True, conn2, cur2)
 			InteractBDD.endQuery(conn2, cur2)
 			return None	
@@ -782,36 +832,36 @@ class InteractBDD(Static):
 
 
 		@staticmethod
-		def removeFighter(username, pirate):
+		def removeFighter(username, pirate, gameid):
 			[conn, cur]=InteractBDD.beginQuery()
 
-			boss=False
-			request = "SELECT nom FROM pnj WHERE nom='"+pirate.name+"';"
-			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
-			for elem in description:
-				boss=True
+			#boss=False
+			#request = "SELECT nom FROM pnj WHERE nom='"+pirate.name+"';"
+			#description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+			#for elem in description:
+			#	boss=True
 
-			if boss:
+			#if boss:
 				
-				request = "UPDATE pirate SET level=level-10 WHERE username='"+username+"' AND name='"+pirate.name+"' AND level>10;"
-				InteractBDD.connectAndExecuteRequest(request, True, conn, cur) 
+			#request = "UPDATE pirate SET level=level-10 WHERE username='"+username+"' AND name='"+pirate.name+"' AND level>10;"
+			#InteractBDD.connectAndExecuteRequest(request, True, conn, cur) 
 
-				InteractBDD.endQuery(conn, cur)
-				return None
+			#InteractBDD.endQuery(conn, cur)
+			#return None
 
-			else:
+			#else:
 
-				fruitsName=pirate.fruit.name
-				if fruitsName!="None":
-					request = "UPDATE fruit SET allocated=0 WHERE name='"+fruitsName+"';"
-					InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
-
-
-				request = "DELETE FROM pirate WHERE username='"+username+"' and name='"+pirate.name+"' and fruit='"+pirate.fruit.name+"' and qualite='"+str(pirate.qualite)+"';"
+			fruitsName=pirate.fruit.name
+			if fruitsName!="None":
+				request = "UPDATE fruit SET allocated=0 WHERE name='"+fruitsName+"' and gameid="+str(gameid)+";"
 				InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 
-				InteractBDD.endQuery(conn, cur)
-				return None
+
+			request = "DELETE FROM pirate WHERE username='"+username+"' and name='"+pirate.name+"' and fruit='"+pirate.fruit.name+"' and qualite='"+str(pirate.qualite)+"' and gameid="+str(gameid)+";"
+			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+
+			InteractBDD.endQuery(conn, cur)
+			return None
 
 
 		#____________________________________________________________
