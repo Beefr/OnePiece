@@ -43,7 +43,7 @@ class Joueur(object):
 
 	def resetCrew(self):
 		InteractBDD.deleteUserProgress(self._username, self._gameid)
-		self._equipage=Equipage([Pirate(1, True, self._username)])
+		self._equipage=Equipage([Pirate(self._gameid, 1, True, self._username)])
 		self._position= Island(Joueur.villeDeDepart)
 		InteractBDD.setMyCrew(self._username, Joueur.villeDeDepart, self._equipage.team, 1, self._gameid)
 		self._availableToFight=True
@@ -221,7 +221,7 @@ class Joueur(object):
 				output.content+ boss.asMessageArray()
 
 		for i in range(start,number):
-			pirate=Pirate(crewMinLevel)
+			pirate=Pirate(self._gameid, crewMinLevel)
 			InteractBDD.addNewFighter("recrutement"+self._username, pirate, self._gameid)
 			output.content+ "Choix "
 			output.content* Message(str(i))
