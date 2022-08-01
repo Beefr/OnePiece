@@ -53,7 +53,7 @@ class FruitFactoryMeta(type):
 class FruitFactory(metaclass=FruitFactoryMeta):
 
 	@staticmethod
-	def allocateFruit(percentages):
+	def allocateFruit(percentages, gameid):
 		fruitBool=random.randint(0,100)<=percentages[0]
 		if fruitBool:
 			availableFruits=InteractBDD.countAvailableFruits(gameid)
