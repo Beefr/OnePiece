@@ -17,10 +17,10 @@ class Joueur(object):
 
 	def __init__(self, username):		
 		self._username= username
+		self._gameid=-1
 		self._equipage= self.getMyCrew()
 		self._position= self.getMyLocation()
 		self._availableToFight=True
-		self._gameid=-1
 		
 
 	def showMenu(self, output):
