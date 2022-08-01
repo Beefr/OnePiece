@@ -47,7 +47,6 @@ class Menu(object):
 		if self._died==True or not isinstance(user_input, int):
 			self._died=False
 			self._userInput=[]
-			#self.choseThatIsland()
 			str(eval(Menu.steps[self._currentStep] + "(" + self.getParameters() + ")"))
 		else:
 			self._userInput=user_input

@@ -78,7 +78,7 @@ class InteractBDD(Static):
 			[conn, cur]=InteractBDD.beginQuery()
 
 			gameid=InteractBDD.maxGameID()+1
-			request= "INSERT INTO `games` (`gameid`, `username`, `encours`) VALUES ("+str(gameid)+", '"+username+"', 1);"
+			request= "INSERT INTO `games` (`gameid`, `username`, `encours`, `currentstep`) VALUES ("+str(gameid)+", '"+username+"', 1, 1);"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 			
 			for request in InteractBDD.fruits:
