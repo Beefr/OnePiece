@@ -343,7 +343,6 @@ class InteractBDD(Static):
 				txt= txt+"| " + str(elem[0])
 				txt= txt+"| " + str(elem[1])
 				txt= txt+"| " + "Not Displayable"
-				txt= txt+"| " + str(elem[3])
 				txt=txt+"<br>"
 			txt=txt+"<br>"
 
