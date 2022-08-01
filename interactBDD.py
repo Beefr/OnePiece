@@ -489,7 +489,7 @@ class InteractBDD(Static):
 				if drop==0:
 					return None
 
-			request = "SELECT nom, level, fruit, qualite, gameid FROM pnj WHERE ile='"+currentIslandName+"';"
+			request = "SELECT nom, level, fruit, qualite FROM pnj WHERE ile='"+currentIslandName+"';"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			txt=""
 			for elem in description:
