@@ -15,9 +15,9 @@ class Joueur(object):
 
 	villeDeDepart='Village de Fuchsia'
 
-	def __init__(self, username):		
+	def __init__(self, username, gid):		
 		self._username= username
-		self._gameid=-1
+		self._gameid=gid
 		self._equipage= self.getMyCrew()
 		self._position= self.getMyLocation()
 		self._availableToFight=True
