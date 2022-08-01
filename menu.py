@@ -33,7 +33,7 @@ class Menu(object):
 
 	@joueur.setter
 	def joueur(self, joueur):
-		self._currentStep=InteractBDD.getMyCurrentStep(joueur.username)
+		self._currentStep=InteractBDD.getMyCurrentStep(joueur.username, joueur.gameid)
 		self._joueur=joueur
 
 
@@ -62,7 +62,7 @@ class Menu(object):
 			self._currentStep=2
 		elif self._currentStep==2:
 			self._currentStep=1
-		InteractBDD.setMyCurrentStep(self._joueur.username, self._currentStep)
+		InteractBDD.setMyCurrentStep(self._joueur.username, self._currentStep, self._joueur.gameid)
 
 
 	def getParameters(self):
@@ -105,7 +105,7 @@ class Menu(object):
 
 	def choseThatPirate(self, value=None):
 		if value!=None:
-			recruitablePirates=InteractBDD.getMyCrewsID("recrutement"+self._joueur.username)
+			recruitablePirates=InteractBDD.getMyCrewsID("recrutement"+self._joueur.username, self._joueur.gameid)
 			self._joueur.recrutement(self._output, recruitablePirates, value)
 			self.nextStep()
 		else:
