@@ -589,7 +589,7 @@ class InteractBDD(Static):
 		def countAvailableFruits(gameid):
 			[conn, cur]=InteractBDD.beginQuery()
 
-			InteractBDD.checkAllocatedFruits()
+			InteractBDD.checkAllocatedFruits(gameid)
 
 			request = "SELECT COUNT(*) FROM fruit WHERE allocated='0' and gameid="+str(gameid)+";"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
