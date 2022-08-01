@@ -42,22 +42,22 @@ class Joueur(object):
 		return "Joueur"
 
 	def resetCrew(self):
-		InteractBDD.deleteUserProgress(self._username)
+		InteractBDD.deleteUserProgress(self._username, self._gameid)
 		self._equipage=Equipage([Pirate(1, True, self._username)])
 		self._position= Island(Joueur.villeDeDepart)
-		InteractBDD.setMyCrew(self._username, Joueur.villeDeDepart, self._equipage.team, 1)
+		InteractBDD.setMyCrew(self._username, Joueur.villeDeDepart, self._equipage.team, 1, self._gameid)
 		self._availableToFight=True
 
 
 	def increaseCrewLevel(self):
-		InteractBDD.increasePirateLevel(self._username)
+		InteractBDD.increasePirateLevel(self._username, self._gameid)
 
 	def goingToNextIsland(self, value, output):
 		self._position=Island(World.next(self._position.name, value))
 		self._equipage.regenerateHealth()
 
-		isThereOtherPlayer=InteractBDD.checkPlayer(self._position.name) # returns the username or None
-		InteractBDD.setMyLocation(self._username, self._position.name)
+		isThereOtherPlayer=InteractBDD.checkPlayer(self._position.name, self._gameid) # returns the username or None
+		InteractBDD.setMyLocation(self._username, self._position.name, self._gameid)
 		if isThereOtherPlayer!=None:
 			self.fightOtherPlayer(isThereOtherPlayer, output)
 		else:
@@ -73,7 +73,7 @@ class Joueur(object):
 
 	def fightOtherPlayer(self, isThereOtherPlayer, output):
 		ennemies=[]
-		txtPirates=InteractBDD.getMyCrew(isThereOtherPlayer)
+		txtPirates=InteractBDD.getMyCrew(isThereOtherPlayer, self._gameid)
 		for txt in txtPirates:
 			ennemy=Utils.load(txt)
 			ennemies.append(ennemy)
@@ -93,7 +93,7 @@ class Joueur(object):
 			# TODO eventuellement rajouter un petit message quand le gars se reconnecte?
 
 	def fightPNJ(self, output):
-		ennemies=Equipage.generateEnnemies(InteractBDD.averagePirateLevel(self._username), max(self._equipage.numberOfPirates,4))
+		ennemies=Equipage.generateEnnemies(InteractBDD.averagePirateLevel(self._username, self._gameid), max(self._equipage.numberOfPirates,4))
 		isThereBoss=InteractBDD.checkBoss(self._position.name)
 		if isThereBoss!=None:
 			ennemies.newFighter(Utils.load(isThereBoss))
@@ -118,12 +118,12 @@ class Joueur(object):
 		if self.availableToFight:
 			self.increaseCrewLevel()
 			array+ Joueur.phraseDeVictoire(self)
-			InteractBDD.deallocateFruitsFromCrew(entry2)
+			InteractBDD.deallocateFruitsFromCrew(entry2, self._gameid)
 		else:
 			if entry2.isinstance()=="Joueur":
 				entry2.increaseCrewLevel()
 			array+ Joueur.phraseDeVictoire(entry2)
-			InteractBDD.deallocateFruitsFromCrew(self)
+			InteractBDD.deallocateFruitsFromCrew(self, self._gameid)
 		return array
 
 
@@ -184,7 +184,7 @@ class Joueur(object):
 			newPirate=piratesID[int(value)] # now it's not a pirate, it's an id
 			truePirate=Utils.load(InteractBDD.getMyPirate(newPirate))
 			self._equipage.newFighter(truePirate)
-			InteractBDD.addNewFighter(self._username, truePirate) # i dont fking want to create a method that updates the owner's name
+			InteractBDD.addNewFighter(self._username, truePirate, self._gameid) # i dont fking want to create a method that updates the owner's name
 		self.showMenu(output)
 
 
@@ -193,7 +193,7 @@ class Joueur(object):
 			return Message("")
 		array=[[Message("Ces pirates sont tombés au combat:", True, False, "rouge")]]
 		for pirate in self._equipage.dead:
-			InteractBDD.removeFighter(self._username, pirate)
+			InteractBDD.removeFighter(self._username, pirate, self._gameid)
 			array.extend(pirate.asMessageArray())
 		self._equipage.cleanUpDeadArray()
 		return array
@@ -201,8 +201,8 @@ class Joueur(object):
 
 
 	def askForRecruitment(self, output):
-		InteractBDD.deletePirates("recrutement"+self._username) # clean up precedent recrutement
-		crewMinLevel=InteractBDD.getMyCrewMinLevel(self._username)
+		InteractBDD.deletePirates("recrutement"+self._username, self._gameid) # clean up precedent recrutement
+		crewMinLevel=InteractBDD.getMyCrewMinLevel(self._username, self._gameid)
 		number=5
 		start=0
 		output.content+ Message("Des pirates sont disponibles au recrutement.", True, False, "rouge")
@@ -216,13 +216,13 @@ class Joueur(object):
 				boss=Utils.load(isThereBoss)
 				boss.level=crewMinLevel
 				boss.qualite=0
-				InteractBDD.addNewFighter("recrutement"+self._username, boss)
+				InteractBDD.addNewFighter("recrutement"+self._username, boss, self._gameid)
 				output.content+ "Choix 0:"
 				output.content+ boss.asMessageArray()
 
 		for i in range(start,number):
 			pirate=Pirate(crewMinLevel)
-			InteractBDD.addNewFighter("recrutement"+self._username, pirate)
+			InteractBDD.addNewFighter("recrutement"+self._username, pirate, self._gameid)
 			output.content+ "Choix "
 			output.content* Message(str(i))
 			output.content* ": "
@@ -274,10 +274,10 @@ class Joueur(object):
 
 
 	def getMyCrew(self):
-		txtPirates=InteractBDD.getMyCrew(self._username)
+		txtPirates=InteractBDD.getMyCrew(self._username, self._gameid)
 		if len(txtPirates)==0:
 			pirate=Pirate(1, True, self._username)
-			InteractBDD.setMyCrew(self._username, Joueur.villeDeDepart, [pirate],1)
+			InteractBDD.setMyCrew(self._username, Joueur.villeDeDepart, [pirate],1, self._gameid)
 			return Equipage([pirate])
 
 		else:
@@ -289,11 +289,11 @@ class Joueur(object):
 
 
 	def getMyLocation(self):
-		island = InteractBDD.getMyLocation(self._username)
+		island = InteractBDD.getMyLocation(self._username, self._gameid)
 		if island!="":
 			return Island(island)
 		else:
-			InteractBDD.setMyLocation(self._username, Joueur.villeDeDepart)
+			InteractBDD.setMyLocation(self._username, Joueur.villeDeDepart, self._gameid)
 			return Island(Joueur.villeDeDepart)
 	
 
