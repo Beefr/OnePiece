@@ -246,7 +246,7 @@ class InteractBDD(Static):
 		@staticmethod
 		def getMyPirate(id):
 			[conn, cur]=InteractBDD.beginQuery()
-			request = "SELECT name, level, fruit, qualite FROM pirate WHERE id='"+str(id)+"';"
+			request = "SELECT name, level, fruit, qualite, gameid FROM pirate WHERE id='"+str(id)+"';"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
 				txt=InteractBDD.pirateTXT(elem, 'Pirate')
@@ -451,7 +451,7 @@ class InteractBDD(Static):
 		@staticmethod
 		def checkBoss(currentIslandName):
 			[conn, cur]=InteractBDD.beginQuery()
-			request = "SELECT nom, level, fruit, qualite FROM pnj WHERE ile='"+currentIslandName+"';"
+			request = "SELECT nom, level, fruit, qualite, gameid FROM pnj WHERE ile='"+currentIslandName+"';"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			txt=""
 			for elem in description:
@@ -489,7 +489,7 @@ class InteractBDD(Static):
 				if drop==0:
 					return None
 
-			request = "SELECT nom, level, fruit, qualite FROM pnj WHERE ile='"+currentIslandName+"';"
+			request = "SELECT nom, level, fruit, qualite, gameid FROM pnj WHERE ile='"+currentIslandName+"';"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			txt=""
 			for elem in description:
