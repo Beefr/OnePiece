@@ -451,7 +451,7 @@ class InteractBDD(Static):
 		@staticmethod
 		def checkBoss(currentIslandName):
 			[conn, cur]=InteractBDD.beginQuery()
-			request = "SELECT nom, level, fruit, qualite, gameid FROM pnj WHERE ile='"+currentIslandName+"';"
+			request = "SELECT nom, level, fruit, qualite FROM pnj WHERE ile='"+currentIslandName+"';"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			txt=""
 			for elem in description:
@@ -900,11 +900,12 @@ class InteractBDD(Static):
 			level=elem[1]
 			fruitsName=elem[2]
 			qualite=elem[3]
-			gameid=elem[4]
+			gameid=-1
 
 			boss=False
 			if cls=="Legende":
 				boss=True
+				gameid=elem[4]
 
 			power=InteractBDD.fruitsPower(fruitsName)
 			#fruitsTXT='{"type": "FruitDemon", "name": \"'+fruitsName+'\", "power": \"'+str(power)+'\"}'
@@ -912,7 +913,10 @@ class InteractBDD(Static):
 			fruitsTXT='{"type": "FruitDemon", "name": "%s", "power": %s, "boss": "%s"}' % (fruitsName, str(power), str(boss)) 
 			#txt='{"type": "'+type+'", "name": \"'+piratesName+'\", "level": \"'+str(level)+ '\", "qualite": \"'+str(qualite)+'\", "fruit": \"'+ fruitsTXT+'\", "stats": \"'+str(StatsPirate.generateStats(level, qualite, power))+'\", "availableToFight": "True", "mort": "False"}'
 			#txt="{"+ '\"type": "{}", "name": "{}", "level": "{}", "qualite": "{}", "fruit": "{}", "stats": "{}", "availableToFight": "True", "mort": "False\"'.format(type, piratesName, str(level), str(qualite), fruitsTXT, str(StatsPirate.generateStats(level, qualite, power)) ) +"}"
-			txt='{"type": "%s", "name": "%s", "gameid": %s, "level": %s, "qualite": %s, "fruit": %s, "stats": "%s", "availableToFight": "True", "mort": "False"}' % (cls, piratesName, str(gameid), str(level), str(qualite), fruitsTXT, str(StatsPirate.generateStats(level, qualite, power)) )
+			if boss:
+				txt='{"type": "%s", "name": "%s", "level": %s, "qualite": %s, "fruit": %s, "stats": "%s", "availableToFight": "True", "mort": "False"}' % (cls, piratesName, str(level), str(qualite), fruitsTXT, str(StatsPirate.generateStats(level, qualite, power)) )
+			else:
+				txt='{"type": "%s", "name": "%s", "gameid": %s, "level": %s, "qualite": %s, "fruit": %s, "stats": "%s", "availableToFight": "True", "mort": "False"}' % (cls, piratesName, str(gameid), str(level), str(qualite), fruitsTXT, str(StatsPirate.generateStats(level, qualite, power)) )
 			return txt
 
 
