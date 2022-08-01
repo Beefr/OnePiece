@@ -905,6 +905,7 @@ class InteractBDD(Static):
 			boss=False
 			if cls=="Legende":
 				boss=True
+			else:
 				gameid=elem[4]
 
 			power=InteractBDD.fruitsPower(fruitsName)
