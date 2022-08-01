@@ -9,13 +9,13 @@ from message import Message
 class Pirate(object):
 
 
-	def __init__(self, level, capitaine=False, name=None, pnj=False):
+	def __init__(self, gameid, level, capitaine=False, name=None, pnj=False):
 		if capitaine:
 			self._qualite=0
-			self._fruit=FruitFactory.giveAFruit()
+			self._fruit=FruitFactory.giveAFruit(gameid)
 		elif pnj==False:
 			self._qualite=Pirate.generateQualite([1,10,50,100])
-			self._fruit=FruitFactory.allocateFruit([1,100])
+			self._fruit=FruitFactory.allocateFruit([1,100], gameid)
 		else: # pnj = True
 			self._qualite=Pirate.generateQualite([0,10,50,100])
 			self._fruit= FruitDemon("None",[0,0,0,0])

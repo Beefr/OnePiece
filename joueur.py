@@ -276,7 +276,7 @@ class Joueur(object):
 	def getMyCrew(self):
 		txtPirates=InteractBDD.getMyCrew(self._username, self._gameid)
 		if len(txtPirates)==0:
-			pirate=Pirate(1, True, self._username)
+			pirate=Pirate(self._gameid, 1, True, self._username)
 			InteractBDD.setMyCrew(self._username, Joueur.villeDeDepart, [pirate],1, self._gameid)
 			return Equipage([pirate])
 
