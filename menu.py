@@ -23,10 +23,6 @@ class Menu(object):
 		self._output=Output()
 		self._died=False
 
-	#TODO use fruit's allocation
-	#TODO hook values from bdd and not code
-
-
 	@property
 	def joueur(self):
 		return self._joueur
@@ -43,8 +39,10 @@ class Menu(object):
 			user_input=int(user_input)
 		except:
 			pass
-
-		if self._died==True or not isinstance(user_input, int):
+		
+		if self._died==True:
+			self._output.content+ "Ton équipage est mort, la partie est finie pour toi."
+		elif not isinstance(user_input, int):
 			self._died=False
 			self._userInput=[]
 			str(eval(Menu.steps[self._currentStep] + "(" + self.getParameters() + ")"))
@@ -97,7 +95,7 @@ class Menu(object):
 			self.nextStep()
 		else:
 			self._joueur.resetCrew()
-			self._output.content+ "Ton équipage est mort, il va falloir recommencer du début pour devenir le roi des pirates. y/n"
+			self._output.content+ "Ton équipage est mort, la partie est finie pour toi."
 			self._died=True
 			self._currentStep=1
 

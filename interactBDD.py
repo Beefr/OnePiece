@@ -89,36 +89,105 @@ class InteractBDD(Static):
 
 		@staticmethod
 		def addUser(username, gameid):
+			[conn, cur]=InteractBDD.beginQuery()
+			result=True
+			if InteractBDD.gameExists(gameid):
+				count=0
+				request= "SELECT encours, username FROM games WHERE gameid="+str(gameid)+";"
+				description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+				for elem in description:
+					count+=1
+					if int(elem[0])==0:
+						# si la partie est finie on peut pas la join
+						result=False
+					if str(elem[1])==username:
+						# si le joueur est déjà dans la partie il peut pas la rerejoindre
+						result=False
 
+				if count<8:
+				# on le rajoute aux joueurs
+					request= "INSERT INTO `games` (`gameid`, `username`, `encours`, `currentstep`) VALUES ("+str(gameid)+", '"+username+"', 1, 1);"
+					InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+
+					InteractBDD.setMyLocation(username, InteractBDD.villeDeDepart(), gameid)
+					
+					request = "INSERT INTO `pirate` (`username`, `name`, `level`, `fruit`, `qualite`, `gameid`) VALUES ('"+username+"','"+username+"','"+str(1)+"','"+InteractBDD.giveAFruit(gameid)+"','"+str(0)+"', "+str(gameid)+");"
+					InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+				else: # plus de place pour jouer avec ses potes
+					result=False
+
+			else: # partie existe pas
+				result=False
+			InteractBDD.endQuery(conn, cur)
+			return result
+			
+		@staticmethod
+		def joinThatGameID(username, gameid):
+			result=True
 			if InteractBDD.gameExists(gameid):
 				
 				[conn, cur]=InteractBDD.beginQuery()
 
+				count=0
 				request= "SELECT encours, username FROM games WHERE gameid="+str(gameid)+";"
 				description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 				for elem in description:
+					count+=1
 					if int(elem[0])==0:
-						InteractBDD.endQuery(conn, cur) # si la partie est finie on peut pas la join
+						# si la partie est finie on peut pas la join
 						return False
 					if str(elem[1])==username:
-						InteractBDD.endQuery(conn, cur) # si le joueur est déjà dans la partie il peut pas la rerejoindre
+						# si le joueur est déjà dans la partie il peut pas la rerejoindre
 						return False
 
+				if count>=8:
 				# on le rajoute aux joueurs
-				request= "INSERT INTO `games` (`gameid`, `username`, `encours`, `currentstep`) VALUES ("+str(gameid)+", '"+username+"', 1, 1);"
-				InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
-
-				InteractBDD.setMyLocation(username, InteractBDD.villeDeDepart(), gameid)
+					result=False
 				
-				request = "INSERT INTO `pirate` (`username`, `name`, `level`, `fruit`, `qualite`, `gameid`) VALUES ('"+username+"','"+username+"','"+str(1)+"','"+InteractBDD.giveAFruit(gameid)+"','"+str(0)+"', "+str(gameid)+");"
-				InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 
 				InteractBDD.endQuery(conn, cur)
 				return True
 			else: # partie existe pas
-				gameid=InteractBDD.createGame(username)
-				return gameid
+				result=False
+
+			return result
+
+		@staticmethod
+		def joinGame(username, gameid):
+			[conn, cur]=InteractBDD.beginQuery()
+			result=InteractBDD.joinThatGameID(username, gameid)
+			while result==False:
+				gameid=gameid+1
+				result=InteractBDD.joinThatGameID(username, gameid)
 			
+			request= "INSERT INTO `games` (`gameid`, `username`, `encours`, `currentstep`) VALUES ("+str(gameid)+", '"+username+"', 1, 1);"
+			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+
+			InteractBDD.setMyLocation(username, InteractBDD.villeDeDepart(), gameid)
+			
+			request = "INSERT INTO `pirate` (`username`, `name`, `level`, `fruit`, `qualite`, `gameid`) VALUES ('"+username+"','"+username+"','"+str(1)+"','"+InteractBDD.giveAFruit(gameid)+"','"+str(0)+"', "+str(gameid)+");"
+			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+			InteractBDD.endQuery(conn, cur)
+			return gameid
+			
+
+
+		@staticmethod
+		def villeDeDepart():
+			[conn, cur]=InteractBDD.beginQuery()
+
+			request = "SELECT nom from ile;"
+			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+			iles=[]
+			for elem in range(description):
+				iles.append(elem[0])
+
+			ile=iles[random.randint(0, len(iles)-1)]
+				
+
+			InteractBDD.endQuery(conn, cur)
+			return ile
+
 
 		@staticmethod
 		def giveAFruit(gameid):
