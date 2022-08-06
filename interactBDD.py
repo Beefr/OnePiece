@@ -6,8 +6,7 @@ except:
 	pass
 
 from statsPirate import StatsPirate
-
-
+import random
 
 class Static:
 	def __new__(cls):
@@ -108,6 +107,12 @@ class InteractBDD(Static):
 				# on le rajoute aux joueurs
 				request= "INSERT INTO `games` (`gameid`, `username`, `encours`, `currentstep`) VALUES ("+str(gameid)+", '"+username+"', 1, 1);"
 				InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+
+				InteractBDD.setMyLocation(username, InteractBDD.villeDeDepart(), gameid)
+				
+				request = "INSERT INTO `pirate` (`username`, `name`, `level`, `fruit`, `qualite`, `gameid`) VALUES ('"+username+"','"+username+"','"+str(1)+"','"+InteractBDD.giveAFruit(gameid)+"','"+str(0)+"', "+str(gameid)+");"
+				InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+
 				InteractBDD.endQuery(conn, cur)
 				return True
 			else: # partie existe pas
@@ -115,7 +120,16 @@ class InteractBDD(Static):
 				return gameid
 			
 
-			
+		@staticmethod
+		def giveAFruit(gameid):
+			availableFruits=InteractBDD.countAvailableFruits(gameid)
+			if availableFruits==0:
+				return "GumGum"
+			fruitsNumber=random.randint(0,availableFruits-1)
+			fruitsName=InteractBDD.notAllocatedFruits(gameid)[fruitsNumber]
+			InteractBDD.allocateFruit(fruitsName, gameid)
+			return fruitsName
+
 
 		@staticmethod
 		def gamesInProgress(username):
@@ -138,7 +152,7 @@ class InteractBDD(Static):
 
 			request= "SELECT gameid FROM games WHERE gameid="+str(gameid)+";"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
-			for elem in description:
+			for _ in description:
 				InteractBDD.endQuery(conn, cur)
 				return True
 			InteractBDD.endQuery(conn, cur)

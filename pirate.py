@@ -1,5 +1,4 @@
-
-from abc import abstractmethod
+from name import Name
 from fruitdemon import FruitFactory, FruitDemon
 import random
 from interactBDD import InteractBDD
@@ -20,7 +19,7 @@ class Pirate(object):
 			self._qualite=Pirate.generateQualite([0,10,50,100])
 			self._fruit= FruitDemon("None",[0,0,0,0])
 
-		self._name=str(Pirate.generateNewName(name))
+		self._name=str(Name.generateNewName(name))
 		self._level=level
 		[self._vie, self._atk, self._dfs]=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
 		self._mort=False
@@ -101,11 +100,6 @@ class Pirate(object):
 			return Message(texte)
 		return Message(texte, True, False)
 
-	@staticmethod
-	def generateNewName(name):
-		if name==None:
-			return Firstname()+Secondname()
-		return name
 		
 	
 	@staticmethod
@@ -138,57 +132,7 @@ class Pirate(object):
 		return self._name+" 	-lvl:"+str(self._level)+" 	-qual:"+str(self._qualite)+" 	-fruit:"+self._fruit.name+" 	-stats"+str([self._vie, self._atk, self._dfs])
 
 
-class Name(object):
 
-
-	def __init__(self, name):
-		self._name=name
-
-
-	@abstractmethod
-	def generateName(self):
-		raise NotImplementedError("Hey, Don't forget to implement")
-
-
-	@property
-	def name(self):
-		return self._name
-
-
-
-
-class Firstname(Name):
-
-	def __init__(self):
-		firstname=self.generateName()
-		super().__init__(firstname)
-
-
-	def generateName(self):
-		dictionnaire=["Kevin", "Roger", "Tiburce", "Gertrude", "Berthe", "Robert", "Blaise", "Titeuf", "Bob", "Berenice", "Benedicte", "Sbleurgh", "Adelaide", "Isidore", "Magdalena", "Augustin", "Mayeul", "Rodrigue", "Denis", "Eude"]
-		index=random.randint(0,len(dictionnaire)-1)
-		return dictionnaire[index]
-
-
-	def __add__(self, secondname):
-		return self._name+" "+secondname.name
-
-
-
-
-
-
-class Secondname(Name):
-
-	def __init__(self):
-		secondname=self.generateName()
-		super().__init__(secondname)
-
-
-	def generateName(self):
-		dictionnaire=["Tapedur", "Tankfor", "Grossbarb", "Epeenmousse", "Lechauv", "Coursurpat", "Penkibit", "Grofiak", "Moudujnou", "Potremalin", "Barbkipik", "Sendeloin", "Vendecarpet", "Aleuilkidifukalotr", "Couymol", "Persondentier"]
-		index=random.randint(0,len(dictionnaire)-1)
-		return dictionnaire[index]
 
 
 class Legende(Pirate):

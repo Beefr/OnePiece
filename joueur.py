@@ -256,28 +256,17 @@ class Joueur(object):
 
 	def getMyCrew(self):
 		txtPirates=InteractBDD.getMyCrew(self._username, self._gameid)
-		if len(txtPirates)==0:
-			pirate=Pirate(self._gameid, 1, True, self._username)
-			InteractBDD.setMyCrew(self._username, Joueur.villeDeDepart, [pirate],1, self._gameid)
-			return Equipage([pirate])
-
-		else:
-			pirates=[]
-			for txt in txtPirates:
-				pirate=Utils.load(txt)
-				pirates.append(pirate)
-			return Equipage(pirates)
+		pirates=[]
+		for txt in txtPirates:
+			pirate=Utils.load(txt)
+			pirates.append(pirate)
+		return Equipage(pirates)
 
 
 	def getMyLocation(self):
 		island = InteractBDD.getMyLocation(self._username, self._gameid)
-		if island!="":
-			return Island(island)
-		else:
-			InteractBDD.setMyLocation(self._username, Joueur.villeDeDepart, self._gameid)
-			return Island(Joueur.villeDeDepart)
-	
-
+		return Island(island)
+		
 
 
 
