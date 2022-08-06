@@ -10,12 +10,7 @@ from collections import namedtuple
 
 import hashlib
 
-class Static:
-	def __new__(cls):
-		raise TypeError('Static classes cannot be instantiated')
-
-
-class Utils(Static):
+class Utils():
 
 
 
@@ -33,17 +28,6 @@ class Utils(Static):
 	@staticmethod
 	def clear():
 		os.system('cls')
-
-
-	@staticmethod
-	def removeElement(array, index):
-		temp=[]
-		count=0
-		for elem in array:
-			if count!=index:
-				temp.append(elem)
-			count+=1
-		return temp
 
 
 	@staticmethod

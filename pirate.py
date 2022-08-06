@@ -68,27 +68,21 @@ class Pirate(object):
 	@qualite.setter
 	def qualite(self, qualite):
 		self._qualite=qualite
-		[self._vie, self._atk, self._dfs, self._ftg]=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
+		[self._vie, self._atk, self._dfs]=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
 
 	@fruit.setter
 	def fruit(self, frui):
 		self._fruit=frui
-		[self._vie, self._atk, self._dfs, self._ftg]=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
+		[self._vie, self._atk, self._dfs]=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
 
 
 	@level.setter
 	def level(self, lvl):
 		self._level=lvl
 
-	@staticmethod
-	def regenerateHealth(level, qualite):
-		return 100*level*(5-qualite)
-
 
 	def takeDamages(self, degats):
-		#print(self._name+"       "+str(self._vie)+"     "+str(degats))
 		self._vie=self._vie-abs(degats)
-		#print(self._name+"       "+str(self._vie))
 
 	def isAttacked(self, pirate):
 		if pirate is None:

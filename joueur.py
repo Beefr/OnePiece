@@ -54,7 +54,6 @@ class Joueur(object):
 
 	def goingToNextIsland(self, value, output):
 		self._position=Island(World.next(self._position.name, value))
-		self._equipage.regenerateHealth()
 
 		isThereOtherPlayer=InteractBDD.checkPlayer(self._position.name, self._gameid) # returns the username or None
 		InteractBDD.setMyLocation(self._username, self._position.name, self._gameid)
@@ -253,14 +252,6 @@ class Joueur(object):
 	@username.setter
 	def username(self, username):
 		self._username=username
-
-	@position.setter
-	def position(self, position):
-		self._position=position
-
-	@equipage.setter
-	def equipage(self, equipage):
-		self._equipage=equipage
 
 
 	def getMyCrew(self):

@@ -92,10 +92,6 @@ class Equipage(object):
 			self._availableToFight=False
 
 
-	def regenerateHealth(self):
-		for pirate in self._team:
-			pirate.regenerateHealth(pirate.level, pirate.qualite)
-
 
 	def removeFighter(self):
 		self._turn.removeCurrent()
