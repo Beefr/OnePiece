@@ -455,7 +455,7 @@ class InteractBDD(Static):
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			txt=""
 			for elem in description:
-				elem.append(gameid)
+				elem = list(elem).append(gameid)
 				txt=InteractBDD.pirateTXT(elem, 'Legende')
 				InteractBDD.endQuery(conn, cur)
 				return txt
@@ -500,7 +500,7 @@ class InteractBDD(Static):
 					InteractBDD.endQuery(conn, cur)
 					return None
 
-				elem.append(gameid)
+				elem = list(elem).append(gameid)
 				txt=InteractBDD.pirateTXT(elem, 'Legende')
 				InteractBDD.endQuery(conn, cur)
 				return [txt, drop]
