@@ -133,14 +133,14 @@ class InteractBDD(Static):
 				count=0
 				request= "SELECT encours, username FROM games WHERE gameid="+str(gameid)+";"
 				description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
-				for elem in description:
+				'''for elem in description:
 					count+=1
 					if int(elem[0])==0:
 						# si la partie est finie on peut pas la join
 						result=False
 					if str(elem[1])==username:
 						# si le joueur est déjà dans la partie il peut pas la rerejoindre
-						result=False
+						result=False'''
 
 				if count>=8:
 				# trop de joueurs
