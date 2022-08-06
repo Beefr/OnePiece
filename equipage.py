@@ -27,6 +27,10 @@ class Equipage(object):
 		return False
 
 	@property
+	def numberOfPirates(self):
+		return len(self._team)
+
+	@property
 	def dead(self):
 		return self._dead
 
