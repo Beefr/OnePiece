@@ -262,10 +262,6 @@ class Joueur(object):
 	def equipage(self, equipage):
 		self._equipage=equipage
 
-	@availableToFight.setter
-	def availableToFight(self, av):
-		self._availableToFight=av
-
 
 	def getMyCrew(self):
 		txtPirates=InteractBDD.getMyCrew(self._username, self._gameid)
