@@ -472,7 +472,7 @@ class InteractBDD(Static):
 				return texte
 
 			InteractBDD.endQuery(conn, cur)
-			return "attaque"
+			return " attaque "
 
 
 			
@@ -978,7 +978,7 @@ class InteractBDD(Static):
 
 		@staticmethod
 		def phraseDeCombat(cool):
-			return "attaque"
+			return " attaque "
 
 		@staticmethod
 		def increasePirateLevel(cool):
