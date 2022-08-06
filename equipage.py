@@ -110,7 +110,7 @@ class Turn(object):
 
 
 	def add(self, pirate):
-		place=random.randint(0,len(self._team)+1)
+		place=random.randint(0,len(self._pirates)+1)
 		self._pirates.insert(place,pirate)
 
 	def removeCurrent(self):
