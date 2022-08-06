@@ -100,11 +100,13 @@ class InteractBDD(Static):
 					if int(elem[0])==0:
 						# si la partie est finie on peut pas la join
 						result=False
+						break
 					if str(elem[1])==username:
 						# si le joueur est déjà dans la partie il peut pas la rerejoindre
 						result=False
+						break
 
-				if count<8:
+				if count<8 and result:
 				# on le rajoute aux joueurs
 					request= "INSERT INTO `games` (`gameid`, `username`, `encours`, `currentstep`) VALUES ("+str(gameid)+", '"+username+"', 1, 1);"
 					InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
@@ -124,9 +126,9 @@ class InteractBDD(Static):
 		@staticmethod
 		def joinThatGameID(username, gameid):
 			result=True
+			[conn, cur]=InteractBDD.beginQuery()
 			if InteractBDD.gameExists(gameid):
 				
-				[conn, cur]=InteractBDD.beginQuery()
 
 				count=0
 				request= "SELECT encours, username FROM games WHERE gameid="+str(gameid)+";"
@@ -135,21 +137,20 @@ class InteractBDD(Static):
 					count+=1
 					if int(elem[0])==0:
 						# si la partie est finie on peut pas la join
-						return False
+						result=False
 					if str(elem[1])==username:
 						# si le joueur est déjà dans la partie il peut pas la rerejoindre
-						return False
+						result=False
 
 				if count>=8:
-				# on le rajoute aux joueurs
+				# trop de joueurs
 					result=False
 				
 
-				InteractBDD.endQuery(conn, cur)
-				return True
 			else: # partie existe pas
 				result=False
 
+			InteractBDD.endQuery(conn, cur)
 			return result
 
 		@staticmethod
@@ -170,6 +171,18 @@ class InteractBDD(Static):
 			InteractBDD.endQuery(conn, cur)
 			return gameid
 			
+
+		@staticmethod
+		def numberOfGames(username):
+			[conn, cur]=InteractBDD.beginQuery()
+			count=0
+			request= "SELECT encours FROM games WHERE username="+username+";"
+			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
+			for _ in description:
+				count+=1
+			
+			InteractBDD.endQuery(conn, cur)
+			return count
 
 
 		@staticmethod
