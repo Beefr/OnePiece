@@ -80,7 +80,7 @@ class Utils(Static):
 	def decode(dict):
 		tuple=namedtuple('Metamorph', dict.keys())(*dict.values())
 		if tuple.type=="Legende":
-			obj= Legende(tuple.name, tuple.level, tuple.fruit, tuple.qualite)
+			obj= Legende(tuple.gameid, tuple.name, tuple.level, tuple.fruit, tuple.qualite)
 		elif tuple.type=="Pirate":
 			obj= Pirate(tuple.gameid, tuple.level)
 			obj.name=tuple.name

@@ -235,7 +235,8 @@ class Secondname(Name):
 
 class Legende(Pirate):
 
-	def __init__(self, nom, level, fruit, qualite):
+	def __init__(self, gameid, nom, level, fruit, qualite):
+		self._gameid=gameid
 		self._qualite=qualite
 		self._fruit=fruit
 		self._name=nom
