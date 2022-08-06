@@ -12,7 +12,6 @@ class Equipage(object):
 		self._team=pirates
 		self._turn=Turn(pirates)
 		self._availableToFight=True
-		self._numberOfPirates=len(self._team)
 		self._dead=[]
 
 	@property
@@ -26,12 +25,6 @@ class Equipage(object):
 			if pirate.mort==False:
 				return True
 		return False
-
-	@property
-	def numberOfPirates(self):
-		self._numberOfPirates=len(self._team)
-		return self._numberOfPirates
-
 
 	@property
 	def dead(self):
@@ -54,12 +47,12 @@ class Equipage(object):
 
 
 	def defenseur(self):
-		self.countAvailableToTank()
-		if self._numberOfPirates<=0:
+		self.updateStatus() 
+		if len(self._team)<=0:
 			return None
-		elif self._numberOfPirates==1:
+		elif len(self._team)==1:
 			return self._team[0]
-		who=random.randint(0, self._numberOfPirates-1)
+		who=random.randint(0, len(self._team)-1)
 		count=0
 		for i in range(len(self._team)):
 			if self._team[i].mort==False:
@@ -68,14 +61,6 @@ class Equipage(object):
 				count+=1
 
 	
-	def countAvailableToTank(self):
-		count=0
-		for pirate in self._team:
-			if pirate.mort==False:
-				count+=1
-		self._numberOfPirates=count
-		if self._numberOfPirates==0:
-			self._availableToFight=False
 
 
 	def isinstance(self):
@@ -87,8 +72,7 @@ class Equipage(object):
 				self._dead.append(self._team[count])
 				self._team.pop(count)
 		self._turn.removePirate()
-		self._numberOfPirates=len(self._team)
-		if self._numberOfPirates==0:
+		if len(self._team)==0:
 			self._availableToFight=False
 
 
@@ -119,27 +103,22 @@ class Turn(object):
 	def __init__(self, pirates):
 		self._pirates=Utils.shuffle(pirates)
 		self._turnCount=0
-		self._numberOfPirates=len(self._pirates)
 
 
 	def add(self, pirate):
-		self._numberOfPirates+=1
-		place=random.randint(0,self._numberOfPirates)
+		place=random.randint(0,len(self._team)+1)
 		self._pirates.insert(place,pirate)
 
 	def removeCurrent(self):
-		self._numberOfPirates-=1
 		self._pirates.pop(self._turnCount)
 
 
 	def removePirate(self):
 		if len(self._pirates)==0:
-			self._numberOfPirates=0
 			return None
 		for count in range(len(self._pirates)-1,-1,-1):
 			if self._pirates[count].mort:
 				self._pirates.pop(count)
-		self._numberOfPirates=len(self._pirates)
 
 
 	def next(self):
