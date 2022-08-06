@@ -238,18 +238,18 @@ class InteractBDD(Static):
 			request = "SELECT name, level, fruit, qualite, gameid FROM pirate WHERE username='"+username+"' and gameid="+str(gameid)+";"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
-				txt=InteractBDD.pirateTXT(elem, 'Pirate')
+				txt=InteractBDD.pirateTXT(elem, 'Pirate', gameid)
 				pirates.append(txt) #pas besoin de separation avec une ',', il n'y en a qu'un avec cet id
 			InteractBDD.endQuery(conn, cur)
 			return pirates
 
 		@staticmethod
-		def getMyPirate(id):
+		def getMyPirate(id, gameid):
 			[conn, cur]=InteractBDD.beginQuery()
 			request = "SELECT name, level, fruit, qualite, gameid FROM pirate WHERE id='"+str(id)+"';"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for elem in description:
-				txt=InteractBDD.pirateTXT(elem, 'Pirate')
+				txt=InteractBDD.pirateTXT(elem, 'Pirate', gameid)
 			InteractBDD.endQuery(conn, cur)
 			return txt
 
@@ -455,8 +455,7 @@ class InteractBDD(Static):
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			txt=""
 			for elem in description:
-				elem = list(elem).append(gameid)
-				txt=InteractBDD.pirateTXT(elem, 'Legende')
+				txt=InteractBDD.pirateTXT(elem, 'Legende', gameid)
 				InteractBDD.endQuery(conn, cur)
 				return txt
 			return None
@@ -500,8 +499,7 @@ class InteractBDD(Static):
 					InteractBDD.endQuery(conn, cur)
 					return None
 
-				elem = list(elem).append(gameid)
-				txt=InteractBDD.pirateTXT(elem, 'Legende')
+				txt=InteractBDD.pirateTXT(elem, 'Legende', gameid)
 				InteractBDD.endQuery(conn, cur)
 				return [txt, drop]
 			return None
@@ -897,12 +895,11 @@ class InteractBDD(Static):
 			conn.close()
 			
 		@staticmethod
-		def pirateTXT(elem, cls):
+		def pirateTXT(elem, cls, gameid):
 			piratesName=elem[0]
 			level=elem[1]
 			fruitsName=elem[2]
 			qualite=elem[3]
-			gameid=elem[4]
 
 			boss= cls=="Legende"
 
