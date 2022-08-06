@@ -90,7 +90,7 @@ class Joueur(object):
 			# TODO eventuellement rajouter un petit message quand le gars se reconnecte?
 
 	def fightPNJ(self, output):
-		ennemies=Equipage.generateEnnemies(InteractBDD.averagePirateLevel(self._username, self._gameid), max(self._equipage.numberOfPirates,4))
+		ennemies=Equipage.generateEnnemies(InteractBDD.averagePirateLevel(self._username, self._gameid), max(self._equipage.numberOfPirates,4), self._gameid)
 		isThereBoss=InteractBDD.checkBoss(self._position.name, self._gameid)
 		if isThereBoss!=None:
 			ennemies.newFighter(Utils.load(isThereBoss))

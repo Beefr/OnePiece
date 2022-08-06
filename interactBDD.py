@@ -452,7 +452,7 @@ class InteractBDD(Static):
 		@staticmethod
 		def averagePirateLevel(username, gameid):
 			[conn, cur]=InteractBDD.beginQuery()
-			request = "SELECT level FROM pirate WHERE username='"+username+"' and gameid="+str(gameid)+";"
+			request = "SELECT level FROM pirate WHERE username='"+username+"' and gameid='"+str(gameid)+"';"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			
 			levels=[]

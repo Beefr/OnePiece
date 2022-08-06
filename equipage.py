@@ -96,10 +96,10 @@ class Equipage(object):
 
 
 	@staticmethod
-	def generateEnnemies(level, ennemies):
+	def generateEnnemies(level, ennemies, gameid):
 		pirates=[]
 		for _ in range(ennemies):
-			pirates.append(Pirate(level, False, None, True))
+			pirates.append(Pirate(gameid, level, False, None, True))
 		return Equipage(pirates)
 
 class Turn(object):
