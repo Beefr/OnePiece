@@ -94,7 +94,7 @@ class Joueur(object):
 
 	def fightPNJ(self, output):
 		ennemies=Equipage.generateEnnemies(InteractBDD.averagePirateLevel(self._username, self._gameid), max(self._equipage.numberOfPirates,4))
-		isThereBoss=InteractBDD.checkBoss(self._position.name)
+		isThereBoss=InteractBDD.checkBoss(self._position.name, self._gameid)
 		if isThereBoss!=None:
 			ennemies.newFighter(Utils.load(isThereBoss))
 		
