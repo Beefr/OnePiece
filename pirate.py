@@ -138,7 +138,7 @@ class Pirate(object):
 			return Message(texte)
 		
 		self.takeDamages(degats)
-		texte=(pirate.name+phrase+self.name+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(self.vie)+"pts de vie")
+		texte=(pirate.name+" pour un total de "+str(degats)+"degats, il ne lui reste plus que "+str(self.vie)+"pts de vie")
 		if phrase=="attaque":
 			return Message(texte)
 		return Message(texte, True, False)
