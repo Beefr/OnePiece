@@ -176,7 +176,7 @@ class InteractBDD(Static):
 		def numberOfGames(username):
 			[conn, cur]=InteractBDD.beginQuery()
 			count=0
-			request= "SELECT encours FROM games WHERE username="+username+";"
+			request= "SELECT encours FROM games WHERE username='"+username+"';"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			for _ in description:
 				count+=1
