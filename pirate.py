@@ -20,7 +20,7 @@ class Pirate(object):
 			self._qualite=Pirate.generateQualite([0,10,50,100])
 			self._fruit= FruitDemon("None",[0,0,0,0])
 
-		self._name=Pirate.generateNewName(name)
+		self._name=str(Pirate.generateNewName(name))
 		self._level=level
 		[self._vie, self._atk, self._dfs, self._ftg]=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
 		self._availableToFight=True
