@@ -13,7 +13,7 @@ class Pirate(object):
 		if capitaine:
 			self._qualite=0
 			self._fruit=FruitFactory.giveAFruit(gameid)
-		elif pnj==False:
+		elif pnj==False: # pour le recrutement
 			self._qualite=Pirate.generateQualite([1,10,50,100])
 			self._fruit=FruitFactory.allocateFruit([1,100], gameid)
 		else: # pnj = True
@@ -22,8 +22,7 @@ class Pirate(object):
 
 		self._name=str(Pirate.generateNewName(name))
 		self._level=level
-		[self._vie, self._atk, self._dfs, self._ftg]=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
-		self._availableToFight=True
+		[self._vie, self._atk, self._dfs]=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
 		self._mort=False
 
 
@@ -42,14 +41,6 @@ class Pirate(object):
 	@property
 	def dfs(self):
 		return self._dfs
-
-	@property
-	def ftg(self):
-		return self._ftg
-
-	@property
-	def availableToFight(self):
-		return self._availableToFight
 
 	@property
 	def fruit(self):
@@ -85,22 +76,6 @@ class Pirate(object):
 		[self._vie, self._atk, self._dfs, self._ftg]=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
 
 
-	@vie.setter
-	def vie(self, st):
-		self._vie=st
-
-	@atk.setter
-	def atk(self, st):
-		self._atk=st
-
-	@dfs.setter
-	def dfs(self, st):
-		self._dfs=st
-
-	@ftg.setter
-	def ftg(self, st):
-		self._ftg=st
-
 	@level.setter
 	def level(self, lvl):
 		self._level=lvl
@@ -114,17 +89,6 @@ class Pirate(object):
 		#print(self._name+"       "+str(self._vie)+"     "+str(degats))
 		self._vie=self._vie-abs(degats)
 		#print(self._name+"       "+str(self._vie))
-
-
-	def increaseFatigue(self):
-		self._ftg-1
-		if self._ftg<=0:
-			self._availableToFight=False
-
-	def updateStatus(self):
-		self._mort=self.mort
-		self._availableToFight= self._ftg>0
-		return self._mort
 
 	def isAttacked(self, pirate):
 		if pirate is None:
@@ -170,7 +134,7 @@ class Pirate(object):
 		array=[]
 		array.append([Message(self._name, True)])
 		array.append([Message("niveau: "+str(self._level)+" | qualité: "+str(self._qualite)+" | fruit: "+self._fruit.name, True)])
-		array.append([Message('vie: '+str(int(self._vie))+" | dps: "+str(int(self._atk))+" | def: "+str(int(self._dfs))+" | fatigue: "+str(int(self._ftg)))])
+		array.append([Message('vie: '+str(int(self._vie))+" | dps: "+str(int(self._atk))+" | def: "+str(int(self._dfs)))])
 		array.append([Message("___________________________________________________", False, True)])
 		return array
 
@@ -241,8 +205,7 @@ class Legende(Pirate):
 		self._fruit=fruit
 		self._name=nom
 		self._level=level
-		[self._vie, self._atk, self._dfs, self._ftg]=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
-		self._availableToFight=True
+		[self._vie, self._atk, self._dfs]=StatsPirate.generateStats(self._level, self._qualite, self._fruit.power)
 		self._mort=False
 
 

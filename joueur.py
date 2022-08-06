@@ -80,13 +80,11 @@ class Joueur(object):
 		otherPlayer=Joueur(isThereOtherPlayer)
 		otherPlayer.equipage=Equipage(ennemies)
 		otherPlayer.position=self._position
-		output.content+ "Aie c'est le bordel sur "
-		output.content* self._position.name
-		output.content* ","
+		output.content+ "Aie c'est le bordel sur {},".format(self._position.name)
 		output.content+ Message(isThereOtherPlayer, True, False, "rouge")
 		output.content* " et son équipage sont présents sur l'ile,"
 		output.content+ "le combat est inévitable."
-		output.content+self.fight(otherPlayer)
+		output.content+ self.fight(otherPlayer)
 		otherPlayer.cleanUpDeadPirates()
 		if otherPlayer.availableToFight==False:
 			otherPlayer.resetCrew()
@@ -98,9 +96,7 @@ class Joueur(object):
 		if isThereBoss!=None:
 			ennemies.newFighter(Utils.load(isThereBoss))
 		
-		output.content+ "Arrivé sur "
-		output.content* self._position.name
-		output.content* ", tu fais face à de nombreux pirates hostiles."
+		output.content+ "Arrivé sur {}, tu fais face à de nombreux pirates hostiles.".format(self._position.name)
 		output.content+ self.fight(ennemies)
 
 
@@ -223,9 +219,7 @@ class Joueur(object):
 		for i in range(start,number):
 			pirate=Pirate(self._gameid, crewMinLevel)
 			InteractBDD.addNewFighter("recrutement"+self._username, pirate, self._gameid)
-			output.content+ "Choix "
-			output.content* Message(str(i))
-			output.content* ": "
+			output.content+ "Choix {}:".format(str(i))
 			output.content+ pirate.asMessageArray()
 		output.content+ Message("Lequel voulez-vous recruter?", True, False, "rouge")
 		return None

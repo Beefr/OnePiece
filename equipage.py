@@ -23,7 +23,7 @@ class Equipage(object):
 	def availableToFight(self):
 		self._turn=Turn(self._team)
 		for pirate in self._team:
-			if pirate.mort==False and pirate.availableToFight:
+			if pirate.mort==False:
 				return True
 		return False
 
@@ -44,7 +44,6 @@ class Equipage(object):
 		pirate=self._turn.next()
 		if pirate==None:
 			return None
-		pirate.increaseFatigue()
 		return pirate
 
 	def isAttacked(self, attaquant):
@@ -84,7 +83,7 @@ class Equipage(object):
 
 	def updateStatus(self):
 		for count in range(len(self._team)-1,-1,-1):
-			if self._team[count].updateStatus():
+			if self._team[count].mort:
 				self._dead.append(self._team[count])
 				self._team.pop(count)
 		self._turn.removePirate()
@@ -115,7 +114,7 @@ class Equipage(object):
 	@staticmethod
 	def generateEnnemies(level, ennemies):
 		pirates=[]
-		for i in range(ennemies):
+		for _ in range(ennemies):
 			pirates.append(Pirate(level, False, None, True))
 		return Equipage(pirates)
 
@@ -152,7 +151,7 @@ class Turn(object):
 			return None
 		self.increaseTurnCount()
 		pirate = self._pirates[self._turnCount]
-		while pirate.availableToFight==False or pirate.mort:
+		while pirate.mort:
 			self.removeCurrent()
 			if len(self._pirates)==0:
 				return None
