@@ -904,6 +904,8 @@ class InteractBDD(Static):
 			qualite=elem[3]
 			gameid=elem[4]
 
+			boss= cls=="Legende"
+
 			power=InteractBDD.fruitsPower(fruitsName)
 			fruitsTXT='{"type": "FruitDemon", "name": "%s", "power": %s, "boss": "%s"}' % (fruitsName, str(power), str(boss)) 
 			txt='{"type": "%s", "name": "%s", "gameid": %s, "level": %s, "qualite": %s, "fruit": %s, "stats": "%s", "availableToFight": "True", "mort": "False"}' % (cls, piratesName, str(gameid), str(level), str(qualite), fruitsTXT, str(StatsPirate.generateStats(level, qualite, power)) )
