@@ -192,7 +192,7 @@ class InteractBDD(Static):
 			request = "SELECT nom from ile;"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			iles=[]
-			for elem in range(description):
+			for elem in description:
 				iles.append(elem[0])
 
 			ile=iles[random.randint(0, len(iles)-1)]
