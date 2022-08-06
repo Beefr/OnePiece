@@ -109,13 +109,13 @@ class Joueur(object):
 		array= MultiLineMessage()
 		first=random.randint(0,1)
 		turnsCount=0
-		while self.availableToFight and entry2.availableToFight:
+		while self._availableToFight and entry2.availableToFight:
 			array+ Message("Tour "+str(turnsCount), True, False, "rouge")
 			array+ self.phraseDeCombat(entry2, first)
 			array+ self.phraseDeCombat(entry2, 1-first)
 			turnsCount+=1
 
-		if self.availableToFight:
+		if self._availableToFight:
 			self.increaseCrewLevel()
 			array+ Joueur.phraseDeVictoire(self)
 			InteractBDD.deallocateFruitsFromCrew(entry2, self._gameid)
