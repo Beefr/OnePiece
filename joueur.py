@@ -207,7 +207,7 @@ class Joueur(object):
 		start=0
 		output.content+ Message("Des pirates sont disponibles au recrutement.", True, False, "rouge")
 
-		obj=InteractBDD.getDrop(self._position.name, self._username)
+		obj=InteractBDD.getDrop(self._position.name, self._username, self._gameid)
 		if obj!=None:
 			[isThereBoss, drop]=obj
 			percent = random.randint(0,100)

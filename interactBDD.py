@@ -477,7 +477,7 @@ class InteractBDD(Static):
 
 			
 		@staticmethod
-		def getDrop(currentIslandName, username):
+		def getDrop(currentIslandName, username, gameid):
 			[conn, cur]=InteractBDD.beginQuery()
 
 
@@ -494,7 +494,7 @@ class InteractBDD(Static):
 			txt=""
 			for elem in description:
 				bossName=str(elem[0])
-				has=InteractBDD.hasThatBoss(bossName, username)
+				has=InteractBDD.hasThatBoss(bossName, username, gameid)
 				if has:
 					InteractBDD.endQuery(conn, cur)
 					return None
