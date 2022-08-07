@@ -68,7 +68,7 @@ CREATE TABLE world(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, archipel1 varchar
 CREATE TABLE pnj(nom varchar(20) PRIMARY KEY NOT NULL, ile varchar(60) NOT NULL, level INT NOT NULL, fruit varchar(20) NOT NULL, qualite INT NOT NULL, phrase varchar(256) NOT NULL, perc INT NOT NULL);
 CREATE TABLE ile(nom varchar(60) PRIMARY KEY NOT NULL, archipel varchar(40) NOT NULL, pvp INT NOT NULL);
 CREATE TABLE archipel(nom varchar(60) PRIMARY KEY NOT NULL, ileprincipale varchar(60) NOT NULL);
-CREATE TABLE games(id INT PRIMARY KEY NOT NULL, gameid INT NOT NULL, username varchar(40) NOT NULL, encours INT NOT NULL, currentstep INT NOT NULL);
+CREATE TABLE games(id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, gameid INT NOT NULL, username varchar(40) NOT NULL, encours INT NOT NULL, currentstep INT NOT NULL);
 
 INSERT INTO fruit VALUES('GumGum','30,40,30,0', 0);
 INSERT INTO fruit VALUES('Feu','25,50,0,25', 0);

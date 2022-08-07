@@ -157,30 +157,31 @@ class InteractBDD(Static):
 
 		@staticmethod
 		def joinGame(username, gameid):
-			[conn, cur]=InteractBDD.beginQuery()
 			result=InteractBDD.joinThatGameID(username, gameid)
 			if result==False:
 				gameid=gameid+1
 			
-			request= "INSERT INTO `games` (`gameid`, `username`, `encours`, `currentstep`) VALUES ("+str(gameid)+", '"+username+"', 1, 1);"
-			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+			InteractBDD.addToGame(gameid, username)
 
 			InteractBDD.setMyLocation(username, InteractBDD.villeDeDepart(), gameid)
 			
 			fruitsname=InteractBDD.giveAFruit(gameid)
-			request = "INSERT INTO `pirate` (`username`, `name`, `level`, `fruit`, `qualite`, `gameid`) VALUES ('"+username+"','"+username+"','"+str(1)+"','"+fruitsname+"','"+str(0)+"', "+str(gameid)+");"
-			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+			InteractBDD.addNewPirate(username, username, 1, fruitsname, 0, gameid)
 
-			for request in InteractBDD.fruits:
-				request=request.format(str(gameid))
-				InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+			InteractBDD.setFruitsForGame(gameid)
 
-			request = "UPDATE fruit SET allocated=1 WHERE gameid="+str(gameid)+" and name='"+fruitsname+"';"
-			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+			InteractBDD.allocateFruit(fruitsname, gameid)
 
-			InteractBDD.endQuery(conn, cur)
 			return gameid
 			
+		@staticmethod
+		def addToGame(gameid, username):
+			[conn, cur]=InteractBDD.beginQuery()
+			request= "INSERT INTO `games` (`gameid`, `username`, `encours`, `currentstep`) VALUES ("+str(gameid)+", '"+username+"', 1, 1);"
+			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+			InteractBDD.endQuery(conn, cur)
+			return None
+
 
 		@staticmethod
 		def numberOfGames(username):
@@ -199,11 +200,11 @@ class InteractBDD(Static):
 		def villeDeDepart():
 			[conn, cur]=InteractBDD.beginQuery()
 
-			request = "SELECT nom from ile;"
+			request = "SELECT nom FROM ile;"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			iles=[]
 			for elem in description:
-				iles.append(elem[0])
+				iles.append(int(elem[0]))
 
 			ile=iles[random.randint(0, len(iles)-1)]
 				
@@ -211,16 +212,6 @@ class InteractBDD(Static):
 			InteractBDD.endQuery(conn, cur)
 			return ile
 
-
-		@staticmethod
-		def giveAFruit(gameid):
-			availableFruits=InteractBDD.countAvailableFruits(gameid)
-			if availableFruits==0:
-				return "GumGum"
-			fruitsNumber=random.randint(0,availableFruits-1)
-			fruitsName=InteractBDD.notAllocatedFruits(gameid)[fruitsNumber]
-			InteractBDD.allocateFruit(fruitsName, gameid)
-			return fruitsName
 
 
 		@staticmethod
@@ -676,6 +667,15 @@ class InteractBDD(Static):
 
 
 		@staticmethod
+		def addNewPirate(username, name, level, fruitsname, qualite, gameid): # we allocate the fruit elsewhere
+			[conn, cur]=InteractBDD.beginQuery()
+			request = "INSERT INTO `pirate` (`username`, `name`, `level`, `fruit`, `qualite`, `gameid`) VALUES ('"+username+"','"+name+"','"+str(level)+"','"+fruitsname+"','"+str(qualite)+"', "+str(gameid)+");"
+			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+			InteractBDD.endQuery(conn, cur)
+			return None
+
+
+		@staticmethod
 		def increasePirateLevel(username, gameid):
 			[conn, cur]=InteractBDD.beginQuery()
 
@@ -689,6 +689,28 @@ class InteractBDD(Static):
 
 
 		#_________________________FRUITS_________________________________
+
+		@staticmethod
+		def setFruitsForGame(gameid):
+			[conn, cur]=InteractBDD.beginQuery()
+			for request in InteractBDD.fruits:
+				request=request.format(str(gameid))
+				InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+			InteractBDD.endQuery(conn, cur)
+			return None
+
+
+
+
+		@staticmethod
+		def giveAFruit(gameid):
+			availableFruits=InteractBDD.countAvailableFruits(gameid)
+			if availableFruits==0:
+				return "GumGum"
+			fruitsNumber=random.randint(0,availableFruits-1)
+			fruitsName=InteractBDD.notAllocatedFruits(gameid)[fruitsNumber]
+			InteractBDD.allocateFruit(fruitsName, gameid)
+			return fruitsName
 
 
 		@staticmethod
@@ -717,15 +739,10 @@ class InteractBDD(Static):
 			request = "SELECT fruit FROM pirate WHERE gameid="+str(gameid)+";"
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			
-			[conn2, cur2]=InteractBDD.beginQuery()
 			for elem in description:
 				fruitsName=str(elem[0])
-				request = "UPDATE fruit SET allocated=1 WHERE name='"+fruitsName+"' and gameid="+str(gameid)+";"
-				InteractBDD.connectAndExecuteRequest(request, True, conn2, cur2)
+				InteractBDD.allocateFruit(fruitsName, gameid)
 
-			
-			
-			InteractBDD.endQuery(conn2, cur2)
 			InteractBDD.endQuery(conn, cur)
 			return None
 
@@ -1036,7 +1053,7 @@ class InteractBDD(Static):
 			return 0
 
 		@staticmethod
-		def allocateFruit(cool):
+		def allocateFruit(cool, cool2):
 			return None
 
 		@staticmethod
@@ -1048,7 +1065,7 @@ class InteractBDD(Static):
 			return fruitPower
 
 		@staticmethod
-		def getMyCrew(cool):
+		def getMyCrew(cool, cool2):
 			level=InteractBDD.crewLevel
 			qualite=InteractBDD.crewQuality
 			fruit=InteractBDD.crewFruit
