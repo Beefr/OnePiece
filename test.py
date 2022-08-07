@@ -84,9 +84,9 @@ while i<100:
     print(ile)'''
 
 
-
-
-
+'''dico={"type": "Pirate", "name": "oui", "level": 1, "qualite": 1, "fruit": "ptet", "stats": "[1,2,3]", "availableToFight": "True", "mort": "False"}
+a=list(dico.values())
+print(a)'''
 
 
 
