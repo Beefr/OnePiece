@@ -1,5 +1,6 @@
 
-from interactBDD import InteractBDD
+
+from bdd import InteractBDD
 from output import Output
 
 

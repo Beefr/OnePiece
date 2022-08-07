@@ -1,7 +1,7 @@
 from name import Name
 from fruitdemon import FruitFactory, FruitDemon
 import random
-from interactBDD import InteractBDD
+from bdd import InteractBDD
 from statsPirate import StatsPirate
 from message import Message
 

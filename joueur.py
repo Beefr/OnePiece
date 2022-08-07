@@ -6,7 +6,7 @@ from utils import Utils
 from equipage import Equipage
 from pirate import Pirate
 from world import World
-from interactBDD import InteractBDD
+from bdd import InteractBDD
 from island import Island
 from message import Message
 

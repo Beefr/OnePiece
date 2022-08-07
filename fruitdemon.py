@@ -1,7 +1,7 @@
 
 import random
 
-from interactBDD import InteractBDD
+from bdd import InteractBDD
 
 class FruitDemon(object):
 

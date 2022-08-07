@@ -8,12 +8,7 @@ except:
 from statsPirate import StatsPirate
 import random
 
-class Static:
-	def __new__(cls):
-		raise TypeError('Static classes cannot be instantiated')
-
-
-class InteractBDD(Static):
+class InteractBDD(object):
 
 	config = {
 	    'host': 'mariadb-anog-service',
