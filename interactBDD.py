@@ -138,9 +138,9 @@ class InteractBDD(Static):
 					if int(elem[0])==0:
 						# si la partie est finie on peut pas la join
 						result=False
-					'''if str(elem[1])==username:
+					if str(elem[1])==username:
 						# si le joueur est déjà dans la partie il peut pas la rerejoindre
-						result=False'''
+						result=False
 
 				if count>=8:
 				# trop de joueurs
@@ -168,6 +168,11 @@ class InteractBDD(Static):
 			
 			request = "INSERT INTO `pirate` (`username`, `name`, `level`, `fruit`, `qualite`, `gameid`) VALUES ('"+username+"','"+username+"','"+str(1)+"','"+InteractBDD.giveAFruit(gameid)+"','"+str(0)+"', "+str(gameid)+");"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+
+			for request in InteractBDD.fruits:
+				request=request.format(str(gameid))
+				InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+
 			InteractBDD.endQuery(conn, cur)
 			return gameid
 			
