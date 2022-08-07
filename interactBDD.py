@@ -165,10 +165,10 @@ class InteractBDD(Static):
 
 			InteractBDD.setMyLocation(username, InteractBDD.villeDeDepart(), gameid)
 			
+			InteractBDD.setFruitsForGame(gameid)
+
 			fruitsname=InteractBDD.giveAFruit(gameid)
 			InteractBDD.addNewPirate(username, username, 1, fruitsname, 0, gameid)
-
-			InteractBDD.setFruitsForGame(gameid)
 
 			InteractBDD.allocateFruit(fruitsname, gameid)
 
