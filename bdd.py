@@ -66,7 +66,7 @@ class Resultat(object):
 	def __init__(self, description):
 		self._items=[] # c'est une liste de listes
 		for item in description:
-			self._items.append(list(item.values()))
+			self._items.append(list(item))
 		self._currentIndex=0
 
 	@property
