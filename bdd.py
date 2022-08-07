@@ -373,7 +373,7 @@ class InteractBDD(object):
 	def availableIslandsInCurrentArchipel(self, currentIslandName):
 		currentArchipelName=self.getArchipelFromIle(currentIslandName)
 		islandNames=[] # and we must also get all the islands inside the current archipel
-		res=self._pool +Command(SQL.selectFruitsname.format(currentArchipelName), False)
+		res=self._pool +Command(SQL.selectNomIle2.format(currentArchipelName), False)
 		if res.first!=currentIslandName:
 			islandNames.append(res.first) 
 		return islandNames
