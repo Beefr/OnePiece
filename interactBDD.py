@@ -204,7 +204,7 @@ class InteractBDD(Static):
 			description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
 			iles=[]
 			for elem in description:
-				iles.append(int(elem[0]))
+				iles.append(str(elem[0]))
 
 			ile=iles[random.randint(0, len(iles)-1)]
 				
