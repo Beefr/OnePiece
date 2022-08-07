@@ -361,7 +361,7 @@ class InteractBDD(object):
 	def fruitsPower(self, fruitsName):
 		if fruitsName=='None':
 			return [0,0,0,0]
-		res=self._pool +Command(SQL.selectFruitsname.format(fruitsName), False)
+		res=self._pool +Command(SQL.selectPower.format(fruitsName), False)
 		strpower=res.first
 		power=list(map(int, strpower.split(",") )) # [1,2,3,4]
 		return power
