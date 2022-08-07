@@ -41,14 +41,14 @@ class FruitFactory(object):
 	def allocateFruit(percentages, gameid):
 		fruitBool=random.randint(0,100)<=percentages[0]
 		if fruitBool:
-			availableFruits=InteractBDD.countAvailableFruits(gameid)
+			availableFruits=InteractBDD().countAvailableFruits(gameid)
 			if availableFruits==0:
 				return FruitDemon("None",[0,0,0,0])
 
 			fruitsNumber=random.randint(0,availableFruits-1)
-			fruitsName=InteractBDD.notAllocatedFruits(gameid)[fruitsNumber]
-			InteractBDD.allocateFruit(fruitsName, gameid)
-			power=InteractBDD.fruitsPower(fruitsName) 
+			fruitsName=InteractBDD().notAllocatedFruits(gameid)[fruitsNumber]
+			InteractBDD().allocateFruit(fruitsName, gameid)
+			power=InteractBDD().fruitsPower(fruitsName) 
 			return FruitDemon(fruitsName,power)
 					
 		return FruitDemon("None",[0,0,0,0])
@@ -59,19 +59,19 @@ class FruitFactory(object):
 		if fruitsName=="None":
 			return FruitDemon("None",[0,0,0,0])
 		if not boss: 
-			InteractBDD.allocateFruit(fruitsName, gameid) # TODO deallocate...?
-		power=InteractBDD.fruitsPower(fruitsName) 
+			InteractBDD().allocateFruit(fruitsName, gameid) # TODO deallocate...?
+		power=InteractBDD().fruitsPower(fruitsName) 
 		return FruitDemon(fruitsName, power)
 
 	@staticmethod
 	def giveAFruit(gameid):
-		availableFruits=InteractBDD.countAvailableFruits(gameid)
+		availableFruits=InteractBDD().countAvailableFruits(gameid)
 		if availableFruits==0:
 			return FruitDemon("GumGum",[30,40,30,0])
 		fruitsNumber=random.randint(0,availableFruits-1)
-		fruitsName=InteractBDD.notAllocatedFruits(gameid)[fruitsNumber]
-		InteractBDD.allocateFruit(fruitsName, gameid)
-		power=InteractBDD.fruitsPower(fruitsName) 
+		fruitsName=InteractBDD().notAllocatedFruits(gameid)[fruitsNumber]
+		InteractBDD().allocateFruit(fruitsName, gameid)
+		power=InteractBDD().fruitsPower(fruitsName) 
 		return FruitDemon(fruitsName,power)
 
 

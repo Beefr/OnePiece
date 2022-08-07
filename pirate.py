@@ -88,7 +88,7 @@ class Pirate(object):
 			return Message("Cet équipage n'a plus personne de vivant. Fin du combat.", True, True)
 		# c'est pirate qui attaque self
 		degats=int(pirate.atk-self._dfs)
-		phrase=InteractBDD.phraseDeCombat(pirate.name)
+		phrase=InteractBDD().phraseDeCombat(pirate.name)
 
 		if degats<=0: #aucun degat reçu
 			texte=(pirate.name+phrase+self._name+", mais celui-ci ne prend aucun degats et garde ses "+str(self._vie)+"pts de vie")

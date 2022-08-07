@@ -20,12 +20,12 @@ class World(object):
 		array= MultiLineMessage()
 		compteur=0
 
-		availableIslands=InteractBDD.availableIslandsInCurrentArchipel(currentIslandName)
+		availableIslands=InteractBDD().availableIslandsInCurrentArchipel(currentIslandName)
 		for ile in availableIslands: # it's only their names
 			array+ Message(str(compteur)+": " +ile, False, False, "rouge")
 			compteur+=1
 
-		availableArchipels=InteractBDD.availableIslandsInAvailableArchipels(currentIslandName)
+		availableArchipels=InteractBDD().availableIslandsInAvailableArchipels(currentIslandName)
 		for arch in availableArchipels: # it's only their names
 			array+ Message(str(compteur)+": " +arch, False, False, "rouge")
 			compteur+=1
@@ -35,13 +35,13 @@ class World(object):
 	@staticmethod
 	def nextIslandsAsArray(currentIslandName):
 		array= []
-		availableIslands=InteractBDD.availableIslandsInCurrentArchipel(currentIslandName)
+		availableIslands=InteractBDD().availableIslandsInCurrentArchipel(currentIslandName)
 		for ile in availableIslands:
 			array.append(ile)
 
-		availableArchipels=InteractBDD.availableArchipels(currentIslandName)
+		availableArchipels=InteractBDD().availableArchipels(currentIslandName)
 		for archipel in availableArchipels:
-			ile = InteractBDD.ilePrincipale(archipel)
+			ile = InteractBDD().ilePrincipale(archipel)
 			array.append(ile)
 
 		return array
@@ -57,13 +57,13 @@ class World(object):
 		array+ Message("", False, True)
 
 		array+ Message("Les iles à proximité sont:", False, True)
-		ilesProches=InteractBDD.availableIslandsInCurrentArchipel(currentIslandName)
+		ilesProches=InteractBDD().availableIslandsInCurrentArchipel(currentIslandName)
 		for ile in ilesProches:
 			array+ Message(ile, False, True, "rouge")
 		array+ Message("", False, True)
 
 		array+ Message("Les archipels à proximité sont:", False, True)
-		archipelsProches=InteractBDD.availableArchipels(currentIslandName)
+		archipelsProches=InteractBDD().availableArchipels(currentIslandName)
 		for archipel in archipelsProches:
 			array+ Message(archipel, False, True, "rouge")
 
