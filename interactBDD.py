@@ -111,7 +111,11 @@ class InteractBDD(Static):
 
 					InteractBDD.setMyLocation(username, InteractBDD.villeDeDepart(), gameid)
 					
-					request = "INSERT INTO `pirate` (`username`, `name`, `level`, `fruit`, `qualite`, `gameid`) VALUES ('"+username+"','"+username+"','"+str(1)+"','"+InteractBDD.giveAFruit(gameid)+"','"+str(0)+"', "+str(gameid)+");"
+					fruitsname=InteractBDD.giveAFruit(gameid)
+					request = "INSERT INTO `pirate` (`username`, `name`, `level`, `fruit`, `qualite`, `gameid`) VALUES ('"+username+"','"+username+"','"+str(1)+"','"+fruitsname+"','"+str(0)+"', "+str(gameid)+");"
+					InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+
+					request = "UPDATE fruit SET allocated=1 WHERE gameid="+str(gameid)+" and name='"+fruitsname+"';"
 					InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
 				else: # plus de place pour jouer avec ses potes
 					result=False
@@ -155,9 +159,8 @@ class InteractBDD(Static):
 		def joinGame(username, gameid):
 			[conn, cur]=InteractBDD.beginQuery()
 			result=InteractBDD.joinThatGameID(username, gameid)
-			while result==False:
+			if result==False:
 				gameid=gameid+1
-				result=InteractBDD.joinThatGameID(username, gameid)
 			
 			request= "INSERT INTO `games` (`gameid`, `username`, `encours`, `currentstep`) VALUES ("+str(gameid)+", '"+username+"', 1, 1);"
 			InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
