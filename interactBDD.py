@@ -108,8 +108,6 @@ class InteractBDD(Static):
 				# on le rajoute aux joueurs
 					request= "INSERT INTO `games` (`gameid`, `username`, `encours`, `currentstep`) VALUES ("+str(gameid)+", '"+username+"', 1, 1);"
 					InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
-
-					InteractBDD.setMyLocation(username, InteractBDD.villeDeDepart(), gameid)
 					
 					fruitsname=InteractBDD.giveAFruit(gameid)
 					request = "INSERT INTO `pirate` (`username`, `name`, `level`, `fruit`, `qualite`, `gameid`) VALUES ('"+username+"','"+username+"','"+str(1)+"','"+fruitsname+"','"+str(0)+"', "+str(gameid)+");"
@@ -117,6 +115,8 @@ class InteractBDD(Static):
 
 					request = "UPDATE fruit SET allocated=1 WHERE gameid="+str(gameid)+" and name='"+fruitsname+"';"
 					InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
+
+					InteractBDD.setMyLocation(username, InteractBDD.villeDeDepart(), gameid)
 				else: # plus de place pour jouer avec ses potes
 					result=False
 
@@ -162,8 +162,6 @@ class InteractBDD(Static):
 				gameid=gameid+1
 			
 			InteractBDD.addToGame(gameid, username)
-
-			InteractBDD.setMyLocation(username, InteractBDD.villeDeDepart(), gameid)
 			
 			InteractBDD.setFruitsForGame(gameid)
 
@@ -171,6 +169,8 @@ class InteractBDD(Static):
 			InteractBDD.addNewPirate(username, username, 1, fruitsname, 0, gameid)
 
 			InteractBDD.allocateFruit(fruitsname, gameid)
+
+			InteractBDD.setMyLocation(username, InteractBDD.villeDeDepart(), gameid)
 
 			return gameid
 			
