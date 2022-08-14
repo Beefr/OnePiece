@@ -83,10 +83,10 @@ class InteractBDD(object):
 			return gameid
 
 		@staticmethod
-		def addUser(username, gameid):
+		def addUser(username, gameid, boolean):
 			[conn, cur]=InteractBDD.beginQuery()
 			result=True
-			if InteractBDD.gameExists(gameid):
+			if InteractBDD.gameExists(gameid) or boolean:
 				count=0
 				request= "SELECT encours, username FROM games WHERE gameid="+str(gameid)+";"
 				description = InteractBDD.connectAndExecuteRequest(request, False, conn, cur)
@@ -99,7 +99,7 @@ class InteractBDD(object):
 						# si le joueur est déjà dans la partie il peut pas la rerejoindre
 						result=False
 
-				if count<8 and result:
+				if (count<8 and result) or boolean:
 				# on le rajoute aux joueurs
 					request= "INSERT INTO `games` (`gameid`, `username`, `encours`, `currentstep`) VALUES ("+str(gameid)+", '"+username+"', 1, 1);"
 					InteractBDD.connectAndExecuteRequest(request, True, conn, cur)
