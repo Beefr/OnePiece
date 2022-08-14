@@ -2,7 +2,8 @@
 
 from multiLineMessage import MultiLineMessage
 from message import Message
-from bdd import InteractBDD
+#from bdd import InteractBDD
+from interactBDD import InteractBDD
 
 class World(object):
 
